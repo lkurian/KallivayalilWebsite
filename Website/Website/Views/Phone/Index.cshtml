@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Website.Models.Phone>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Phone", new {}, new {})
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Type
+        </th>
+        <th>
+            Number
+        </th>
+        <th>
+            CreatedDateTime
+        </th>
+        <th>
+            UpdatedDateTime
+        </th>
+        <th>
+            CreatedBy
+        </th>
+        <th>
+            UpdatedBy
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+        <td>
+            @item.Type.Description
+        </td>
+        <td>
+            @item.Number
+        </td>
+        <td>
+            @String.Format("{0:g}", item.CreatedDateTime)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.UpdatedDateTime)
+        </td>
+        <td>
+            @item.CreatedBy
+        </td>
+        <td>
+            @item.UpdatedBy
+        </td>
+    </tr>
+}
+
+</table>
+

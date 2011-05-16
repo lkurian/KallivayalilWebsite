@@ -1,0 +1,100 @@
+﻿@model IEnumerable<Website.Models.Constituent>
+
+
+<div class="box">
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Home", new { }, new { })
+</p>
+<table>
+<tbody>
+    <tr>
+        <th></th>
+        <th>
+            Gender
+        </th>
+        <th>
+            BranchName
+        </th>
+        <th>
+            HouseName
+        </th>
+        <th>
+            BornOn
+        </th>
+        <th>
+            DiedOn
+        </th>
+        <th>
+            HasExpired
+        </th>
+        <th>
+            MaritialStatus
+        </th>
+        <th>
+            IsRegistered
+        </th>
+        <th>
+            CreatedDateTime
+        </th>
+        <th>
+            UpdatedDateTime
+        </th>
+        <th>
+            CreatedBy
+        </th>
+        <th>
+            UpdatedBy
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+        <td>
+            @item.Gender
+        </td>
+        <td>
+            @item.BranchName
+        </td>
+        <td>
+            @item.HouseName
+        </td>
+        <td>
+            @String.Format("{0:g}", item.BornOn)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.DiedOn)
+        </td>
+        <td>
+            @item.HasExpired
+        </td>
+        <td>
+            @item.MaritialStatus
+        </td>
+        <td>
+            @item.IsRegistered
+        </td>
+        <td>
+            @String.Format("{0:g}", item.CreatedDateTime)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.UpdatedDateTime)
+        </td>
+        <td>
+            @item.CreatedBy
+        </td>
+        <td>
+            @item.UpdatedBy
+        </td>
+    </tr>
+}
+</tbody>
+</table>
+
+</div>
+
