@@ -1,20 +1,20 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
+<head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>@ViewBag.Title</title>
-<link rel="stylesheet" href="../../Content/mytheme/styles.css" type="text/css" />
-<link rel="stylesheet" href="../../Scripts/galleria/galleria.classic.css" type="text/css"/>
+<link rel="stylesheet" href="@Url.Content("~/Content/mytheme/styles.css")" type="text/css" />
+<link rel="stylesheet" href="@Url.Content("~/Scripts/galleria/galleria.classic.css")" type="text/css"/>
 
-<link rel="stylesheet" href="../../Content/slide.css" type="text/css" media="screen" />
-<link rel="stylesheet" href="../../Content/slidestyle.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="@Url.Content("~/Content/slide.css")" type="text/css" media="screen" />
+<link rel="stylesheet" href="@Url.Content("~/Content/slidestyle.css")" type="text/css" media="screen" />
 			         
-<script type="text/javascript" src="../../Content/mytheme/js/jquery.js"></script>
-<script type="text/javascript" src="../../Content/mytheme/js/slider.js"></script>
-<script type="text/javascript" src="../../Content/mytheme/js/superfish.js"></script>
-<script type="text/javascript" src="../../Scripts/galleria/galleria-1.2.2.js"></script>
-<script type="text/javascript" src="../../Scripts/galleria/galleria.classic.js"></script>
-<script src="../../Scripts/loginslider/slide.js" type="text/javascript"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/jquery.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/slider.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/superfish.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/galleria/galleria-1.2.2.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/galleria/galleria.classic.js")"></script>
+<script src="@Url.Content("~/Scripts/loginslider/slide.js")" type="text/javascript"></script>
 
 <script type="text/javascript">
     function show() {
@@ -52,7 +52,7 @@
 					<input class="field" type="password" name="pwd" id="pwd" size="23" />
 	            	<label><input name="rememberme" id="rememberme" type="checkbox" checked="checked" value="forever" /> &nbsp;Remember me</label>
         			<div class="clear"></div>
-					<input type="submit" name="submit" value="Login" class="bt_login" />
+					<input type="submit" name="submit" value="Login" class="bt_login" onclick="login()"/>
 					<a class="lost-pwd" href="#">Lost your password?</a>
 				</form>
 			</div>
@@ -95,11 +95,6 @@
     <div id="nav">
     	<ul class="sf-menu dropdown">
         	<li class="selected"><a href="#">Our Family</a></li>
-            <li><a href="#">Login</a></li>
-            <li><a href="#">Events</a></li>
-            <li><a href="#">Contact Us</a></li>
-            <li><a href="#">Tab1</a></li>
-            <li><a href="#">Tab2</a></li>
         </ul>
     </div>
     
@@ -107,20 +102,20 @@
         <div id="galleria">
             	<img title="Snail"
             	     alt="Beautiful Snail.. (Any title for a picture)" 
-            	     src="../../Content/images/img1.jpg"/>
+            	     src="@Url.Content("~/Content/images/img1.jpg")"/>
                 <img title="Flowers"
                      alt="”White flowers in the green back ground.”"
-                     src="../../Content/images/img2.jpg"/>
+                     src="@Url.Content("~/Content/images/img2.jpg")"/>
                 <img title="Trees"
-                     src="../../Content/images/img3.jpg"/>
+                     src=""@Url.Content("~/Content/images/img3.jpg")"/>
                 <img title="Beach"
                      alt="Pacific Blue!!!"
-                     src="../../Content/images/img4.jpg"/>
+                     src=""@Url.Content("~/Content/images/img4.jpg")"/>
                 <img title="Bright Sun"
-                     src="../../Content/images/img5.jpg"/>
+                     src="@Url.Content("~/Content/images/img5.jpg")"/>
                 <img title="Forest"
                      alt="The definition of green."
-                     src="../../Content/images/img6.jpg"/>
+                     src=""@Url.Content("~/Content/images/img6.jpg")"/>
         </div>
         </div>
 

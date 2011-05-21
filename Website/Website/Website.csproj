@@ -115,6 +115,7 @@
     <Content Include="Content\slidestyle.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
+    <Content Include="Scripts\Custom\Login.js" />
     <Content Include="Scripts\galleria\classic-loader.gif" />
     <Content Include="Scripts\galleria\classic-map.png" />
     <Content Include="Scripts\galleria\galleria-1.2.2.js" />
@@ -414,12 +415,11 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>3131</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>
-          </IISUrl>
+          <IISUrl>http://localhost/Kallivayalil</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
