@@ -1,4 +1,6 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Website
@@ -18,13 +20,12 @@ namespace Website
             routes.MapPageRoute("scripts", "scripts", "~/Scripts");
             routes.MapPageRoute("content", "content", "~/Content");
             routes.MapRoute("home", "home/{action}", new {Controller = "Home", action = "Login"});
-            routes.MapRoute("Default", "{controller}/{action}", new {Controller = "Home", action="Index"});
+            routes.MapRoute("Default", "{controller}/{action}", new {Controller = "Home", action="Index"});            
         }
 
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
-
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }

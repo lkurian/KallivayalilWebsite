@@ -1,22 +1,25 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Website.Helpers;
 using Website.Models;
+using Website.Models.ViewModels;
 
 namespace Website.Controllers
 {
     public class HomeController : Controller
     {
-
         private AutoDataContractMapper mapper;
 
         public ActionResult List()
         {
-            var constituentsData = HttpHelper.Get<ConstituentsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents");
+            var constituentsData =
+                HttpHelper.Get<ConstituentsData>(
+                    @"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents");
             var mapper = new AutoDataContractMapper();
             var constituent = new Constituents();
-            mapper.MapList(constituentsData, constituent,typeof(Constituent));
+            mapper.MapList(constituentsData, constituent, typeof (Constituent));
 
 
             return View(constituent);
@@ -44,7 +47,9 @@ namespace Website.Controllers
             var constituentData = new ConstituentData();
             mapper.Map(constituent, constituentData);
 
-            var newConstituent = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents", constituentData);
+            ConstituentData newConstituent =
+                HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents",
+                                constituentData);
 
             return RedirectToAction("Index");
         }
@@ -52,7 +57,9 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Edit(int id)
         {
-            var constituentData = HttpHelper.Get<ConstituentData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/" + id);
+            var constituentData =
+                HttpHelper.Get<ConstituentData>(
+                    @"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/" + id);
             mapper = new AutoDataContractMapper();
             var constituent = new Constituent();
             mapper.Map(constituentData, constituent);
@@ -62,7 +69,9 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Details(int id)
         {
-            var constituentData = HttpHelper.Get<ConstituentData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/" + id);
+            var constituentData =
+                HttpHelper.Get<ConstituentData>(
+                    @"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/" + id);
             mapper = new AutoDataContractMapper();
             var constituent = new Constituent();
             mapper.Map(constituentData, constituent);
@@ -78,21 +87,35 @@ namespace Website.Controllers
             var constituentData = new ConstituentData();
             mapper.Map(constituent, constituentData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/{0}",id), constituentData);
+            HttpHelper.Put(
+                string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/{0}", id),
+                constituentData);
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/{0}", id));
+            HttpHelper.DoHttpDelete(
+                string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/{0}", id));
             return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public JsonResult Login(IDictionary<string,string> jsonRequest)
+        public ActionResult Login(User user)
         {
-            return new JsonResult {Data = "true"};
+            var userName = user.UserName;
+            var password = user.Password;
+
+            var authenticated = string.Equals(userName, password);
+            if (authenticated)
+            {
+                Session["userName"] = userName;
+                Session["password"] = password;
+
+                FormsAuthentication.RedirectFromLoginPage(userName,false);
+            }
+            
+            return View("Index");
         }
-       
     }
 }
