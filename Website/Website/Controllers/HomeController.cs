@@ -21,7 +21,7 @@ namespace Website.Controllers
 
             return View(constituent);
         }
-        
+
         public ActionResult Index()
         {
             return View();
@@ -48,7 +48,6 @@ namespace Website.Controllers
 
             return RedirectToAction("Index");
         }
-
 
         [HttpGet]
         public ActionResult Edit(int id)
@@ -89,7 +88,11 @@ namespace Website.Controllers
             return RedirectToAction("Index");
         }
 
-
+        [HttpPost]
+        public JsonResult Login(IDictionary<string,string> jsonRequest)
+        {
+            return new JsonResult {Data = "true"};
+        }
        
     }
 }

@@ -115,7 +115,7 @@
     <Content Include="Content\slidestyle.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
-    <Content Include="Scripts\Custom\Login.js" />
+    <Content Include="Scripts\Custom\login.js" />
     <Content Include="Scripts\galleria\classic-loader.gif" />
     <Content Include="Scripts\galleria\classic-map.png" />
     <Content Include="Scripts\galleria\galleria-1.2.2.js" />
@@ -353,7 +353,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_LogOnPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
