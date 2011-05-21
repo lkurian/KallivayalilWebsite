@@ -77,12 +77,16 @@
 	<div class="tab">
 		<ul class="login">
 			<li class="left">&nbsp;</li>
-			<li>Hello @(string.IsNullOrEmpty(Session["userName"] as string) ? "Guest" : Session["userName"])  </li>
+			<li>Hello @(string.IsNullOrEmpty(Session["userName"] as string) ? "Guest" : Session["userName"]) ! </li>
 			<li class="sep">|</li>
 			<li id="toggle">
-                
+                @if(string.IsNullOrEmpty(Session["userName"] as string)){
 				<a id="open" class="open" href="#">Log In | Register</a>
 				<a id="close" style="display: none;" class="close" href="#">Close Panel</a>			
+                } else {
+                <a id="logOut" href="" onclick="logout()">Log out</a>
+                }
+
 			</li>
 			<li class="right">&nbsp;</li>
 		</ul> 

@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
 using Website.Helpers;
@@ -103,18 +102,29 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            var userName = user.UserName;
-            var password = user.Password;
+            string userName = user.UserName;
+            string password = user.Password;
 
-            var authenticated = string.Equals(userName, password);
+            bool authenticated = string.Equals(userName, password);
             if (authenticated)
             {
                 Session["userName"] = userName;
                 Session["password"] = password;
 
-                FormsAuthentication.RedirectFromLoginPage(userName,false);
+                FormsAuthentication.RedirectFromLoginPage(userName, false);
             }
-            
+
+            return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            Session["userName"] = string.Empty;
+            Session["password"] = string.Empty;
+
+            FormsAuthentication.RedirectToLoginPage();
+
             return View("Index");
         }
     }
