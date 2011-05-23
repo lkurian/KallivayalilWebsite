@@ -17,6 +17,7 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/galleria/galleria.classic.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.dictionary.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.json-2.2.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
 <script src="@Url.Content("~/Scripts/loginslider/slide.js")" type="text/javascript"></script>
 
 <script type="text/javascript">
@@ -29,6 +30,10 @@
             element.addClass("hidden");
         }
     }
+
+    $(document).ready(function () {
+        $("#accordion").accordion();
+    });
    </script>
 
 </head>
@@ -143,9 +148,10 @@
             </div>
             </div>        
             <div class="sidebar">
-            <ul>	
+            <ul  id="accordion">	
                <li>
-                    <h4><span>Todays<strong>Events</strong></span></h4>
+                    <h4><a href="#"><span>Todays<strong>Events</strong></span></a></h4>
+                    <div>
                     <ul class="blocklist">
                         <li><a href="#">Event 1</a></li>
                         <li><a href="#">Event 2</a></li>
@@ -153,22 +159,27 @@
                         <li><a href="#">Event 4</a></li>
                         <li><a href="#">Event 5</a></li>
                     </ul>
+                    </div>
                 </li>
                 
                 <li>
-                    <h4><span>Birthdays</span></h4>
+                    <h4><a href ="#"><span>Birthdays</span></a></h4>
+                    <div>
                      <ul class="blocklist">
                         <li><a href="#">Birthday 1</a></li>
                         <li><a href="#">Birthday 2</a></li>
                     </ul>
+                    </div>
                 </li>
                 
                 <li>
-                    <h4 class="h4"><span><strong>Anniversaries</strong></span></h4>
+                    <h4 class="h4"><a href="#"><span><strong>Anniversaries</strong></span></a></h4>
+                    <div>
                      <ul class="blocklist">
                         <li><a href="#">Anniversary 1</a></li>
                         <li><a href="#">Anniversary 2</a></li>
                     </ul>
+                    </div>
                 </li>
                 
             </ul> 
