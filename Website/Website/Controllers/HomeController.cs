@@ -105,7 +105,10 @@ namespace Website.Controllers
             string userName = user.UserName;
             string password = user.Password;
 
-            bool authenticated = string.Equals(userName, password);
+//            bool authenticated = string.Equals(userName, password);
+
+            var authenticated = HttpHelper.Get<bool>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Authenticate?username={0}&password={1}",userName,password));
+
             if (authenticated)
             {
                 Session["userName"] = userName;
