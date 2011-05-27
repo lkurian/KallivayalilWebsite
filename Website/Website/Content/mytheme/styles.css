@@ -1,5 +1,5 @@
 body {
-	background: #FFF url('images/body-single.png') repeat-x scroll top left;
+	/*background: #FFF url('images/body-single.png') repeat-x scroll top left;*/
 	margin:0;
 	padding:0;
 	font-family: Verdana, Geneva, sans-serif;
@@ -8,11 +8,19 @@ body {
 }
 
 body.homepage {
-	background: #FFF url('images/body.png') repeat-x scroll top left;
+	
 }
 
 body.noheader {
-	background: #FFF url('images/body-noheader.png') repeat-x scroll top left;
+	/*background: #FFF url('images/body-noheader.png') repeat-x scroll top left;*/
+}
+
+.wrapper
+{
+    background: #FFF url('images/body.png') repeat-x scroll top left;
+    width:980px;
+    margin:0 auto;
+    
 }
 
 * {
@@ -229,9 +237,7 @@ ul.styledlist li {
 
 
 #container {
-	width: 960px;
-	margin: 0 auto;
-	padding: 0px;
+	width: 100%;
 }
 
 #header {
@@ -599,17 +605,16 @@ div#sub-header h2 {
 	clear: both;
 }
 
-#footer {
-	margin:0 auto;
-	background: #000 url('images/footer.jpg') repeat-x scroll bottom left;
-	padding: 30px 5px 0;
+#footer 
+{
+    background: #000 url('images/footer.jpg') repeat-x scroll left bottom;
+    width:100%;
 }
 
 .footer-content {
-	width: 960px;
-	margin: 0 auto;
 	display: block;
-	padding-bottom: 30px;
+	padding:10px 10px 30px 10px;
+	width:960px;
 }
 
 #footer a {
@@ -693,7 +698,7 @@ div#sub-header h2 {
 #footer-links {
 	background-color: #000;
 	color: #ccc;
-	padding: 5px;
+	padding:10px;
 }
 div#footer-links p {
 	text-align: right;

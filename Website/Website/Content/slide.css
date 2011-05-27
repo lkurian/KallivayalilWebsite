@@ -103,14 +103,11 @@ Version: 1.0
 
 /* sliding panel */
 #toppanel {
-    position: absolute;   /*Panel will overlap  content */
-    /*position: relative;*/   /*Panel will "push" the content down */
-    top: 0;
-    width: 75%;
-    z-index: 999;
+    /*Panel will overlap  content */
+    position: absolute;   /*Panel will "push" the content down */
+    width: 980px;
     text-align: center;
-    margin-left: 160px;
-    margin-right: auto;
+    top:0px;
 }
 
 #panel {
