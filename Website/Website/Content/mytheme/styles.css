@@ -524,6 +524,9 @@ div#sub-header h2 {
 	float: right;
 }
 
+.sidebar-hidden {
+	display : none;
+}
 
 .sidebar ul {
 	margin: 0;

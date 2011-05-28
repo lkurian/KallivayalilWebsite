@@ -11,7 +11,7 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
-            var phonesData = HttpHelper.Get<PhonesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=1");
+            var phonesData = HttpHelper.Get<PhonesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=123");
             mapper = new AutoDataContractMapper();
             var phones = new Phones();
             mapper.MapList(phonesData,phones,typeof(Phone));
