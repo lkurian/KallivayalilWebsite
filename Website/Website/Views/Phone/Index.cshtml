@@ -23,6 +23,12 @@
 
     </script>
 
+<<<<<<< HEAD
+=======
+
+
+     
+>>>>>>> 203fe28... #0000 - Phone panel with edit <Hari/Lucy>
 
             <div id="vtab">
         <ul>
@@ -99,11 +105,11 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
         <td>
             @item.Type.Description
@@ -123,7 +129,23 @@
         <td>
             @item.UpdatedBy
         </td>
+<<<<<<< HEAD
     </tr>
+=======
+        <td>
+            <div class="arrow"></div>
+        </td>
+    </tr>
+    
+    <tr>
+        <div id="my_box">
+        <td colspan="6">
+          @{Html.RenderPartial("Edit", item);}
+          </td>
+        </div>
+    </tr>
+ 
+>>>>>>> 203fe28... #0000 - Phone panel with edit <Hari/Lucy>
 }
 
 </table>

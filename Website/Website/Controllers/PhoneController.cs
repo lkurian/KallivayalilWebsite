@@ -40,7 +40,9 @@ namespace Website.Controllers
 
             var newPhone = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=1", phoneData);
 
+            
             return RedirectToAction("Index");
+            
         }
 
         [HttpGet]
@@ -50,15 +52,16 @@ namespace Website.Controllers
             mapper = new AutoDataContractMapper();
             var phone = new Phone();
             mapper.Map(phoneData,phone);
-            return View(phone);
-        }
-
+            
+            return PartialView(phone);
+        } 
+        
         [HttpPost]
         public ActionResult Edit(int id, FormCollection formCollection)
         {
             var phone = new Phone();
             TryUpdateModel(phone, formCollection);
-            phone.Constituent = new Constituent{Id = 1};
+            phone.Constituent = new Constituent{Id = 123};
             mapper = new AutoDataContractMapper();
             var phoneData = new PhoneData();
             mapper.Map(phone, phoneData);
