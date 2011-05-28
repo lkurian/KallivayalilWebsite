@@ -21,8 +21,20 @@
 
                });
 
-    </script>
+               $(document).ready(function () {
+                   $("#report tr:odd").addClass("odd");
+                   $("#report tr:not(.odd)").hide();
+                   $("#report tr:first-child").show();
 
+                   $("#report tr.odd").click(function () {
+                       $(this).next("tr").toggle();
+                       $(this).find(".arrow").toggleClass("up");
+                   });
+                   //$("#report").jExpand();
+               });
+
+    </script>
+     
 
             <div id="vtab">
         <ul>
@@ -76,7 +88,7 @@
 <p>
     @Html.ActionLink("Create New", "Create", "Phone", new {}, new {})
 </p>
-<table>
+<table id="report">
     <tr>
         <th></th>
         <th>
@@ -96,6 +108,8 @@
         </th>
         <th>
             UpdatedBy
+        </th>
+        <th>
         </th>
     </tr>
 
@@ -123,7 +137,39 @@
         <td>
             @item.UpdatedBy
         </td>
+        <td>
+            <div class="arrow"></div>
+        </td>
+    </tr> 
+    
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+        <td>
+            @item.Type.Description
+        </td>
+        <td>
+            @item.Number
+        </td>
+        <td>
+            @String.Format("{0:g}", item.CreatedDateTime)
+        </td>
+        <td>
+            @String.Format("{0:g}", item.UpdatedDateTime)
+        </td>
+        <td>
+            @item.CreatedBy
+        </td>
+        <td>
+            @item.UpdatedBy
+        </td>
+        <td>
+            <div class="arrow"></div>
+        </td>
     </tr>
+    
 }
 
 </table>
