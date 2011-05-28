@@ -21,68 +21,122 @@
 
                });
 
+               $(document).ready(function () {
+                   $("#report tr:odd").addClass("odd");
+                   $("#report tr:not(.odd)").hide();
+                   $("#report tr:first-child").show();
+
+                   $("#report tr.odd").click(function () {
+                       $(this).next("tr").toggle();
+                       $(this).find(".arrow").toggleClass("up");
+                   });
+                   //$("#report").jExpand();
+               });
+
     </script>
 
-<<<<<<< HEAD
-=======
 
+            <div id="vtab">
 
-     
->>>>>>> 203fe28... #0000 - Phone panel with edit <Hari/Lucy>
+        <ul>
 
-            <div id="vtab">
-        <ul>
-            <li class="home selected"></li>
-            <li class="login"></li>
-            <li class="support"></li>
-        </ul>
-        <div>
-            <h4>
-                Welcome Home!</h4>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum tincidunt
-            metus, vitae porta elit mollis eget. Sed id nisl nec lorem tincidunt sodales. Etiam
-            a dolor tellus, vel rhoncus ligula? Duis adipiscing vehicula urna ut pellentesque!
-            Duis eleifend lacinia diam a rhoncus. Integer viverra dolor eget eros consequat
-            facilisis. Curabitur dignissim dignissim lacinia!
-            <br />
-            <br />
-            Sed bibendum velit et magna placerat bibendum. Donec vitae leo ante. Nulla semper
-            dapibus felis et luctus. Donec congue, lectus eget ullamcorper sagittis, orci enim
-            aliquam risus, eget adipiscing quam neque sed eros. Donec commodo nisi varius augue
-            lacinia pharetra. Cras lacinia fermentum luctus. Nunc venenatis commodo lorem, vitae
-            pulvinar neque dignissim sed. Proin blandit rhoncus risus, sit amet eleifend quam
-            eleifend sed.
-        </div>
-        <div>
-            <h4>
-                Secure Login</h4>
-            <form id="loginForm" action="">
-            <fieldset>
-                <legend>You need to sign in with your Email & Password to continue.</legend>
-                <div>
-                    <label for="email">
-                        Email:</label>
-                    <input type="text" name="email" id="email" />
-                </div>
-                <div>
-                    <label for="password">
-                        Password:</label>
-                    <input type="password" name="password" id="password" />
-                </div>
-                <div>
-                    <input id="login" type="submit" value="Fake Login" />
-                </div>
-            </fieldset>
-            </form>
-        </div>
-        <div>
-            <h4>
-                Online Support</h4>
+            <li class="home selected"></li>
+
+            <li class="login"></li>
+
+            <li class="support"></li>
+
+        </ul>
+
+        <div>
+
+            <h4>
+
+                Welcome Home!</h4>
+
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum dictum tincidunt
+
+            metus, vitae porta elit mollis eget. Sed id nisl nec lorem tincidunt sodales. Etiam
+
+            a dolor tellus, vel rhoncus ligula? Duis adipiscing vehicula urna ut pellentesque!
+
+            Duis eleifend lacinia diam a rhoncus. Integer viverra dolor eget eros consequat
+
+            facilisis. Curabitur dignissim dignissim lacinia!
+
+            <br />
+
+            <br />
+
+            Sed bibendum velit et magna placerat bibendum. Donec vitae leo ante. Nulla semper
+
+            dapibus felis et luctus. Donec congue, lectus eget ullamcorper sagittis, orci enim
+
+            aliquam risus, eget adipiscing quam neque sed eros. Donec commodo nisi varius augue
+
+            lacinia pharetra. Cras lacinia fermentum luctus. Nunc venenatis commodo lorem, vitae
+
+            pulvinar neque dignissim sed. Proin blandit rhoncus risus, sit amet eleifend quam
+
+            eleifend sed.
+
+        </div>
+
+        <div>
+
+            <h4>
+
+                Secure Login</h4>
+
+            <form id="loginForm" action="">
+
+            <fieldset>
+
+                <legend>You need to sign in with your Email & Password to continue.</legend>
+
+                <div>
+
+                    <label for="email">
+
+                        Email:</label>
+
+                    <input type="text" name="email" id="email" />
+
+                </div>
+
+                <div>
+
+                    <label for="password">
+
+                        Password:</label>
+
+                    <input type="password" name="password" id="password" />
+
+                </div>
+
+                <div>
+
+                    <input id="login" type="submit" value="Fake Login" />
+
+                </div>
+
+            </fieldset>
+
+            </form>
+
+        </div>
+
+        <div>
+
+            <h4>
+
+                Online Support</h4>
+
             
 <p>
     @Html.ActionLink("Create New", "Create", "Phone", new {}, new {})
 </p>
-<table>
+<table id="report">
     <tr>
         <th></th>
         <th>
@@ -102,6 +156,8 @@
         </th>
         <th>
             UpdatedBy
+        </th>
+        <th>
         </th>
     </tr>
 
@@ -129,9 +185,6 @@
         <td>
             @item.UpdatedBy
         </td>
-<<<<<<< HEAD
-    </tr>
-=======
         <td>
             <div class="arrow"></div>
         </td>
@@ -145,11 +198,13 @@
         </div>
     </tr>
  
->>>>>>> 203fe28... #0000 - Phone panel with edit <Hari/Lucy>
 }
 
 </table>
-
-        </div>
-    </div>
+
+
+        </div>
+
+    </div>
+
 

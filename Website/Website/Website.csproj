@@ -82,6 +82,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\tables.css" />
+    <Content Include="Content\images\arrows.png" />
+    <Content Include="Content\images\header_bkg.png" />
     <Content Include="Content\images\home.png" />
     <Content Include="Content\images\img1.jpg" />
     <Content Include="Content\images\img2.jpg" />
@@ -90,6 +93,7 @@
     <Content Include="Content\images\img5.jpg" />
     <Content Include="Content\images\img6.jpg" />
     <Content Include="Content\images\login.png" />
+    <Content Include="Content\images\row_bkg.png" />
     <Content Include="Content\images\support.png" />
     <Content Include="Content\loginslider\bt_close.png" />
     <Content Include="Content\loginslider\bt_login.png" />
@@ -128,6 +132,7 @@
     <Content Include="Scripts\galleria\galleria.classic.css" />
     <Content Include="Scripts\galleria\galleria.classic.js" />
     <Content Include="Scripts\galleria\galleria.classic.min.js" />
+    <Content Include="Scripts\jexpand\jExpand.js" />
     <Content Include="Scripts\jquery.dictionary.js" />
     <Content Include="Scripts\jquery.json-2.2.js" />
     <Content Include="Scripts\loginslider\jquery-1.3.2.min.js" />
