@@ -82,7 +82,8 @@
 	<div class="tab">
 		<ul class="login">
 			<li class="left">&nbsp;</li>
-			<li>Hello @(string.IsNullOrEmpty(Session["userName"] as string) ? "Guest" : Session["userName"]) ! </li>
+			<li>Hello @Session["userName"] ! </li>
+            	<!--@(string.IsNullOrEmpty(Session["userName"] as string) ? "Guest" : Session["userName"]) -->
 			<li class="sep">|</li>
 			<li id="toggle">
                 @if(string.IsNullOrEmpty(Session["userName"] as string)){

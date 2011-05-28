@@ -26,6 +26,8 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
+            var userName = Session["userName"];
+
             return View();
         }
 
@@ -100,12 +102,10 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public JsonResult Login(User user)
         {
             string userName = user.UserName;
             string password = user.Password;
-
-//            bool authenticated = string.Equals(userName, password);
 
             var authenticated = HttpHelper.Get<bool>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Authenticate?username={0}&password={1}",userName,password));
 
@@ -114,10 +114,9 @@ namespace Website.Controllers
                 Session["userName"] = userName;
                 Session["password"] = password;
 
-                FormsAuthentication.RedirectFromLoginPage(userName, false);
             }
 
-            return View("Index");
+            return new JsonResult(){Data = "true"};
         }
 
         [HttpPost]

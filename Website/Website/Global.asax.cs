@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 
 namespace Website
@@ -19,7 +17,7 @@ namespace Website
         {
             routes.MapPageRoute("scripts", "scripts", "~/Scripts");
             routes.MapPageRoute("content", "content", "~/Content");
-            routes.MapRoute("home", "home/{action}", new {Controller = "Home", action = "Login"});
+            routes.MapRoute("login", "home/{action}", new {Controller = "Home", action = "Login"});
             routes.MapRoute("logout", "home/{action}", new {Controller = "Home", action = "Logout"});
             routes.MapRoute("Default", "{controller}/{action}", new {Controller = "Home", action="Index"});            
         }
