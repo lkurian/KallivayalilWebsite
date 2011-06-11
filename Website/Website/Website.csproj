@@ -37,6 +37,7 @@
       <HintPath>..\..\Lib\Kallivayalil.Client.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Web.WebPages" />
     <Reference Include="System.Web.Helpers" />
@@ -58,6 +59,9 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Telerik.Web.Mvc">
+      <HintPath>..\..\Lib\Telerik.Web.Mvc.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\EmailController.cs" />
@@ -133,12 +137,40 @@
     <Content Include="Scripts\galleria\galleria.classic.js" />
     <Content Include="Scripts\galleria\galleria.classic.min.js" />
     <Content Include="Scripts\jexpand\jExpand.js" />
+    <Content Include="Scripts\jquery-1.5.1.js" />
+    <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery.dictionary.js" />
     <Content Include="Scripts\jquery.json-2.2.js" />
     <Content Include="Scripts\loginslider\jquery-1.3.2.min.js" />
     <Content Include="Scripts\loginslider\pngfix\supersleight-min.js" />
     <Content Include="Scripts\loginslider\pngfix\x.gif" />
     <Content Include="Scripts\loginslider\slide.js" />
+    <Content Include="Scripts\telerik.autocomplete.min.js" />
+    <Content Include="Scripts\telerik.calendar.min.js" />
+    <Content Include="Scripts\telerik.combobox.min.js" />
+    <Content Include="Scripts\telerik.common.min.js" />
+    <Content Include="Scripts\telerik.datepicker.min.js" />
+    <Content Include="Scripts\telerik.datetimepicker.min.js" />
+    <Content Include="Scripts\telerik.draganddrop.min.js" />
+    <Content Include="Scripts\telerik.editor.min.js" />
+    <Content Include="Scripts\telerik.grid.editing.min.js" />
+    <Content Include="Scripts\telerik.grid.filtering.min.js" />
+    <Content Include="Scripts\telerik.grid.grouping.min.js" />
+    <Content Include="Scripts\telerik.grid.min.js" />
+    <Content Include="Scripts\telerik.grid.reordering.min.js" />
+    <Content Include="Scripts\telerik.grid.resizing.min.js" />
+    <Content Include="Scripts\telerik.imagebrowser.min.js" />
+    <Content Include="Scripts\telerik.list.min.js" />
+    <Content Include="Scripts\telerik.menu.min.js" />
+    <Content Include="Scripts\telerik.panelbar.min.js" />
+    <Content Include="Scripts\telerik.slider.min.js" />
+    <Content Include="Scripts\telerik.splitter.min.js" />
+    <Content Include="Scripts\telerik.tabstrip.min.js" />
+    <Content Include="Scripts\telerik.textbox.min.js" />
+    <Content Include="Scripts\telerik.timepicker.min.js" />
+    <Content Include="Scripts\telerik.treeview.min.js" />
+    <Content Include="Scripts\telerik.upload.min.js" />
+    <Content Include="Scripts\telerik.window.min.js" />
     <Content Include="Scripts\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Scripts\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Scripts\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />

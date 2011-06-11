@@ -1,7 +1,9 @@
 ﻿using System.Web.Mvc;
 using Kallivayalil.Client;
+using Telerik.Web.Mvc;
 using Website.Helpers;
 using Website.Models;
+using System.Linq;
 
 namespace Website.Controllers
 {
@@ -9,6 +11,7 @@ namespace Website.Controllers
     {
         private AutoDataContractMapper mapper;
 
+          [GridAction]
         public ActionResult Index()
         {
             var phonesData = HttpHelper.Get<PhonesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=123");
@@ -16,17 +19,16 @@ namespace Website.Controllers
             var phones = new Phones();
             mapper.MapList(phonesData,phones,typeof(Phone));
 
-            return View(phones);
+            return View(new GridModel(phones));
         }
 
 
-       [HttpGet]
        public ActionResult Create()
        {           
            return View();
        }
 
-        [HttpPost]
+          [GridAction]
         public ActionResult Create(FormCollection formCollection)
         {
             var phone = new Phone();
@@ -45,7 +47,6 @@ namespace Website.Controllers
             
         }
 
-        [HttpGet]
         public ActionResult Edit(int id)
         {
             var phoneData = HttpHelper.Get<PhoneData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones/" + id);
@@ -54,13 +55,11 @@ namespace Website.Controllers
             mapper.Map(phoneData,phone);
             
             return PartialView(phone);
-        } 
-        
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection formCollection)
+        }
+
+          [GridAction]
+        public ActionResult Edit(Phone phone)
         {
-            var phone = new Phone();
-            TryUpdateModel(phone, formCollection);
             phone.Constituent = new Constituent{Id = 123};
             mapper = new AutoDataContractMapper();
             var phoneData = new PhoneData();
@@ -70,6 +69,7 @@ namespace Website.Controllers
             return RedirectToAction("Index");
         }
 
+          [GridAction]
         public ActionResult Delete(int id)
         {
             HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones/{0}",id));

@@ -237,5 +237,14 @@
     </div>  
 </div>
 </div> 
+@(Html.Telerik().ScriptRegistrar().jQuery(false)
+            .DefaultGroup(group => 
+                group.Add("telerik.common.js") 
+                     .Add("telerik.grid.js")  
+                     .Add("telerik.textbox.js") 
+                     .Add("telerik.grid.filtering.js") 
+                     .Add("telerik.draganddrop.js") 
+                     .Add("telerik.grid.grouping.js")  
+                     ))
 </body>
 </html>

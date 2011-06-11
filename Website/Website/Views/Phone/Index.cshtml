@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Website.Models.Phone>
-           <script type="text/javascript">
+﻿           <script type="text/javascript">
 
                $(function () {
 
@@ -132,76 +131,37 @@
 
                 Online Support</h4>
 
-            
-<p>
-    @Html.ActionLink("Create New", "Create", "Phone", new {}, new {})
-</p>
-<table id="report">
-    <tr>
-        <th></th>
-        <th>
-            Type
-        </th>
-        <th>
-            Number
-        </th>
-        <th>
-            CreatedDateTime
-        </th>
-        <th>
-            UpdatedDateTime
-        </th>
-        <th>
-            CreatedBy
-        </th>
-        <th>
-            UpdatedBy
-        </th>
-        <th>
-        </th>
-    </tr>
 
-@foreach (var item in Model)
-{
-    <tr>
-        <td>
-            @Html.ActionLink("Delete","Delete", new { id = item.Id })
-        </td>
-        <td>
-            @item.Type.Description
-        </td>
-        <td>
-            @item.Number
-        </td>
-        <td>
-            @String.Format("{0:g}", item.CreatedDateTime)
-        </td>
-        <td>
-            @String.Format("{0:g}", item.UpdatedDateTime)
-        </td>
-        <td>
-            @item.CreatedBy
-        </td>
-        <td>
-            @item.UpdatedBy
-        </td>
-        <td>
-            <div class="arrow"></div>
-        </td>
-    </tr>
-    
-    <tr>
-        <div id="my_box">
-        <td colspan="6">
-          @{Html.RenderPartial("Edit", item);}
-          </td>
-        </div>
-    </tr>
- 
-}
-
-</table>
-
+         
+@(Html.Telerik().Grid<Website.Models.Phone>()
+        .Name("Grid")
+        .DataKeys(keys => 
+        {
+            keys.Add(p => p.Id);
+        })
+                .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        .DataBinding(dataBinding =>
+        {
+            dataBinding.Ajax()
+                .Select("Index", "Phone")
+                .Insert("Create", "Phone")
+                .Update("Edit", "Phone")
+                .Delete("Delete", "Phone");
+        })
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Type.Description).Width(210);
+            columns.Bound(p => p.Number).Width(130);
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.Text);
+                commands.Delete().ButtonType(GridButtonType.Text);
+            }).Width(180).Title("Commands");
+        })
+            .Editable(editing => editing.Mode(GridEditMode.InForm))
+        .Scrollable()
+        .Sortable()
+)
 
         </div>
 
