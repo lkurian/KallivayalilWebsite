@@ -29,28 +29,6 @@ body.noheader {
 }
 
 /** element defaults **/
-table {
-	width: 100%;
-	text-align: left;
-}
-
-th, td {
-	padding: 10px 10px;
-}
-
-th {
-	color: #fff;
-	font-size: 12px;
-	font-family: Arial, Helvetica, sans-serif;
-	text-decoration: none;
-	text-transform: uppercase;
-	text-shadow:-1px -1px #CE5709;
-	background: #F87B27 url('images/frontpage-link.png') repeat-x scroll top left;
-}
-
-td {
-	border-bottom: 1px solid #ccc;
-}
 
 code, blockquote {
 	display: block;

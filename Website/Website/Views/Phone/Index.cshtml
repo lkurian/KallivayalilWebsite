@@ -139,7 +139,7 @@
         {
             keys.Add(p => p.Id);
         })
-                .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Text).ImageHtmlAttributes(new { style = "margin-left:0" }))
+                    .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
         .DataBinding(dataBinding =>
         {
             dataBinding.Ajax()
@@ -154,11 +154,11 @@
             columns.Bound(p => p.Number).Width(130);
             columns.Command(commands =>
             {
-                commands.Edit().ButtonType(GridButtonType.Text);
-                commands.Delete().ButtonType(GridButtonType.Text);
+                commands.Edit().ButtonType(GridButtonType.Image);
+                commands.Delete().ButtonType(GridButtonType.Image);
             }).Width(180).Title("Commands");
         })
-            .Editable(editing => editing.Mode(GridEditMode.InForm))
+                .Editable(editing => editing.Mode(GridEditMode.InLine))
         .Scrollable()
         .Sortable()
 )

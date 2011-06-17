@@ -1,9 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System.Collections.Generic;
+using System.Web.Mvc;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
 using Website.Models;
-using System.Linq;
 
 namespace Website.Controllers
 {
@@ -11,40 +11,37 @@ namespace Website.Controllers
     {
         private AutoDataContractMapper mapper;
 
-          [GridAction]
+        [GridAction]
         public ActionResult Index()
+        {
+            return View(new GridModel(AllPhones()));
+        }
+
+        private IEnumerable<Phone> AllPhones()
         {
             var phonesData = HttpHelper.Get<PhonesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=123");
             mapper = new AutoDataContractMapper();
             var phones = new Phones();
-            mapper.MapList(phonesData,phones,typeof(Phone));
-
-            return View(new GridModel(phones));
+            mapper.MapList(phonesData, phones, typeof (Phone));
+            return phones;
         }
 
-
-       public ActionResult Create()
-       {           
-           return View();
-       }
-
-          [GridAction]
-        public ActionResult Create(FormCollection formCollection)
+        [AcceptVerbs(HttpVerbs.Post)]
+        [GridAction]
+        public ActionResult Create()
         {
             var phone = new Phone();
-            TryUpdateModel(phone ,formCollection);
+            TryUpdateModel(phone);
 
-            phone.Constituent = new Constituent{Id = 1};
+            phone.Constituent = new Constituent {Id = 123};
 
             mapper = new AutoDataContractMapper();
             var phoneData = new PhoneData();
-            mapper.Map(phone,phoneData);
+            mapper.Map(phone, phoneData);
 
-            var newPhone = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=1", phoneData);
+            var newPhone = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=123", phoneData);
 
-            
-            return RedirectToAction("Index");
-            
+            return View(new GridModel(AllPhones()));
         }
 
         public ActionResult Edit(int id)
@@ -52,30 +49,28 @@ namespace Website.Controllers
             var phoneData = HttpHelper.Get<PhoneData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones/" + id);
             mapper = new AutoDataContractMapper();
             var phone = new Phone();
-            mapper.Map(phoneData,phone);
-            
+            mapper.Map(phoneData, phone);
+
             return PartialView(phone);
         }
 
-          [GridAction]
+        [GridAction]
         public ActionResult Edit(Phone phone)
         {
-            phone.Constituent = new Constituent{Id = 123};
+            phone.Constituent = new Constituent {Id = 123};
             mapper = new AutoDataContractMapper();
             var phoneData = new PhoneData();
             mapper.Map(phone, phoneData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?constituentId=1"),phoneData);
+            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?constituentId=1"), phoneData);
             return RedirectToAction("Index");
         }
 
-          [GridAction]
+        [GridAction]
         public ActionResult Delete(int id)
         {
-            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones/{0}",id));
-            return RedirectToAction("Index");            
+            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones/{0}", id));
+            return RedirectToAction("Index");
         }
-
-
     }
 }
