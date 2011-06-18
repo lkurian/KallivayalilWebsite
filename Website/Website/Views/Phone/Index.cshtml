@@ -33,7 +33,7 @@
                });
 
     </script>
-
+    <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/PhoneType.js")"></script>
 
             <div id="vtab">
 
@@ -139,29 +139,36 @@
         {
             keys.Add(p => p.Id);
         })
-                    .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
+                   
         .DataBinding(dataBinding =>
         {
             dataBinding.Ajax()
-                .Select("Index", "Phone")
-                .Insert("Create", "Phone")
+                .Select("AllPhones", "Phone")
                 .Update("Edit", "Phone")
+                .Insert("Create", "Phone")
                 .Delete("Delete", "Phone");
         })
         .Columns(columns =>
         {
-            columns.Bound(p => p.Type.Description).Width(210);
-            columns.Bound(p => p.Number).Width(130);
+            columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+            columns.Bound(p => p.Number);
+            columns.Bound(p => p.Constituent).ReadOnly();
+            columns.Bound(p => p.CreatedBy).Hidden(true);
+            columns.Bound(p => p.CreatedDateTime).Hidden(true);
+            columns.Bound(p => p.UpdatedBy).Hidden(true);
+            columns.Bound(p => p.UpdatedDateTime).Hidden(true);
             columns.Command(commands =>
             {
                 commands.Edit().ButtonType(GridButtonType.Image);
                 commands.Delete().ButtonType(GridButtonType.Image);
             }).Width(180).Title("Commands");
         })
-                .Editable(editing => editing.Mode(GridEditMode.InLine))
+        .ClientEvents(events => events.OnEdit("onEdit"))
         .Scrollable()
         .Sortable()
 )
+
 
         </div>
 
