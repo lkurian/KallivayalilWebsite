@@ -1,0 +1,58 @@
+﻿           <script type="text/javascript">
+
+               $(function() {
+
+                   $('#eventsSidebar').addClass('sidebar-hidden');
+
+                   var $items = $('#vtab>ul>li');
+
+                   $items.mouseover(function() {
+
+                       $items.removeClass('selected');
+
+                       $(this).addClass('selected');
+
+                       var index = $items.index($(this));
+
+                       $('#vtab>div').hide().eq(index).show();
+
+                   }).eq(1).mouseover();
+
+               });
+
+               $(document).ready(function() {
+                   $("#report tr:odd").addClass("odd");
+                   $("#report tr:not(.odd)").hide();
+                   $("#report tr:first-child").show();
+
+                   $("#report tr.odd").click(function() {
+                       $(this).next("tr").toggle();
+                       $(this).find(".arrow").toggleClass("up");
+                   });
+                   //$("#report").jExpand();
+               });
+
+    </script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/PhoneType.js")"> </script>
+
+<div id="vtab">
+
+    <ul>
+        <li class="home selected"></li>
+        <li class="login"></li>
+        <li class="support"></li>
+    </ul>
+    <div>
+        <h4>Welcome Home!</h4>
+    </div>
+    <div>
+        <h4>Secure Login</h4>
+    </div>
+    <div>
+        <h4>Phones</h4>
+         @{ Html.RenderAction("Index", "Phone"); }
+    </div>
+
+</div>
+
+

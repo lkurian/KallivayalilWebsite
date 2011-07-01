@@ -14,7 +14,7 @@ namespace Website.Controllers
         public ActionResult Index()
         {
             PopulatePhoneTypes();
-            return View();
+            return PartialView();
         }
 
         private void PopulatePhoneTypes()
@@ -29,7 +29,7 @@ namespace Website.Controllers
         [GridAction]
         public ActionResult AllPhones()
         {
-            return View(new GridModel(GetPhones()));
+            return PartialView(new GridModel(GetPhones()));
         }
 
         private Phones GetPhones()
@@ -58,7 +58,7 @@ namespace Website.Controllers
 
             var newPhone = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=123", phoneData);
 
-            return View(new GridModel(GetPhones()));
+            return PartialView(new GridModel(GetPhones()));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -75,7 +75,7 @@ namespace Website.Controllers
             mapper.Map(phone, phoneData);
 
             HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?constituentId=123"), phoneData);
-            return View(new GridModel(GetPhones()));
+            return PartialView(new GridModel(GetPhones()));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -83,7 +83,7 @@ namespace Website.Controllers
         public ActionResult Delete(int id)
         {
             HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones/{0}", id));
-            return View(new GridModel(GetPhones()));
+            return PartialView(new GridModel(GetPhones()));
         }
     }
 }
