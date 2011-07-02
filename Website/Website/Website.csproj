@@ -152,7 +152,7 @@
     <Content Include="Content\verticaltabs.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
-    <Content Include="Scripts\Custom\PhoneType.js" />
+    <Content Include="Scripts\Custom\Type.js" />
     <Content Include="Scripts\Custom\login.js" />
     <Content Include="Scripts\galleria\classic-loader.gif" />
     <Content Include="Scripts\galleria\classic-map.png" />
@@ -410,6 +410,7 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\verticaltabs\verticaltabs.js" />
+    <Content Include="Views\Email\EditorTemplates\EmailTypes.ascx" />
     <Content Include="Views\Phone\EditorTemplates\PhoneTypes.ascx" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
@@ -425,12 +426,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Email\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Email\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Email\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\Details.cshtml" />

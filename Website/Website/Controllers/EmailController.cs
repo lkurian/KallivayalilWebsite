@@ -1,77 +1,89 @@
 ﻿using System.Web.Mvc;
 using Kallivayalil.Client;
+using Telerik.Web.Mvc;
 using Website.Helpers;
 using Website.Models;
+using Website.Models.ReferenceData;
 
 namespace Website.Controllers
 {
     public class EmailController : Controller
     {
-        private AutoDataContractMapper mapper;
+        private AutoDataContractMapper mapper = new AutoDataContractMapper();
 
         public ActionResult Index()
         {
-            var emailsData = HttpHelper.Get<EmailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=1");
+            PopulateEmailTypes();
+            return PartialView();
+        }
+
+        private void PopulateEmailTypes()
+        {
+            var emailTypesData = HttpHelper.Get<EmailTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/EmailTypes");
+
+            var emailTypes = new EmailTypes();
+            mapper.MapList(emailTypesData, emailTypes, typeof(EmailType));
+            ViewData["emailTypes"] = emailTypes;
+        }
+
+        [GridAction]
+        public ActionResult AllEmails()
+        {
+            return PartialView(new GridModel(GetEmails()));
+        }
+
+        private Emails GetEmails()
+        {
+            var emailsData = HttpHelper.Get<EmailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=123");
+
             mapper = new AutoDataContractMapper();
             var emails = new Emails();
             mapper.MapList(emailsData, emails, typeof(Email));
-
-            return View(emails);
+            return emails;
         }
 
-
-
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult Create(FormCollection formCollection)
+        [AcceptVerbs(HttpVerbs.Post)]
+        [GridAction]
+        public ActionResult Create(int emailType)
         {
             var email = new Email();
-            TryUpdateModel(email, formCollection);
+            TryUpdateModel(email);
 
-            email.Constituent = new Constituent { Id = 1 };
+            email.Constituent = new Constituent { Id = 123 };
+            email.Type = new EmailType() { Id = emailType };
 
             mapper = new AutoDataContractMapper();
             var emailData = new EmailData();
             mapper.Map(email, emailData);
 
-            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=1", emailData);
+            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=123", emailData);
 
-            return RedirectToAction("Index");
+            return PartialView(new GridModel(GetEmails()));
         }
 
-        [HttpGet]
-        public ActionResult Edit(int id)
+        [AcceptVerbs(HttpVerbs.Post)]
+        [GridAction]
+        public ActionResult Edit(int id, int emailType)
         {
-            var emailData = HttpHelper.Get<EmailData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails/" + id);
-            mapper = new AutoDataContractMapper();
             var email = new Email();
-            mapper.Map(emailData, email);
-            return View(email);
-        }
 
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection formCollection)
-        {
-            var email = new Email();
-            TryUpdateModel(email, formCollection);
-            email.Constituent = new Constituent { Id = 1 };
+            TryUpdateModel(email);
+            email.Type = new EmailType() { Id = emailType };
+            email.Constituent = new Constituent { Id = 123 };
             mapper = new AutoDataContractMapper();
             var emailData = new EmailData();
             mapper.Map(email, emailData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?constituentId=1"), emailData);
-            return RedirectToAction("Index");
+            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?constituentId=123"), emailData);
+            return PartialView(new GridModel(GetEmails()));
         }
 
+        [AcceptVerbs(HttpVerbs.Post)]
+        [GridAction]
         public ActionResult Delete(int id)
         {
             HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails/{0}", id));
-            return RedirectToAction("Index");
+            return PartialView(new GridModel(GetEmails()));
         }
 
     }

@@ -1,57 +1,32 @@
-﻿@model IEnumerable<Website.Models.Email>
+﻿
+@(Html.Telerik().Grid<Website.Models.Email>()
+        .Name("Grid")
+        .DataKeys(keys => keys.Add(p => p.Id))
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
+                   
+        .DataBinding(dataBinding => dataBinding.Ajax()
+                                        .Select("AllEmails", "Email")
+                                        .Update("Edit", "Email")
+                                        .Insert("Create", "Email")
+                                        .Delete("Delete", "Email"))
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+            columns.Bound(p => p.Address);
+            columns.Bound(p => p.Constituent).ReadOnly();
+            columns.Bound(p => p.CreatedBy).Hidden(true);
+            columns.Bound(p => p.CreatedDateTime).Hidden(true);
+            columns.Bound(p => p.UpdatedBy).Hidden(true);
+            columns.Bound(p => p.UpdatedDateTime).Hidden(true);
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.Image);
+                commands.Delete().ButtonType(GridButtonType.Image);
+            }).Width(180).Title("Commands");
+        })
+        .ClientEvents(events => events.OnEdit("onEdit"))
+        .Scrollable()
+        .Sortable()
+)
 
-<p>
-    @Html.ActionLink("Create New", "Create", "Email", new { }, new { })
-</p>
-<table>
-    <tr>
-        <th></th>
-        <th>
-            Type
-        </th>
-        <th>
-            Address
-        </th>
-        <th>
-            CreatedDateTime
-        </th>
-        <th>
-            UpdatedDateTime
-        </th>
-        <th>
-            CreatedBy
-        </th>
-        <th>
-            UpdatedBy
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-        <td>
-            @item.Type.Description
-        </td>
-        <td>
-            @item.Address
-        </td>
-        <td>
-            @String.Format("{0:g}", item.CreatedDateTime)
-        </td>
-        <td>
-            @String.Format("{0:g}", item.UpdatedDateTime)
-        </td>
-        <td>
-            @item.CreatedBy
-        </td>
-        <td>
-            @item.UpdatedBy
-        </td>
-    </tr>
-}
-
-</table>
 

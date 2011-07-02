@@ -6,7 +6,7 @@
 
                    var $items = $('#vtab>ul>li');
 
-                   $items.mouseover(function() {
+                   $items.click(function() {
 
                        $items.removeClass('selected');
 
@@ -16,7 +16,7 @@
 
                        $('#vtab>div').hide().eq(index).show();
 
-                   }).eq(1).mouseover();
+                   }).eq(0).click();
 
                });
 
@@ -33,7 +33,7 @@
                });
 
     </script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/PhoneType.js")"> </script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/Type.js")"> </script>
 
 <div id="vtab">
 
@@ -46,11 +46,12 @@
         <h4>Welcome Home!</h4>
     </div>
     <div>
-        <h4>Secure Login</h4>
+        <h4>Emails</h4>
+        @{ Html.RenderAction("Index", "Email"); }
     </div>
     <div>
         <h4>Phones</h4>
-         @{ Html.RenderAction("Index", "Phone"); }
+         @{ Html.RenderAction("Index","Phone"); }
     </div>
 
 </div>
