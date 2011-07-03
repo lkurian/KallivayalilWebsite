@@ -7,6 +7,6 @@ namespace Website.Controllers
         public ActionResult Profile()
         {
             return View();
-        }
+        } 
     }
 }

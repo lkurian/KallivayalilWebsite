@@ -11,6 +11,7 @@ namespace Website.Controllers
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
 
+         [HttpGet]
         public ActionResult Index()
         {
             PopulatePhoneTypes();

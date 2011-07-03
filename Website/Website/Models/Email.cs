@@ -9,7 +9,6 @@ namespace Website.Models
     public class Emails : List<Email>
     {
     }
-
     public class Email : Entity
     {
         [UIHint("EmailTypes"), DisplayName("Email Type")]
