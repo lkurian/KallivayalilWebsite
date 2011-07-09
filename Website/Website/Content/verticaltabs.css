@@ -43,19 +43,31 @@
 
         #vtab > ul > li.home {
 
-            background: url('../Content/images/home.png') no-repeat center center;
+            background: url('../Content/images/home.jpg') no-repeat center center;
+
+        }  
+        
+         #vtab > ul > li.person {
+
+            background: url('../Content/images/person.jpg') no-repeat center center;
+
+        } 
+        
+        #vtab > ul > li.address {
+
+            background: url('../Content/images/address.jpg') no-repeat center center;
 
         }
 
-        #vtab > ul > li.login {
+        #vtab > ul > li.email {
 
-            background: url('../Content/images/login.png') no-repeat center center;
+            background: url('../Content/images/email.jpg') no-repeat center center;
 
         }
 
-        #vtab > ul > li.support {
+        #vtab > ul > li.phone {
 
-            background: url('../Content/images/support.png') no-repeat center center;
+            background: url('../Content/images/phone.jpg') no-repeat center center;
 
         }
 

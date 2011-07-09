@@ -1,0 +1,36 @@
+﻿
+@(Html.Telerik().Grid<Website.Models.Address>()
+        .Name("AddressesGrid")
+        .DataKeys(keys => keys.Add(p => p.Id))
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
+                   
+        .DataBinding(dataBinding => dataBinding.Ajax()
+                                        .Select("AllAddresses", "Address")
+                                        .Update("Edit", "Address")
+                                        .Insert("Create", "Address")
+                                        .Delete("Delete", "Address"))
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+            columns.Bound(p => p.Line1);
+            columns.Bound(p => p.Line2);
+            columns.Bound(p => p.City);
+            columns.Bound(p => p.State);
+            columns.Bound(p => p.Country);
+            columns.Bound(p => p.PostCode);
+            columns.Bound(p => p.Constituent).ReadOnly();
+            columns.Bound(p => p.CreatedBy).Hidden(true);
+            columns.Bound(p => p.CreatedDateTime).Hidden(true);
+            columns.Bound(p => p.UpdatedBy).Hidden(true);
+            columns.Bound(p => p.UpdatedDateTime).Hidden(true);
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.Image);
+                commands.Delete().ButtonType(GridButtonType.Image);
+            }).Width(180).Title("Commands");
+        })
+        .ClientEvents(events => events.OnEdit("onEdit"))
+        .Sortable()
+)
+
+

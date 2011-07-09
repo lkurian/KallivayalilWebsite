@@ -39,11 +39,20 @@
 
     <ul>
         <li class="home selected"></li>
-        <li class="login"></li>
-        <li class="support"></li>
+        <li class="person"></li>
+        <li class="address"></li>
+        <li class="email"></li>
+        <li class="phone"></li>
     </ul>
     <div>
         <h4>Welcome Home!</h4>
+    </div>
+    <div>
+        <h4>Welcome Constituent!</h4>
+    </div>
+    <div>
+        <h4>Addresses</h4>
+        @{ Html.RenderAction("Index","Address"); }
     </div>
     <div>
         <h4>Emails</h4>
