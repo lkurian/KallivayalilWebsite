@@ -17,7 +17,6 @@ namespace Website
         {
            
             routes.MapRoute("login", "home/{action}", new {Controller = "Home", action = "Login"});
-            routes.MapRoute("phone", "phone/{action}", new { Controller = "Phone", action = "Index" });
             routes.MapRoute("logout", "home/{action}", new {Controller = "Home", action = "Logout"});
             routes.MapRoute("Default", "{controller}/{action}", new {Controller = "Home", action="Index"});
             routes.MapPageRoute("scripts", "scripts", "~/Scripts");
