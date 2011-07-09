@@ -1,0 +1,63 @@
+﻿.profileDetails
+{
+	background: transparent url('./profile/dotting.gif') repeat-x 0 0;
+}
+
+
+#profile .RadComboBox_Sunset,
+#profile .RadInput_Sunset,
+#profile .viewField
+{
+	float: left;
+	margin-right: 40px;
+	margin-bottom: 5px;
+}
+#profile .viewField
+{
+	width: 129px;
+	padding-top: 6px;
+}
+
+#profile label,
+#profile .label
+{
+	width: 65px;
+	display: block;
+	float: left;
+	font: 11px/15px Arial,sans-serif;
+	padding: 6px 0 0 10px;
+}
+
+
+#profile .caption
+{
+	padding-bottom: 9px;
+	color: #47423A;
+}
+
+.profileButton
+{
+	background: transparent url('./profile/profile-button.gif') no-repeat 0 0;
+	border: 0;
+	width: 68px;
+	height: 24px;
+	color: #fff;
+	font: 12px/15px Arial,sans-serif;
+	cursor: pointer;
+	position: absolute;
+	left: 700px;
+}
+
+#profile
+{
+	background: transparent url('./profile/profile-field-bg.gif') no-repeat 50% 30px;
+	width: 974px;
+	margin: 0 auto 15px;
+	position: relative;
+	color: #fff;
+}
+
+
+fieldset {
+	padding : 33px 5px 33px 3px;
+}
