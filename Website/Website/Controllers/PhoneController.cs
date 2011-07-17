@@ -75,7 +75,7 @@ namespace Website.Controllers
             var phoneData = new PhoneData();
             mapper.Map(phone, phoneData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?constituentId=123"), phoneData);
+            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones/{0}",id), phoneData);
             return PartialView(new GridModel(GetPhones()));
         }
 

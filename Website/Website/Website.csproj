@@ -66,11 +66,17 @@
   <ItemGroup>
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\ConstituentController.cs" />
+    <Compile Include="Controllers\EducationDetailController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OccupationController.cs" />
     <Compile Include="Controllers\PhoneController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Models\EducationDetail.cs" />
+    <Compile Include="Models\Occupation.cs" />
     <Compile Include="Models\ReferenceData\AddressType.cs" />
+    <Compile Include="Models\ReferenceData\EducationType.cs" />
+    <Compile Include="Models\ReferenceData\OccupationType.cs" />
     <Compile Include="Models\ViewModels\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -427,6 +433,8 @@
     <Content Include="Scripts\verticaltabs\verticaltabs.js" />
     <Content Include="Views\Address\EditorTemplates\AddressTypes.ascx" />
     <Content Include="Views\Constituent\EditorTemplates\SalutationsTypes.ascx" />
+    <Content Include="Views\Occupation\EditorTemplates\OccupationTypes.ascx" />
+    <Content Include="Views\EducationDetail\EditorTemplates\EducationTypes.ascx" />
     <Content Include="Views\Email\EditorTemplates\EmailTypes.ascx" />
     <Content Include="Views\Phone\EditorTemplates\PhoneTypes.ascx" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -466,6 +474,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Constituent\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EducationDetail\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Occupation\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

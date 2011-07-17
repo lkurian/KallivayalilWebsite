@@ -41,13 +41,13 @@
 
         }
 
-        #vtab > ul > li.home {
+        #vtab > ul > li.occupation {
 
             background: url('../Content/images/home.jpg') no-repeat center center;
 
         }  
         
-         #vtab > ul > li.person {
+         #vtab > ul > li.educationDetail {
 
             background: url('../Content/images/person.jpg') no-repeat center center;
 
