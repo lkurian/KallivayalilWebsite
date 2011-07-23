@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using Kallivayalil.Client;
 using Website.Models.ReferenceData;
 
 namespace Website.Models
