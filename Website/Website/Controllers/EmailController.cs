@@ -75,7 +75,7 @@ namespace Website.Controllers
             var emailData = new EmailData();
             mapper.Map(email, emailData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?constituentId=123"), emailData);
+            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails/{0}",id), emailData);
             return PartialView(new GridModel(GetEmails()));
         }
 

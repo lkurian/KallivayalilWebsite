@@ -1,0 +1,27 @@
+<Configuration>
+  <RecentFiles>
+    <RecentFiles>
+      <File id="1521BB7F-FFD4-4125-9B39-A85FFE110DD8/d:Controllers/f:AddressController.cs" caret="527" fromTop="20" />
+      <File id="1521BB7F-FFD4-4125-9B39-A85FFE110DD8/d:Controllers/f:OccupationController.cs" caret="193" fromTop="8" />
+    </RecentFiles>
+    <RecentEdits />
+  </RecentFiles>
+  <NAntValidationSettings>
+    <NAntPath value="" />
+  </NAntValidationSettings>
+  <UnitTestRunner>
+    <Providers />
+  </UnitTestRunner>
+  <UnitTestRunnerNUnit>
+    <NUnitInstallDir IsNull="False">
+    </NUnitInstallDir>
+    <UseAddins>Never</UseAddins>
+  </UnitTestRunnerNUnit>
+  <SettingsComponent>
+    <string />
+    <integer />
+    <boolean>
+      <setting name="SolutionAnalysisEnabled">False</setting>
+    </boolean>
+  </SettingsComponent>
+</Configuration>

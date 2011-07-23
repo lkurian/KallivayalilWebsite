@@ -64,10 +64,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\ConstituentController.cs" />
+    <Compile Include="Controllers\EducationDetailController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OccupationController.cs" />
     <Compile Include="Controllers\PhoneController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Models\EducationDetail.cs" />
+    <Compile Include="Models\Occupation.cs" />
+    <Compile Include="Models\ReferenceData\AddressType.cs" />
+    <Compile Include="Models\ReferenceData\EducationType.cs" />
+    <Compile Include="Models\ReferenceData\OccupationType.cs" />
     <Compile Include="Models\ViewModels\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -87,6 +96,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\profile.css" />
+    <Content Include="Content\images\address.jpg" />
+    <Content Include="Content\images\email.jpg" />
+    <Content Include="Content\images\home.jpg" />
+    <Content Include="Content\images\person.jpg" />
+    <Content Include="Content\images\phone.jpg" />
+    <Content Include="Content\profile\bg-gradient.gif" />
+    <Content Include="Content\profile\bg-static-header.gif" />
+    <Content Include="Content\profile\bg.jpg" />
+    <Content Include="Content\profile\dotting-h.gif" />
+    <Content Include="Content\profile\dotting.gif" />
+    <Content Include="Content\profile\no-uploaded-image.gif" />
+    <Content Include="Content\profile\profile-button.gif" />
+    <Content Include="Content\profile\profile-field-bg.gif" />
+    <Content Include="Content\profile\top-banner.png" />
     <Content Include="Content\Sunset\editor.png" />
     <Content Include="Content\Sunset\imagebrowser.png" />
     <Content Include="Content\Sunset\loading.gif" />
@@ -110,16 +134,13 @@
     <Content Include="Content\tables.css" />
     <Content Include="Content\images\arrows.png" />
     <Content Include="Content\images\header_bkg.png" />
-    <Content Include="Content\images\home.png" />
     <Content Include="Content\images\img1.jpg" />
     <Content Include="Content\images\img2.jpg" />
     <Content Include="Content\images\img3.jpg" />
     <Content Include="Content\images\img4.jpg" />
     <Content Include="Content\images\img5.jpg" />
     <Content Include="Content\images\img6.jpg" />
-    <Content Include="Content\images\login.png" />
     <Content Include="Content\images\row_bkg.png" />
-    <Content Include="Content\images\support.png" />
     <Content Include="Content\loginslider\bt_close.png" />
     <Content Include="Content\loginslider\bt_login.png" />
     <Content Include="Content\loginslider\bt_open.png" />
@@ -410,6 +431,10 @@
     <Content Include="Scripts\MicrosoftMvcValidation.js" />
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\verticaltabs\verticaltabs.js" />
+    <Content Include="Views\Address\EditorTemplates\AddressTypes.ascx" />
+    <Content Include="Views\Constituent\EditorTemplates\SalutationsTypes.ascx" />
+    <Content Include="Views\Occupation\EditorTemplates\OccupationTypes.ascx" />
+    <Content Include="Views\EducationDetail\EditorTemplates\EducationTypes.ascx" />
     <Content Include="Views\Email\EditorTemplates\EmailTypes.ascx" />
     <Content Include="Views\Phone\EditorTemplates\PhoneTypes.ascx" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -428,15 +453,6 @@
     <Content Include="Views\Email\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Details.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Create.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Home\Edit.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -452,6 +468,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Phone\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Address\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Constituent\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\EducationDetail\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Occupation\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

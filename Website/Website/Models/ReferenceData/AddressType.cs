@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace Website.Models.ReferenceData
 {
-    public class SalutationType :Entity
+    public class AddressType :Entity
     {
         public virtual string Description { get; set; }
     }
 
-    public class SalutationTypes : List<SalutationType> { }
+    public class AddressTypes : List<AddressType> { }
 }

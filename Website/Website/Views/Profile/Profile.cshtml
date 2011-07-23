@@ -34,16 +34,23 @@
 
     </script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/Type.js")"> </script>
+<div>
+<div id="profile">
 
+@{ Html.RenderAction("Index","Constituent"); } 
+</div>
 <div id="vtab">
 
     <ul>
-        <li class="home selected"></li>
-        <li class="login"></li>
-        <li class="support"></li>
+        <li class="address"></li>
+        <li class="email"></li>
+        <li class="phone"></li>
+        <li class="educationDetail"></li>
+        <li class="occupation"></li>
     </ul>
     <div>
-        <h4>Welcome Home!</h4>
+        <h4>Addresses</h4>
+        @{ Html.RenderAction("Index","Address"); }
     </div>
     <div>
         <h4>Emails</h4>
@@ -52,7 +59,17 @@
     <div>
         <h4>Phones</h4>
          @{ Html.RenderAction("Index","Phone"); }
+    </div> 
+    <div>
+        <h4>EducationDetails</h4>
+         @{ Html.RenderAction("Index","EducationDetail"); }
     </div>
+     <div>
+        <h4>Occupations</h4>
+         @{ Html.RenderAction("Index","Occupation"); }
+    </div>
+
+</div>
 
 </div>
 

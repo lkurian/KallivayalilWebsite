@@ -1,0 +1,36 @@
+﻿@model Website.Models.Constituent
+
+<div class="profileDetails">
+<fieldset>
+    <div style="float: left; clear: left; width: 491px; height: 28px;">
+        <span class="label">Gender</span>
+        <span id="labelGender" class="viewField">@Model.Gender</span>
+        <span class="label">MaritialStatus</span>
+        <span id="labelMaritalStatus" class="viewField">@Model.MaritialStatus</span>
+    </div>
+    
+    <div style="float: left; clear: left; width: 491px;">
+        <span class="label">BranchName</span>
+        <span id="labelBranchName" class="viewField">@Model.BranchName</span>
+        <span class="label">HouseName</span>
+        <span id="labelHouseName" class="viewField">@Model.HouseName</span>
+    </div>
+
+
+    <!--<div style="float: left; clear: left; width: 491px;">
+        <span class="label">BornOn</span><span class="viewfield">@String.Format("{0:g}", Model.BornOn)</span>
+        <span class="label">DiedOn</span><span class="viewfield">@String.Format("{0:g}", Model.DiedOn)</span>
+        <span class="label">HasExpired</span><span class="viewfield">@Model.HasExpired</span>
+    </div>
+
+    <div style="float: left; clear: left; width: 491px;">
+        <span class="label">IsRegistered</span><span class="viewfield">@Model.IsRegistered</span>
+    </div>
+-->
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) 
+</p>
+
+</fieldset>
+</div>
+
