@@ -35,7 +35,7 @@ namespace Website.Controllers
 
         private Phones GetPhones()
         {
-            var phonesData = HttpHelper.Get<PhonesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=123");
+            var phonesData = HttpHelper.Get<PhonesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=0");
 
             mapper = new AutoDataContractMapper();
             var phones = new Phones();
@@ -50,14 +50,14 @@ namespace Website.Controllers
             var phone = new Phone();
             TryUpdateModel(phone);
 
-            phone.Constituent = new Constituent {Id = 123};
+            phone.Constituent = new Constituent {Id = 0};
             phone.Type = new PhoneType { Id = PhoneType };
 
             mapper = new AutoDataContractMapper();
             var phoneData = new PhoneData();
             mapper.Map(phone, phoneData);
 
-            var newPhone = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=123", phoneData);
+            var newPhone = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=0", phoneData);
 
             return PartialView(new GridModel(GetPhones()));
         }
@@ -70,7 +70,7 @@ namespace Website.Controllers
 
             TryUpdateModel(phone);
             phone.Type = new PhoneType {Id = PhoneType};
-            phone.Constituent = new Constituent {Id = 123};
+            phone.Constituent = new Constituent {Id = 0};
             mapper = new AutoDataContractMapper();
             var phoneData = new PhoneData();
             mapper.Map(phone, phoneData);

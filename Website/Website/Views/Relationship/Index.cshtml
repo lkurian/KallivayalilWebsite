@@ -1,0 +1,31 @@
+﻿
+@(Html.Telerik().Grid<Website.Models.Association>()
+        .Name("RelationshipsGrid")
+        .DataKeys(keys => keys.Add(p => p.Id))
+        .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
+                   
+        .DataBinding(dataBinding => dataBinding.Ajax()
+                                        .Select("AllAssociations", "Relationship")
+                                            .Update("Edit", "Relationship")
+                                            .Insert("Create", "Relationship")
+                                            .Delete("Delete", "Relationship"))
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.ConstituentId);
+            columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+            columns.Bound(p => p.AssociatedConstituentId);
+            columns.Bound(p => p.CreatedBy).Hidden(true);
+            columns.Bound(p => p.CreatedDateTime).Hidden(true);
+            columns.Bound(p => p.UpdatedBy).Hidden(true);
+            columns.Bound(p => p.UpdatedDateTime).Hidden(true);
+            columns.Command(commands =>
+            {
+                commands.Edit().ButtonType(GridButtonType.Image);
+                commands.Delete().ButtonType(GridButtonType.Image);
+            }).Width(180).Title("Commands");
+        })
+        .ClientEvents(events => events.OnEdit("onEdit"))
+        .Sortable()
+)
+
+

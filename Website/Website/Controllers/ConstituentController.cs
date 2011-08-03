@@ -35,7 +35,7 @@ namespace Website.Controllers
 
         private Constituent GetConstituent()
         {
-            var constituentData = HttpHelper.Get<ConstituentData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/123");
+            var constituentData = HttpHelper.Get<ConstituentData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/0");
 
             mapper = new AutoDataContractMapper();
             var constituent = new Constituent();

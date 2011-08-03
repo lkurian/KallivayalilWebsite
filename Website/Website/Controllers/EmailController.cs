@@ -35,7 +35,7 @@ namespace Website.Controllers
 
         private Emails GetEmails()
         {
-            var emailsData = HttpHelper.Get<EmailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=123");
+            var emailsData = HttpHelper.Get<EmailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=0");
 
             mapper = new AutoDataContractMapper();
             var emails = new Emails();
@@ -50,14 +50,14 @@ namespace Website.Controllers
             var email = new Email();
             TryUpdateModel(email);
 
-            email.Constituent = new Constituent { Id = 123 };
+            email.Constituent = new Constituent { Id = 0 };
             email.Type = new EmailType() { Id = emailType };
 
             mapper = new AutoDataContractMapper();
             var emailData = new EmailData();
             mapper.Map(email, emailData);
 
-            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=123", emailData);
+            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=0", emailData);
 
             return PartialView(new GridModel(GetEmails()));
         }
@@ -70,7 +70,7 @@ namespace Website.Controllers
 
             TryUpdateModel(email);
             email.Type = new EmailType() { Id = emailType };
-            email.Constituent = new Constituent { Id = 123 };
+            email.Constituent = new Constituent { Id = 0 };
             mapper = new AutoDataContractMapper();
             var emailData = new EmailData();
             mapper.Map(email, emailData);

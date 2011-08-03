@@ -35,7 +35,7 @@ namespace Website.Controllers
 
         private EducationDetails GetEducations()
         {
-            var educationDetailsData = HttpHelper.Get<EducationDetailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId=123");
+            var educationDetailsData = HttpHelper.Get<EducationDetailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId=0");
 
             mapper = new AutoDataContractMapper();
             var educations = new EducationDetails();
@@ -50,14 +50,14 @@ namespace Website.Controllers
             var educationDetail = new EducationDetail();
             TryUpdateModel(educationDetail);
 
-            educationDetail.Constituent = new Constituent { Id = 123 };
+            educationDetail.Constituent = new Constituent { Id = 0 };
             educationDetail.Type = new EducationType() { Id = educationType };
 
             mapper = new AutoDataContractMapper();
             var educationDetailData = new EducationDetailData();
             mapper.Map(educationDetail, educationDetailData);
 
-            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId=123", educationDetailData);
+            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId=0", educationDetailData);
 
             return PartialView(new GridModel(GetEducations()));
         }
@@ -70,7 +70,7 @@ namespace Website.Controllers
 
             TryUpdateModel(educationDetail);
             educationDetail.Type = new EducationType() { Id = educationType };
-            educationDetail.Constituent = new Constituent { Id = 123 };
+            educationDetail.Constituent = new Constituent { Id = 0 };
             mapper = new AutoDataContractMapper();
             var educationDetailData = new EducationDetailData();
             mapper.Map(educationDetail, educationDetailData);

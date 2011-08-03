@@ -35,7 +35,7 @@ namespace Website.Controllers
 
         private Addresses GetAddress()
         {
-            var addressesData = HttpHelper.Get<AddressesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId=123");
+            var addressesData = HttpHelper.Get<AddressesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId=0");
 
             mapper = new AutoDataContractMapper();
             var addresses = new Addresses();
@@ -50,14 +50,14 @@ namespace Website.Controllers
             var address = new Address();
             TryUpdateModel(address);
 
-            address.Constituent = new Constituent {Id = 123};
+            address.Constituent = new Constituent {Id = 0};
             address.Type = new AddressType { Id = addressType };
 
             mapper = new AutoDataContractMapper();
             var addressData = new AddressData();
             mapper.Map(address, addressData);
 
-            var newAddress = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId=123", addressData);
+            var newAddress = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId=0", addressData);
 
             return PartialView(new GridModel(GetAddress()));
         }
@@ -70,7 +70,7 @@ namespace Website.Controllers
 
             TryUpdateModel(address);
             address.Type = new AddressType {Id = addressType};
-            address.Constituent = new Constituent {Id = 123};
+            address.Constituent = new Constituent {Id = 0};
             
             mapper = new AutoDataContractMapper();
             var addressData = new AddressData();
