@@ -80,6 +80,7 @@
     <Compile Include="Models\ReferenceData\AssociationType.cs" />
     <Compile Include="Models\ReferenceData\EducationType.cs" />
     <Compile Include="Models\ReferenceData\OccupationType.cs" />
+    <Compile Include="Models\ShortAddress.cs" />
     <Compile Include="Models\ViewModels\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -436,6 +437,7 @@
     <Content Include="Scripts\verticaltabs\verticaltabs.js" />
     <Content Include="Views\Address\EditorTemplates\AddressTypes.ascx" />
     <Content Include="Views\Constituent\EditorTemplates\SalutationsTypes.ascx" />
+    <Content Include="Views\Phone\EditorTemplates\Addresses.ascx" />
     <Content Include="Views\Relationship\EditorTemplates\AssociationTypes.ascx" />
     <Content Include="Views\Occupation\EditorTemplates\OccupationTypes.ascx" />
     <Content Include="Views\EducationDetail\EditorTemplates\EducationTypes.ascx" />

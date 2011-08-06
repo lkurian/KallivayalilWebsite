@@ -15,8 +15,8 @@ namespace Website.Models
         [DisplayName("Phone Number")]
         public virtual string Number { get; set; }
 
-        [DisplayName("Address")]
-        public virtual Address Address { get; set; }
+        [UIHint("Addresses"), DisplayName("Address")]
+        public virtual ShortAddress Address { get; set; }
 
         [DisplayName("Constituent")]
         public virtual Constituent Constituent { get; set; }

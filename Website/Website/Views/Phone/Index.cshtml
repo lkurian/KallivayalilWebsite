@@ -12,7 +12,8 @@
         .Columns(columns =>
         {
             columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
-            columns.Bound(p => p.Number);
+            columns.Bound(p => p.Address).ClientTemplate("<#= Address.Description#>");
+            columns.Bound(p => p.Number);            
             columns.Bound(p => p.Constituent).ReadOnly();
             columns.Bound(p => p.CreatedBy).Hidden(true);
             columns.Bound(p => p.CreatedDateTime).Hidden(true);
