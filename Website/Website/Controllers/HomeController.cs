@@ -115,8 +115,7 @@ namespace Website.Controllers
                 Session["password"] = password;
 
             }
-
-            return new JsonResult(){Data = "true"};
+            return new JsonResult {Data = "true"};
         }
 
         [HttpPost]

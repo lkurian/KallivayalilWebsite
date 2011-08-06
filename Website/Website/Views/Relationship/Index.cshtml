@@ -14,6 +14,7 @@
             columns.Bound(p => p.ConstituentId);
             columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
             columns.Bound(p => p.AssociatedConstituentId);
+            columns.Bound(p => p.AssociatedConstituentName);
             columns.Bound(p => p.CreatedBy).Hidden(true);
             columns.Bound(p => p.CreatedDateTime).Hidden(true);
             columns.Bound(p => p.UpdatedBy).Hidden(true);

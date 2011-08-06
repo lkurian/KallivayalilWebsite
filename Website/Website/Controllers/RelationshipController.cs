@@ -50,7 +50,8 @@ namespace Website.Controllers
             var association = new Association();
             TryUpdateModel(association);
 
-            association.Constituent = new Constituent {Id = 1};
+            if (association.AssociatedConstituentId <= 0)
+                association.AssociatedConstituent = null;
             association.Type = new AssociationType { Id = associationType };
 
             mapper = new AutoDataContractMapper();

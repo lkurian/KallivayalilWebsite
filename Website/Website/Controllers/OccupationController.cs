@@ -35,7 +35,7 @@ namespace Website.Controllers
 
         private Occupations GetOccupations()
         {
-            var OccupationsData = HttpHelper.Get<OccupationsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId=0");
+            var OccupationsData = HttpHelper.Get<OccupationsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId=1");
 
             mapper = new AutoDataContractMapper();
             var Occupations = new Occupations();
@@ -50,14 +50,14 @@ namespace Website.Controllers
             var Occupation = new Occupation();
             TryUpdateModel(Occupation);
 
-            Occupation.Constituent = new Constituent {Id = 0};
+            Occupation.Constituent = new Constituent {Id = 1};
             Occupation.Type = new OccupationType { Id = OccupationType };
 
             mapper = new AutoDataContractMapper();
             var OccupationData = new OccupationData();
             mapper.Map(Occupation, OccupationData);
 
-            var newOccupation = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId=0", OccupationData);
+            var newOccupation = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId=1", OccupationData);
 
             return PartialView(new GridModel(GetOccupations()));
         }
@@ -70,8 +70,8 @@ namespace Website.Controllers
 
             TryUpdateModel(Occupation);
             Occupation.Type = new OccupationType {Id = OccupationType};
-            Occupation.Address = new Address() {Id = 0};
-            Occupation.Constituent = new Constituent {Id = 0};
+            Occupation.Address = new Address() {Id = 1};
+            Occupation.Constituent = new Constituent {Id = 1};
             mapper = new AutoDataContractMapper();
             var OccupationData = new OccupationData();
             mapper.Map(Occupation, OccupationData);

@@ -35,7 +35,7 @@ namespace Website.Controllers
 
         private Emails GetEmails()
         {
-            var emailsData = HttpHelper.Get<EmailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=0");
+            var emailsData = HttpHelper.Get<EmailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=1");
 
             mapper = new AutoDataContractMapper();
             var emails = new Emails();
@@ -50,7 +50,7 @@ namespace Website.Controllers
             var email = new Email();
             TryUpdateModel(email);
 
-            email.Constituent = new Constituent { Id = 0 };
+            email.Constituent = new Constituent { Id = 1 };
             email.Type = new EmailType() { Id = emailType };
 
             mapper = new AutoDataContractMapper();
@@ -70,7 +70,7 @@ namespace Website.Controllers
 
             TryUpdateModel(email);
             email.Type = new EmailType() { Id = emailType };
-            email.Constituent = new Constituent { Id = 0 };
+            email.Constituent = new Constituent { Id = 1 };
             mapper = new AutoDataContractMapper();
             var emailData = new EmailData();
             mapper.Map(email, emailData);
