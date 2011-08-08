@@ -56,8 +56,8 @@
                 columns.Bound(p => p.EventDescription);            
 @*                columns.Bound(p => p.ContactPerson);            
                 columns.Bound(p => p.ContactNumber);        *@    
-                columns.Bound(p => p.StartDate).Width(130).EditorTemplateName("DateTime.ascx");
-                columns.Bound(p => p.EndDate).Width(130);            
+                columns.Bound(p => p.StartDate);
+                columns.Bound(p => p.EndDate);            
                 columns.Bound(p => p.CreatedBy);
                 columns.Bound(p => p.Constituent).ReadOnly();
                 columns.Bound(p => p.CreatedDateTime).Hidden(true);
