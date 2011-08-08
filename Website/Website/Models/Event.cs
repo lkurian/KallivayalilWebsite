@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Runtime.Serialization;
+using System.Web.UI;
 using Website.Models.ReferenceData;
 
 namespace Website.Models
@@ -27,12 +28,10 @@ namespace Website.Models
         [DisplayName("Contact Number")]
         public virtual string ContactNumber { get; set; }
 
-        [DisplayName("Date To Start Displaying Event")]
-        [DataType(DataType.Date)]
+        [UIHint("StartDate"), DisplayName("Start Displaying From")]
         public virtual DateTime StartDate { get; set; }
 
-        [DisplayName("Date of Event")]
-        [DataType(DataType.Date)]
+        [UIHint("EndDate"), DisplayName("Date of Event")]
         public virtual DateTime EndDate { get; set; }
 
         [DisplayName("Constituent")]
