@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
 
 namespace Website.Controllers
 {
@@ -6,6 +7,8 @@ namespace Website.Controllers
     {
         public ActionResult Profile()
         {
+           if(Session["userName"]==null)
+               FormsAuthentication.RedirectToLoginPage();
             return View();
         } 
     }
