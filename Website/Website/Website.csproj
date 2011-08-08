@@ -68,6 +68,7 @@
     <Compile Include="Controllers\ConstituentController.cs" />
     <Compile Include="Controllers\EducationDetailController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\EventController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OccupationController.cs" />
     <Compile Include="Controllers\PhoneController.cs" />
@@ -439,6 +440,7 @@
     <Content Include="Scripts\verticaltabs\verticaltabs.js" />
     <Content Include="Views\Address\EditorTemplates\AddressTypes.ascx" />
     <Content Include="Views\Constituent\EditorTemplates\SalutationsTypes.ascx" />
+    <Content Include="Views\Event\EditorTemplates\EventTypes.ascx" />
     <Content Include="Views\Phone\EditorTemplates\Addresses.ascx" />
     <Content Include="Views\Relationship\EditorTemplates\AssociationTypes.ascx" />
     <Content Include="Views\Occupation\EditorTemplates\OccupationTypes.ascx" />
@@ -493,7 +495,10 @@
     <Content Include="Views\Relationship\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Events\Index.cshtml" />
+    <Content Include="Views\Event\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Event\DateTime.ascx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
