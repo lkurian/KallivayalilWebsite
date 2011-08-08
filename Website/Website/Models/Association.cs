@@ -31,7 +31,8 @@ namespace Website.Models
         public Constituent AssociatedConstituent { get; set; } 
         
         [DisplayName("AssociatedName")]
-        public string AssociatedConstituentName { get; set; }
+        public string AssociatedConstituentName
+        { get; set; }
     }
 
     public class Associations : List<Association> {}
