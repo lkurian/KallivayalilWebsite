@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
@@ -15,7 +16,24 @@ namespace Website.Controllers
         public ActionResult Index()
         {
             PopulatePhoneTypes();
+            PopulateAddressTypes();
             return PartialView();
+        }
+
+        private void PopulateAddressTypes()
+        {
+            var addressesData = HttpHelper.Get<AddressesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?constituentId=1");
+
+            var addresses = new ShortAddresses();
+            
+            addressesData.ForEach(data => addresses.Add( new ShortAddress()
+                                                             {
+                                                                 Id = data.Id,
+                                                                 Description = string.Format("{0},{1},{2},{3}-{4},{5}",data.Line1,data.Line2,data.City,data.State,data.PostCode,data.Country)
+                                                             }));
+
+            ViewData["addresses"] = addresses;
+            ;
         }
 
         private void PopulatePhoneTypes()
@@ -45,13 +63,14 @@ namespace Website.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [GridAction]
-        public ActionResult Create(int PhoneType)
+        public ActionResult Create(int PhoneType,int ShortAddress)
         {
             var phone = new Phone();
             TryUpdateModel(phone);
 
             phone.Constituent = new Constituent {Id = 1};
             phone.Type = new PhoneType { Id = PhoneType };
+            phone.Address = new ShortAddress() { Id = ShortAddress };
 
             mapper = new AutoDataContractMapper();
             var phoneData = new PhoneData();
@@ -64,13 +83,14 @@ namespace Website.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [GridAction]
-        public ActionResult Edit(int id, int PhoneType)
+        public ActionResult Edit(int id, int PhoneType,int ShortAddress)
         {
             var phone = new Phone();
 
             TryUpdateModel(phone);
             phone.Type = new PhoneType {Id = PhoneType};
             phone.Constituent = new Constituent {Id = 1};
+            phone.Address = new ShortAddress() {Id = ShortAddress};
             mapper = new AutoDataContractMapper();
             var phoneData = new PhoneData();
             mapper.Map(phone, phoneData);

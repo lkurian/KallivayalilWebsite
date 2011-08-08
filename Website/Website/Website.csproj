@@ -74,12 +74,15 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Models\Association.cs" />
+    <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EducationDetail.cs" />
     <Compile Include="Models\Occupation.cs" />
     <Compile Include="Models\ReferenceData\AddressType.cs" />
     <Compile Include="Models\ReferenceData\AssociationType.cs" />
     <Compile Include="Models\ReferenceData\EducationType.cs" />
+    <Compile Include="Models\ReferenceData\EventType.cs" />
     <Compile Include="Models\ReferenceData\OccupationType.cs" />
+    <Compile Include="Models\ShortAddress.cs" />
     <Compile Include="Models\ViewModels\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -436,6 +439,7 @@
     <Content Include="Scripts\verticaltabs\verticaltabs.js" />
     <Content Include="Views\Address\EditorTemplates\AddressTypes.ascx" />
     <Content Include="Views\Constituent\EditorTemplates\SalutationsTypes.ascx" />
+    <Content Include="Views\Phone\EditorTemplates\Addresses.ascx" />
     <Content Include="Views\Relationship\EditorTemplates\AssociationTypes.ascx" />
     <Content Include="Views\Occupation\EditorTemplates\OccupationTypes.ascx" />
     <Content Include="Views\EducationDetail\EditorTemplates\EducationTypes.ascx" />
@@ -487,6 +491,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Relationship\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Events\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
