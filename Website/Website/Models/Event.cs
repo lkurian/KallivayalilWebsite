@@ -28,9 +28,11 @@ namespace Website.Models
         public virtual string ContactNumber { get; set; }
 
         [DisplayName("Date To Start Displaying Event")]
+        [DataType(DataType.Date)]
         public virtual DateTime StartDate { get; set; }
 
         [DisplayName("Date of Event")]
+        [DataType(DataType.Date)]
         public virtual DateTime EndDate { get; set; }
 
         [DisplayName("Constituent")]

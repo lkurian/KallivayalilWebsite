@@ -1,5 +1,4 @@
-﻿
-@(Html.Telerik().Grid<Website.Models.Phone>()
+﻿@(Html.Telerik().Grid<Website.Models.Phone>()
         .Name("PhoneGrid")
         .DataKeys(keys => keys.Add(p => p.Id))
         .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
@@ -28,6 +27,3 @@
         .ClientEvents(events => events.OnEdit("onEdit"))
         .Sortable()
 )
-
-
-
