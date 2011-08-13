@@ -1,18 +1,34 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
+using Website.Helpers;
+using Website.Models;
 using Website.Models.ViewModels;
 
 namespace Website.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly AutoDataContractMapper mapper = new AutoDataContractMapper();
 
         public ActionResult Index()
         {
+            PopulateEvents();
             var userName = Session["userName"];
 
             return View();
+        }
+
+
+        private void PopulateEvents()
+        {
+            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}"
+                                    ,"http://localhost/kallivayalilService/KallivayalilService.svc/Events",true,DateTime.Today,DateTime.Today,true));
+
+            var events = new Events();
+            mapper.MapList(eventsData, events, typeof(Event));
+            ViewData["events"] = events;
         }
 
         [HttpPost]

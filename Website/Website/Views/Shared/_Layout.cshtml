@@ -48,6 +48,7 @@
         var windowElement = $('#Window');
       //  var undoButton = $('#undo');
         windowElement.data('tWindow').open();
+        
        // undoButton.hide();
        // undoButton.toggle(!windowElement.is(':visible'));
     }
@@ -275,14 +276,19 @@
                 and alert/prompt/confirm boxes<br /> in your ASP.NET MVC applications.
             </p>
         </text>)
+        .Effects(fx => fx
+            .Zoom()
+            .Opacity()
+            .OpenDuration(200)
+            .CloseDuration(300)
+            
+        )
         .Width(300)
         .Height(300)
         .Render();
 }
 
-@(Html.Telerik().ScriptRegistrar())
-
-}
+@(Html.Telerik().ScriptRegistrar().jQuery(false));
 
 </body>
 </html>
