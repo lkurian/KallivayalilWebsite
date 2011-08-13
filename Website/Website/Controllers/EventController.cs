@@ -39,7 +39,7 @@ namespace Website.Controllers
 
         private Events GetEvents()
         {
-            var eventsData = HttpHelper.Get<EventsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Events?isApproved=true");
+            var eventsData = HttpHelper.Get<EventsData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Events?isApproved=true&startDate={0}&endDate{1}&includeBirthdays=false",DateTime.Today.AddDays(-5),DateTime.Today.AddDays(5)));
 
             mapper = new AutoDataContractMapper();
             var events = new Events();

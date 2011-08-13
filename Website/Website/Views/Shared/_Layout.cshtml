@@ -44,6 +44,14 @@
         }
     }
 
+    function openWindow() {
+        var windowElement = $('#Window');
+      //  var undoButton = $('#undo');
+        windowElement.data('tWindow').open();
+       // undoButton.hide();
+       // undoButton.toggle(!windowElement.is(':visible'));
+    }
+
     $(document).ready(function () {
         $("#accordion").accordion();
     });
@@ -169,7 +177,7 @@
                     <h4><a href="#"><span>Todays<strong>Events</strong></span></a></h4>
                     <div>
                     <ul class="blocklist">
-                        <li><a href="#">Event 1</a></li>
+                        <li><a id="undo" class="t-group" href="#" onclick="openWindow()">Event 1</a></li>
                         <li><a href="#">Event 2</a></li>
                         <li><a href="#">Event 3</a></li>
                         <li><a href="#">Event 4</a></li>
@@ -247,7 +255,34 @@
     </div>  
 </div>
 </div> 
-@(Html.Telerik().ScriptRegistrar().jQuery(false))
+
+@{ Html.Telerik().Window()
+        .Name("Window")
+        .Title("Telerik Window for ASP.NET MVC")
+        .Draggable(true)
+        .Resizable(resizing => resizing
+            .Enabled(true)
+            .MinHeight(250)
+            .MinWidth(250)
+            .MaxHeight(500)
+            .MaxWidth(500)
+        )
+        .Modal(true)
+        .Buttons(b => b.Maximize().Close())
+        .Content(@<text>
+            <p style="text-align: center">
+                The Telerik Window for ASP.NET MVC is<br /> the right choice for creating Window dialogs<br />
+                and alert/prompt/confirm boxes<br /> in your ASP.NET MVC applications.
+            </p>
+        </text>)
+        .Width(300)
+        .Height(300)
+        .Render();
+}
+
+@(Html.Telerik().ScriptRegistrar())
+
+}
 
 </body>
 </html>
