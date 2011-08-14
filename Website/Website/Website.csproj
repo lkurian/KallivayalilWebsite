@@ -180,8 +180,8 @@
     <Content Include="Content\verticaltabs.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
-    <Content Include="Scripts\Custom\Type.js" />
     <Content Include="Scripts\Custom\login.js" />
+    <Content Include="Scripts\Custom\Type.js" />
     <Content Include="Scripts\galleria\classic-loader.gif" />
     <Content Include="Scripts\galleria\classic-map.png" />
     <Content Include="Scripts\galleria\galleria-1.2.2.js" />

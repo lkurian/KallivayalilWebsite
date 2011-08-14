@@ -32,10 +32,10 @@ namespace Website.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult Login(FormCollection collection)
         {
-            var userName = user.UserName;
-            var password = user.Password;
+            var userName = collection["userName"];
+            var password = collection["password"];
 
             var authenticated = HttpHelper.Get<bool>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Authenticate?username={0}&password={1}",userName,password));
 
@@ -43,7 +43,7 @@ namespace Website.Controllers
             {
                 Session["userName"] = userName;
                 Session["password"] = password;
-                FormsAuthentication.SetAuthCookie(userName,false);
+                FormsAuthentication.RedirectFromLoginPage(userName,false);
             }
 
             return View("Index");
@@ -52,8 +52,8 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Logout()
         {
-            Session["userName"] = string.Empty;
-            Session["password"] = string.Empty;
+            Session["userName"] = null;
+            Session["password"] = null;
 
             FormsAuthentication.SignOut();
             FormsAuthentication.RedirectToLoginPage();
