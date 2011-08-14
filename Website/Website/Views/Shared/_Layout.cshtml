@@ -47,7 +47,7 @@
 
     function openWindow() {
         var windowElement = $('#Window');
-        windowElement.data('tWindow').open();
+        windowElement.data('tWindow').center().open();
     }
 
     $(document).ready(function () {
@@ -122,7 +122,7 @@
                      foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
                       {
                          if(ev.Type.Description !="Birthday"){
-                            <li><a id="undo" class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
+                            <li><a class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
                          }
                       }
                      }
@@ -138,7 +138,7 @@
                      foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
                       {
                          if(ev.Type.Description =="Birthday"){
-                            <li><a id="undo" class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
+                            <li><a class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
                          }
                       }
                      }
@@ -232,6 +232,7 @@
             .CloseDuration(300)
 
         )
+        .Visible(false)
         .Width(300)
         .Height(300)
         .Render();
