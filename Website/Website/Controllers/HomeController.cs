@@ -4,7 +4,6 @@ using System.Web.Security;
 using Kallivayalil.Client;
 using Website.Helpers;
 using Website.Models;
-using Website.Models.ViewModels;
 
 namespace Website.Controllers
 {

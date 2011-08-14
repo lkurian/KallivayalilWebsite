@@ -24,6 +24,7 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/jexpand/jExpand.js")"></script>
 <script src="@Url.Content("~/Scripts/loginslider/slide.js")" type="text/javascript"></script>
 
+
 @(Html.Telerik().StyleSheetRegistrar()
                       .DefaultGroup(group => group
                                  .Add("~/Content/telerik.common.min.css")
@@ -46,11 +47,7 @@
 
     function openWindow() {
         var windowElement = $('#Window');
-      //  var undoButton = $('#undo');
         windowElement.data('tWindow').open();
-        
-       // undoButton.hide();
-       // undoButton.toggle(!windowElement.is(':visible'));
     }
 
     $(document).ready(function () {
@@ -107,7 +104,8 @@
             });
 
     </script>
-      
+   
+ 
     <div id="body">            
 	    <div id="content">
             <div class="box">
@@ -115,16 +113,19 @@
             </div>
             </div>        
             <div class="sidebar" id="eventsSidebar">
-            <ul  id="accordion">	
+                <ul  id="accordion">	
                <li>
                     <h4><a href="#"><span>Todays<strong>Events</strong></span></a></h4>
                     <div>
                     <ul class="blocklist">
-                        <li><a id="undo" class="t-group" href="#" onclick="openWindow()">Event 1</a></li>
-                        <li><a href="#">Event 2</a></li>
-                        <li><a href="#">Event 3</a></li>
-                        <li><a href="#">Event 4</a></li>
-                        <li><a href="#">Event 5</a></li>
+                    @if(ViewData["events"]!= null){
+                     foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
+                      {
+                         if(ev.Type.Description !="Birthday"){
+                            <li><a id="undo" class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
+                         }
+                      }
+                     }
                     </ul>
                     </div>
                 </li>
@@ -133,8 +134,14 @@
                     <h4><a href ="#"><span>Birthdays</span></a></h4>
                     <div>
                      <ul class="blocklist">
-                        <li><a href="#">Birthday 1</a></li>
-                        <li><a href="#">Birthday 2</a></li>
+                    @if(ViewData["events"]!= null){
+                     foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
+                      {
+                         if(ev.Type.Description =="Birthday"){
+                            <li><a id="undo" class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
+                         }
+                      }
+                     }
                     </ul>
                     </div>
                 </li>
@@ -223,7 +230,7 @@
             .Opacity()
             .OpenDuration(200)
             .CloseDuration(300)
-            
+
         )
         .Width(300)
         .Height(300)
@@ -234,3 +241,5 @@
 
 </body>
 </html>
+
+
