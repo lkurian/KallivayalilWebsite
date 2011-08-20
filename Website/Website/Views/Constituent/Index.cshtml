@@ -1,26 +1,5 @@
 ﻿@model Website.Models.Constituent
- <script type="text/javascript">
-
-     function hideViewProfileDetails() {
-         var element = $("#viewProfileDetails");
-         var element1 = $("#editProfileDetails");
-         var btn = $("#BtnUpdateProfile");
-         if (element.hasClass("hidden")) {
-             element.removeClass("hidden");
-             element1.addClass("hidden");
-         }
-         else {
-             element.addClass("hidden");
-             element1.removeClass("hidden");
-         }
-     }
-
-     function editProfileDetails() {
-         hideViewProfileDetails();
-         alert("Save Clicked");
-     }
-
-    </script>
+ 
 
 
 <div id="profile">
@@ -51,29 +30,29 @@
         <span class="label">DiedOn</span>
         <span class="viewfield">@String.Format("{0:g}", Model.DiedOn)</span>
     </div>
-    <input id="BtnUpdateProfile" type="submit" class="profileButton" onclick="hideViewProfileDetails()" value="Edit" />
+    <input id="BtnUpdateProfile" type="submit" class="profileButton" onclick="edit()" value="Edit" />
 </fieldset>
 
 <fieldset   id="editProfileDetails" class="profileDetails hidden">
-    
-    <div style="float: left; clear: left; width: 748px;">
-        First Name : <input class="editField" type="text"  id="inpFirstName" value="@Model.Name.FirstName"/>
-        Gender : <input   class="editField" type="text"  id="inpGender" value="@Model.Gender"/>
-        MaritalStatus : <input class="editField" type="text"  id="inpMaritialStatus" value="@Model.MaritialStatus"/>
-    </div> 
+        <div style="float: left; clear: left; width: 748px;">
+            First Name : <input class="editField" type="text" name="input" id="FirstName" value="@Model.Name.FirstName"/>
+            Gender : <input   class="editField" type="text" name="input" id="Gender" value="@Model.Gender"/>
+            MaritalStatus : <input class="editField" type="text" name="input" id="MaritialStatus" value="@Model.MaritialStatus"/>
+        </div> 
 
-     <div style="float: left; clear: left; width: 748px;">
-        Middle Name :<input class="editField" type="text"  id="inpMiddleName" value="@Model.Name.MiddleName"/>
-        BranchName : <input  class="editField"  type="text"  id="inpBranchName" value="@Model.BranchName"/>
-        BornOn : <input class="editField" type="text"  id="inpBornOn" value="@Model.BornOn"/>
-    </div> 
+         <div style="float: left; clear: left; width: 748px;">
+            Middle Name :<input class="editField" type="text"  name="input" id="MiddleName" value="@Model.Name.MiddleName"/>
+            BranchName : <input  class="editField"  type="text" name="input" id="BranchName" value="@Model.BranchName"/>
+            BornOn : <input class="editField" type="text" name="input" id="BornOn" value="@Model.BornOn"/>
+        </div> 
     
-    <div style="float: left; clear: left; width: 748px;">
-        Last Name : <input class="editField" type="text"  id="inpLastName" value="@Model.Name.LastName"/>
-        HouseName : <input  class="editField"  type="text"  id="inpHouseName" value="@Model.HouseName"/>
-        DiedOn : <input class="editField" type="text"  id="inpDiedOn" value="@Model.DiedOn"/>
-    </div>
-   <input id="BtnUpdateProfile" type="submit" class="profileButton" onclick="editProfileDetails()" value="Save" />
+        <div style="float: left; clear: left; width: 748px;">
+            Last Name : <input class="editField" type="text" name="input"  id="LastName" value="@Model.Name.LastName"/>
+            HouseName : <input  class="editField"  type="text" name="input"  id="HouseName" value="@Model.HouseName"/>
+            DiedOn : <input class="editField" type="text" name="input"  id="DiedOn" value="@Model.DiedOn"/>
+        </div>
+         <input id="personUpdate" type="submit" class="profileButton"  value="Save"/>
+      
 </fieldset>
      
 </div>

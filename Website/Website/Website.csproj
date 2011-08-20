@@ -85,6 +85,7 @@
     <Compile Include="Models\ReferenceData\EventType.cs" />
     <Compile Include="Models\ReferenceData\OccupationType.cs" />
     <Compile Include="Models\ShortAddress.cs" />
+    <Compile Include="Models\ViewModels\ConstituentInputModel.cs" />
     <Compile Include="Models\ViewModels\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -183,6 +184,7 @@
     <Content Include="Content\verticaltabs.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
+    <Content Include="Scripts\Custom\constituent.js" />
     <Content Include="Scripts\Custom\familytree.js" />
     <Content Include="Scripts\Custom\login.js" />
     <Content Include="Scripts\Custom\Type.js" />

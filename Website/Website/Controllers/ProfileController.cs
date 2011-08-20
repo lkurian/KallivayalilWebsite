@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System.Web.Security;
+using Website.Models.ViewModels;
 
 namespace Website.Controllers
 {
@@ -10,6 +11,14 @@ namespace Website.Controllers
            if(Session["userName"]==null)
                FormsAuthentication.RedirectToLoginPage();
             return View();
-        } 
+        }
+
+        [HttpPost]
+        public ActionResult Save(ConstituentInputModel constituent)
+        {
+            return Json(constituent);
+        }
     }
+
+        
 }
