@@ -21,6 +21,7 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.dictionary.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.json-2.2.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.tools.min.js")"></script>
 
 <!--script type="text/javascript" src="@Url.Content("~/Scripts/verticaltabs/verticaltabs.js")"></script-->
 <script type="text/javascript" src="@Url.Content("~/Scripts/jexpand/jExpand.js")"></script>
@@ -195,10 +196,34 @@
                       {
                          if(ev.Type.Description !="Birthday")
                          {
-                            <li><a class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
+                            <li><a id=@string.Format("event_{0}",ev.Id) class="t-group" href="#">@ev.EventTitle</a></li>
+                            <div class="tooltip">
+	                        <img src="http://static.flowplayer.org/img/title/eye.png" alt="Flying screens" style="float:left;margin:0 15px 20px 0" />
+	                            <table style="margin:0">
+		                            <tr>
+			                            <td class="label">Description</td>
+			                            <td>@ev.EventDescription</td>
+		                            </tr>
+		                            <tr>
+			                            <td class="label">Date</td>
+			                            <td>@ev.EndDate.Day</td>
+		                            </tr>
+		                            <tr>
+			                            <td class="label">ContactPerson</td>
+			                            <td>@ev.ContactPerson</td>
+		                            </tr>
+		                            <tr>
+			                            <td class="label">ContactNumber</td>
+			                            <td>@ev.ContactNumber</td>
+		                            </tr>		
+	                            </table>
+                            </div>
+
+                         <script type="text/javascript">$("@string.Format("#event_{0}",ev.Id)").tooltip({ effect: 'slide'});</script> 
+                        
                          }
                       }
-                     }
+                    }
                     </ul>
                     </div>
                 </li>
@@ -207,14 +232,16 @@
                     <h4><a href ="#"><span>Birthdays</span></a></h4>
                     <div>
                      <ul class="blocklist">
-                    @if(ViewData["events"]!= null){
-                     foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
-                      {
-                         if(ev.Type.Description =="Birthday"){
+                    @if (ViewData["events"] != null)
+                    {
+                        foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
+                        {
+                            if (ev.Type.Description == "Birthday")
+                            {
                             <li><a class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
-                         }
-                      }
-                     }
+                            }
+                        }
+                    }
                     </ul>
                     </div>
                 </li>

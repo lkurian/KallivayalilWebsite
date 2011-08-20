@@ -6,8 +6,8 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        alert('partial is ready.');
-        init();
+        var constituentId = @((Session["constituentId"]) as int?);
+        init(constituentId);
     });
 </script>
 <div id="center-container">

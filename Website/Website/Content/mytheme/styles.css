@@ -694,3 +694,27 @@ div#footer-links p {
 	font-weight: bold;
 	text-decoration: underline;
 }
+
+/* tooltip styling */
+.tooltip {
+	display:none;
+	background:url(http://static.flowplayer.org/tools/img/tooltip/black_arrow_big.png);
+	height:163px;
+	padding:40px 30px 10px 30px;
+	width:310px;
+	font-size:11px;
+	color:#fff;
+	z-index:10;
+}
+
+/* a .label element inside tooltip */
+.tooltip .label {
+	color:yellow;
+	width:35px;
+}
+
+.tooltip a {
+	color:#ad4;
+	font-size:11px;
+	font-weight:bold;
+}
