@@ -13,7 +13,7 @@ namespace Website.Models.ViewModels
 //        public  bool HasExpired { get; set; }
 //        public  int MaritialStatus { get; set; }
 //        public  bool IsRegistered { get; set; }
-        public  string FirstName { get; set; }
+          public string FirstName { get; set; }
 //        public  string MiddleName { get; set; }
 //        public  string LastName { get; set; }
 //        public  string PreferedName { get; set; }

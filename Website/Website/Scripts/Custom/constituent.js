@@ -24,7 +24,7 @@ $(function () {
             url: "http://localhost/Kallivayalil/Profile/Save",
             type: "POST",
             datatype: "json",
-            data: person,
+            data: constituent,
             accept: "application/json",
             contentType: "application/json charset=utf-8",
             success: function (data) {
