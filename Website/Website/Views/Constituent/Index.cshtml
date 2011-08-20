@@ -29,7 +29,15 @@
         <span id="labelHouseName" class="viewField">@Model.HouseName</span>
         <span class="label">DiedOn</span>
         <span class="viewfield">@String.Format("{0:g}", Model.DiedOn)</span>
-    </div>
+    </div>  
+    
+    <div class="hidden">
+        <span id="lblHasExpired">@Model.HasExpired</span>
+        <span id="lblIsRegistered" >@Model.IsRegistered</span>
+        <span  id="lblNameId" >@Model.Name.Id</span>
+        <span id="lblCreatedDateTime" >@Model.CreatedDateTime</span>
+        <span id="lblCreatedBy" >@Model.CreatedBy</span> 
+     </div>
     <input id="BtnUpdateProfile" type="submit" class="profileButton" onclick="edit()" value="Edit" />
 </fieldset>
 
@@ -51,6 +59,16 @@
             HouseName : <input  class="editField"  type="text" name="input"  id="HouseName" value="@Model.HouseName"/>
             DiedOn : <input class="editField" type="text" name="input"  id="DiedOn" value="@Model.DiedOn"/>
         </div>
+        
+        <div class="hidden">
+            <input class="editField" type="text" name="input"  id="HasExpired" value="@Model.HasExpired"/>
+            <input  class="editField"  type="text" name="input"  id="IsRegistered" value="@Model.IsRegistered"/>
+            <input class="editField" type="text" name="input"  id="NameId" value="@Model.Name.Id"/>
+            <input class="editField" type="text" name="input"  id="CreatedDateTime" value="@Model.CreatedDateTime"/>
+            <input class="editField" type="text" name="input"  id="CreatedBy" value="@Model.CreatedBy"/>
+        </div>
+
+
          <input id="personUpdate" type="submit" class="profileButton"  value="Save"/>
       
 </fieldset>

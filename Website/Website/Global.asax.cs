@@ -21,12 +21,13 @@ namespace Website
             routes.MapRoute("Default", "{controller}/{action}", new {Controller = "Home", action="Index"});
             routes.MapPageRoute("scripts", "scripts", "~/Scripts");
             routes.MapPageRoute("content", "content", "~/Content");
-            ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
+
         }
 
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+            ValueProviderFactories.Factories.Add(new JsonValueProviderFactory());
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);
         }
