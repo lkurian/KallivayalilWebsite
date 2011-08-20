@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
@@ -14,6 +15,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userName"] == null)
+                FormsAuthentication.RedirectToLoginPage();
             PopulateAddressTypes();
             return PartialView();
         }
@@ -35,7 +38,8 @@ namespace Website.Controllers
 
         private Addresses GetAddress()
         {
-            var addressesData = HttpHelper.Get<AddressesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId=1");
+            var constituentId = (int)Session["constituentId"];
+            var addressesData = HttpHelper.Get<AddressesData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId={0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var addresses = new Addresses();
@@ -49,15 +53,15 @@ namespace Website.Controllers
         {
             var address = new Address();
             TryUpdateModel(address);
-
-            address.Constituent = new Constituent {Id = 1};
+            var constituentId = (int)Session["constituentId"];
+            address.Constituent = new Constituent {Id = constituentId};
             address.Type = new AddressType { Id = addressType };
 
             mapper = new AutoDataContractMapper();
             var addressData = new AddressData();
             mapper.Map(address, addressData);
 
-            var newAddress = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId=1", addressData);
+            var newAddress = HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId={0}", constituentId), addressData);
 
             return PartialView(new GridModel(GetAddress()));
         }
@@ -67,10 +71,11 @@ namespace Website.Controllers
         public ActionResult Edit(int id, int addressType)
         {
             var address = new Address();
+            var constituentId = (int)Session["constituentId"];
 
             TryUpdateModel(address);
             address.Type = new AddressType {Id = addressType};
-            address.Constituent = new Constituent {Id = 1};
+            address.Constituent = new Constituent {Id = constituentId};
             
             mapper = new AutoDataContractMapper();
             var addressData = new AddressData();

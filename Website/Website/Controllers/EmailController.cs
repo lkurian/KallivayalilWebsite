@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
@@ -14,6 +15,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userName"] == null)
+                FormsAuthentication.RedirectToLoginPage();
             PopulateEmailTypes();
             return PartialView();
         }
@@ -35,7 +38,8 @@ namespace Website.Controllers
 
         private Emails GetEmails()
         {
-            var emailsData = HttpHelper.Get<EmailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=1");
+            var constituentId = (int)Session["constituentId"];
+            var emailsData = HttpHelper.Get<EmailsData>("http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId="+constituentId);
 
             mapper = new AutoDataContractMapper();
             var emails = new Emails();
@@ -50,14 +54,16 @@ namespace Website.Controllers
             var email = new Email();
             TryUpdateModel(email);
 
-            email.Constituent = new Constituent { Id = 1 };
+            var constituentId = (int)Session["constituentId"];
+
+            email.Constituent = new Constituent { Id = constituentId };
             email.Type = new EmailType() { Id = emailType };
 
             mapper = new AutoDataContractMapper();
             var emailData = new EmailData();
             mapper.Map(email, emailData);
 
-            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId=0", emailData);
+            HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId={0}", constituentId), emailData);
 
             return PartialView(new GridModel(GetEmails()));
         }
@@ -67,10 +73,10 @@ namespace Website.Controllers
         public ActionResult Edit(int id, int emailType)
         {
             var email = new Email();
-
+            var constituentId = (int)Session["constituentId"];
             TryUpdateModel(email);
             email.Type = new EmailType() { Id = emailType };
-            email.Constituent = new Constituent { Id = 1 };
+            email.Constituent = new Constituent { Id = constituentId };
             mapper = new AutoDataContractMapper();
             var emailData = new EmailData();
             mapper.Map(email, emailData);
