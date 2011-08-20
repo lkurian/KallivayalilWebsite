@@ -1,36 +1,80 @@
 ﻿@model Website.Models.Constituent
+ <script type="text/javascript">
 
-<div class="profileDetails">
-<fieldset>
-    <div style="float: left; clear: left; width: 491px; height: 28px;">
+     function hideViewProfileDetails() {
+         var element = $("#viewProfileDetails");
+         var element1 = $("#editProfileDetails");
+         var btn = $("#BtnUpdateProfile");
+         if (element.hasClass("hidden")) {
+             element.removeClass("hidden");
+             element1.addClass("hidden");
+         }
+         else {
+             element.addClass("hidden");
+             element1.removeClass("hidden");
+         }
+     }
+
+     function editProfileDetails() {
+         hideViewProfileDetails();
+         alert("Save Clicked");
+     }
+
+    </script>
+
+
+<div id="profile">
+<fieldset   id="viewProfileDetails" class="profileDetails">
+    <div style="float: left; clear: left; width: 748px; ">
+        <span class="label">First Name</span>
+        <span id="labelFirstName" class="viewField">@Model.Name.FirstName</span>
         <span class="label">Gender</span>
         <span id="labelGender" class="viewField">@Model.Gender</span>
         <span class="label">MaritialStatus</span>
-        <span id="labelMaritalStatus" class="viewField">@Model.MaritialStatus</span>
+        <span id="labelMaritalStatus" class="viewField">@Model.MaritialStatus</span>        
     </div>
-    
-    <div style="float: left; clear: left; width: 491px;">
+
+    <div style="float: left; clear: left; width: 748px; ">
+        <span class="label">Middle Name</span>
+        <span id="labelMiddleName" class="viewField">@Model.Name.MiddleName</span>
         <span class="label">BranchName</span>
         <span id="labelBranchName" class="viewField">@Model.BranchName</span>
+        <span class="label">BornOn</span>
+        <span class="viewfield">@String.Format("{0:g}", Model.BornOn)</span>
+    </div>
+    
+    <div style="float: left; clear: left; width: 748px;">
+        <span class="label">Last Name</span>
+        <span id="labelLastName" class="viewField">@Model.Name.LastName</span>
         <span class="label">HouseName</span>
         <span id="labelHouseName" class="viewField">@Model.HouseName</span>
+        <span class="label">DiedOn</span>
+        <span class="viewfield">@String.Format("{0:g}", Model.DiedOn)</span>
     </div>
-
-
-    <!--<div style="float: left; clear: left; width: 491px;">
-        <span class="label">BornOn</span><span class="viewfield">@String.Format("{0:g}", Model.BornOn)</span>
-        <span class="label">DiedOn</span><span class="viewfield">@String.Format("{0:g}", Model.DiedOn)</span>
-        <span class="label">HasExpired</span><span class="viewfield">@Model.HasExpired</span>
-    </div>
-
-    <div style="float: left; clear: left; width: 491px;">
-        <span class="label">IsRegistered</span><span class="viewfield">@Model.IsRegistered</span>
-    </div>
--->
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id=Model.Id }) 
-</p>
-
+    <input id="BtnUpdateProfile" type="submit" class="profileButton" onclick="hideViewProfileDetails()" value="Edit" />
 </fieldset>
+
+<fieldset   id="editProfileDetails" class="profileDetails hidden">
+    
+    <div style="float: left; clear: left; width: 748px;">
+        First Name : <input class="editField" type="text"  id="inpFirstName" value="@Model.Name.FirstName"/>
+        Gender : <input   class="editField" type="text"  id="inpGender" value="@Model.Gender"/>
+        MaritalStatus : <input class="editField" type="text"  id="inpMaritialStatus" value="@Model.MaritialStatus"/>
+    </div> 
+
+     <div style="float: left; clear: left; width: 748px;">
+        Middle Name :<input class="editField" type="text"  id="inpMiddleName" value="@Model.Name.MiddleName"/>
+        BranchName : <input  class="editField"  type="text"  id="inpBranchName" value="@Model.BranchName"/>
+        BornOn : <input class="editField" type="text"  id="inpBornOn" value="@Model.BornOn"/>
+    </div> 
+    
+    <div style="float: left; clear: left; width: 748px;">
+        Last Name : <input class="editField" type="text"  id="inpLastName" value="@Model.Name.LastName"/>
+        HouseName : <input  class="editField"  type="text"  id="inpHouseName" value="@Model.HouseName"/>
+        DiedOn : <input class="editField" type="text"  id="inpDiedOn" value="@Model.DiedOn"/>
+    </div>
+   <input id="BtnUpdateProfile" type="submit" class="profileButton" onclick="editProfileDetails()" value="Save" />
+</fieldset>
+     
 </div>
 

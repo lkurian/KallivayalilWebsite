@@ -193,7 +193,8 @@
                     @if(ViewData["events"]!= null){
                      foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
                       {
-                         if(ev.Type.Description !="Birthday"){
+                         if(ev.Type.Description !="Birthday")
+                         {
                             <li><a class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
                          }
                       }
@@ -291,12 +292,7 @@
         )
         .Modal(true)
         .Buttons(b => b.Maximize().Close())
-        .Content(@<text>
-            <p style="text-align: center">
-                The Telerik Window for ASP.NET MVC is<br /> the right choice for creating Window dialogs<br />
-                and alert/prompt/confirm boxes<br /> in your ASP.NET MVC applications.
-            </p>
-        </text>)
+        .LoadContentFrom("http://localhost/kallivayalilService/KallivayalilService.svc/Events/333")
         .Effects(fx => fx
             .Zoom()
             .Opacity()
