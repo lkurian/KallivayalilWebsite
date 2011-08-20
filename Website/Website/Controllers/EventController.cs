@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Web.Mvc;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
@@ -37,9 +38,10 @@ namespace Website.Controllers
             return PartialView(new GridModel(GetEvents()));
         }
 
-        private Events GetEvents()
+        private IEnumerable<Event> GetEvents()
         {
-            var eventsData = HttpHelper.Get<EventsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Events?isApproved=true");
+            var eventsData = HttpHelper.Get<EventsData>(string.Format("http://localhost/kallivayalilService/KallivayalilService.svc/Events?isApproved=true&startDate={0}&endDate={1}&includeBirthdays=false"
+                ,DateTime.Today.AddDays(-5),DateTime.Today.AddDays(5)));
 
             mapper = new AutoDataContractMapper();
             var events = new Events();
@@ -58,6 +60,8 @@ namespace Website.Controllers
             @event.Type = new EventType() { Id = EventType };
             @event.ContactPerson = "test";
             @event.ContactNumber = "1232343434";
+            @event.StartDate = DateTime.Today;
+            @event.EndDate = DateTime.Today.AddDays(5);
             @event.IsApproved = true;
 
 
@@ -81,6 +85,8 @@ namespace Website.Controllers
             @event.Type = new EventType() { Id = EventType };
             @event.ContactPerson = "test";
             @event.ContactNumber = "1232343434";
+            @event.StartDate = DateTime.Today;
+            @event.EndDate = DateTime.Today.AddDays(5);
             @event.IsApproved = true;
             mapper = new AutoDataContractMapper();
             var eventData = new EventData();

@@ -26,6 +26,7 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/jexpand/jExpand.js")"></script>
 <script src="@Url.Content("~/Scripts/loginslider/slide.js")" type="text/javascript"></script>
 
+
 @(Html.Telerik().StyleSheetRegistrar()
                       .DefaultGroup(group => group
                                  .Add("~/Content/telerik.common.min.css")
@@ -44,6 +45,11 @@
         else {
             element.addClass("hidden");
         }
+    }
+
+    function openWindow() {
+        var windowElement = $('#Window');
+        windowElement.data('tWindow').center().open();
     }
 
     $(document).ready(function () {
@@ -167,7 +173,8 @@
             });
 
     </script>
-      
+   
+ 
     <div id="body">            
 	    <div id="content">
             <div class="box">
@@ -175,16 +182,19 @@
             </div>
             </div>        
             <div class="sidebar" id="eventsSidebar">
-            <ul  id="accordion">	
+                <ul  id="accordion">	
                <li>
                     <h4><a href="#"><span>Todays<strong>Events</strong></span></a></h4>
                     <div>
                     <ul class="blocklist">
-                        <li><a href="#">Event 1</a></li>
-                        <li><a href="#">Event 2</a></li>
-                        <li><a href="#">Event 3</a></li>
-                        <li><a href="#">Event 4</a></li>
-                        <li><a href="#">Event 5</a></li>
+                    @if(ViewData["events"]!= null){
+                     foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
+                      {
+                         if(ev.Type.Description !="Birthday"){
+                            <li><a class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
+                         }
+                      }
+                     }
                     </ul>
                     </div>
                 </li>
@@ -193,8 +203,14 @@
                     <h4><a href ="#"><span>Birthdays</span></a></h4>
                     <div>
                      <ul class="blocklist">
-                        <li><a href="#">Birthday 1</a></li>
-                        <li><a href="#">Birthday 2</a></li>
+                    @if(ViewData["events"]!= null){
+                     foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
+                      {
+                         if(ev.Type.Description =="Birthday"){
+                            <li><a class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
+                         }
+                      }
+                     }
                     </ul>
                     </div>
                 </li>
@@ -258,7 +274,42 @@
     </div>  
 </div>
 </div> 
-@(Html.Telerik().ScriptRegistrar().jQuery(false))
+
+@{ Html.Telerik().Window()
+        .Name("Window")
+        .Title("Telerik Window for ASP.NET MVC")
+        .Draggable(true)
+        .Resizable(resizing => resizing
+            .Enabled(true)
+            .MinHeight(250)
+            .MinWidth(250)
+            .MaxHeight(500)
+            .MaxWidth(500)
+        )
+        .Modal(true)
+        .Buttons(b => b.Maximize().Close())
+        .Content(@<text>
+            <p style="text-align: center">
+                The Telerik Window for ASP.NET MVC is<br /> the right choice for creating Window dialogs<br />
+                and alert/prompt/confirm boxes<br /> in your ASP.NET MVC applications.
+            </p>
+        </text>)
+        .Effects(fx => fx
+            .Zoom()
+            .Opacity()
+            .OpenDuration(200)
+            .CloseDuration(300)
+
+        )
+        .Visible(false)
+        .Width(300)
+        .Height(300)
+        .Render();
+}
+
+@(Html.Telerik().ScriptRegistrar().jQuery(false));
 
 </body>
 </html>
+
+

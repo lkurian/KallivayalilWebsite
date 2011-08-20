@@ -56,7 +56,7 @@
                 columns.Bound(p => p.EventDescription);            
 @*                columns.Bound(p => p.ContactPerson);            
                 columns.Bound(p => p.ContactNumber);        *@    
-                columns.Bound(p => p.StartDate);
+                columns.Bound(p => p.StartDate).EditorTemplateName("StartDate");
                 columns.Bound(p => p.EndDate);            
                 columns.Bound(p => p.CreatedBy);
                 columns.Bound(p => p.Constituent).ReadOnly();
