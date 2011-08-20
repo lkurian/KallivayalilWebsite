@@ -201,10 +201,7 @@
     <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery.dictionary.js" />
     <Content Include="Scripts\jquery.json-2.2.js" />
-<<<<<<< HEAD
-=======
     <Content Include="Scripts\jquery.tools.min.js" />
->>>>>>> f3ad1d4f858acbb6a3b20e8cd719f2d14a9a1103
     <Content Include="Scripts\loginslider\jquery-1.3.2.min.js" />
     <Content Include="Scripts\loginslider\pngfix\supersleight-min.js" />
     <Content Include="Scripts\loginslider\pngfix\x.gif" />
