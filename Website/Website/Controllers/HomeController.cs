@@ -30,6 +30,7 @@ namespace Website.Controllers
             ViewData["events"] = events;
         }
 
+
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {

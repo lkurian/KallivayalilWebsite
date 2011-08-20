@@ -1,6 +1,7 @@
 ﻿.profileDetails
 {
-	background: transparent url('./profile/dotting.gif') repeat-x 0 0;
+	background: transparent url('./profile/dotting.gif') repeat-x 0 38px;
+	padding-top: 29px;
 }
 
 
@@ -45,7 +46,8 @@
 	font: 12px/15px Arial,sans-serif;
 	cursor: pointer;
 	position: absolute;
-	left: 700px;
+	left: 748px;
+	top:42px;
 }
 
 #profile
@@ -57,7 +59,14 @@
 	color: #fff;
 }
 
+.editField
+{
+    width: 70px;
+	padding-top: 6px;
+	padding: 8px 0 0 10px;
+}
+
 
 fieldset {
-	padding : 33px 5px 33px 3px;
+	padding : 4px 5px 33px 3px;
 }
