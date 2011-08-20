@@ -69,7 +69,10 @@
     <Compile Include="Controllers\EducationDetailController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\EventController.cs" />
+<<<<<<< HEAD
     <Compile Include="Controllers\FamilyTreeController.cs" />
+=======
+>>>>>>> 50b758a0759f936fd9b3d40311dde7cda905f0e4
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\OccupationController.cs" />
     <Compile Include="Controllers\PhoneController.cs" />
@@ -447,11 +450,13 @@
     <Content Include="Scripts\verticaltabs\verticaltabs.js" />
     <Content Include="Views\Address\EditorTemplates\AddressTypes.ascx" />
     <Content Include="Views\Constituent\EditorTemplates\SalutationsTypes.ascx" />
-<<<<<<< .mine    <Content Include="Views\Event\EditorTemplates\EndDate.ascx" />
+<<<<<<< HEAD
+    <Content Include="Views\Event\EditorTemplates\EndDate.ascx" />
     <Content Include="Views\Event\EditorTemplates\StartDate.ascx" />
+=======
+>>>>>>> 50b758a0759f936fd9b3d40311dde7cda905f0e4
     <Content Include="Views\Event\EditorTemplates\EventTypes.ascx" />
-=======    <Content Include="Views\Event\EditorTemplates\EventTypes.ascx" />
->>>>>>> .theirs    <Content Include="Views\Phone\EditorTemplates\Addresses.ascx" />
+    <Content Include="Views\Phone\EditorTemplates\Addresses.ascx" />
     <Content Include="Views\Relationship\EditorTemplates\AssociationTypes.ascx" />
     <Content Include="Views\Occupation\EditorTemplates\OccupationTypes.ascx" />
     <Content Include="Views\EducationDetail\EditorTemplates\EducationTypes.ascx" />
@@ -507,16 +512,17 @@
   <ItemGroup>
     <Content Include="Views\Event\Index.cshtml" />
   </ItemGroup>
-<<<<<<< .mine  <ItemGroup>
+  <ItemGroup>
+<<<<<<< HEAD
     <Content Include="Views\Event\EditorTemplates\DateTime.ascx" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\FamilyTree\Index.cshtml" />
-  </ItemGroup>
-=======  <ItemGroup>
+=======
     <Content Include="Views\Event\DateTime.ascx" />
+>>>>>>> 50b758a0759f936fd9b3d40311dde7cda905f0e4
   </ItemGroup>
->>>>>>> .theirs  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
