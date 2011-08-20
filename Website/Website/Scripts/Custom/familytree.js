@@ -26,13 +26,12 @@ var Log = {
 };
 
 
-function init(){
+function init(constituentId){
     //init data
     //var json = { "children": [{ "children": null, "id": 2, "name": "Mary" }, { "children": null, "id": -1, "name": "Bla" }, { "children": null, "id": -2, "name": "mary"}], "id": 1, "name": "James" };
+    //var constituentId = @ (int)Session["constituentId"];
     var jsonData = "";
-    $.getJSON('http://localhost/kallivayalilService/KallivayalilService.svc/Relationships?constituentId=1', function (data) {
-        jsonData = data;
-    });
+   
     //end
     //init Spacetree
     //Create a new ST instance
@@ -139,15 +138,19 @@ function init(){
             }
         }
     });
-    //load json data
-    st.loadJSON(jsonData);
-    //compute node positions and layout
-    st.compute();
-    //optional: make a translation of the tree
-    st.geom.translate(new $jit.Complex(-200, 0), "current");
-    //emulate a click on the root node.
-    st.onClick(st.root);
-    //end
+    $.getJSON('http://localhost/kallivayalilService/KallivayalilService.svc/Relationships?constituentId=' + constituentId, function (data) {
+        jsonData = data;
+        //load json data
+        st.loadJSON(jsonData);
+        //compute node positions and layout
+        st.compute();
+        //optional: make a translation of the tree
+        st.geom.translate(new $jit.Complex(-200, 0), "current");
+        //emulate a click on the root node.
+        st.onClick(st.root);
+        //end
+    });
+    
     //Add event handlers to switch spacetree orientation.
     var top = $jit.id('r-top'), 
         left = $jit.id('r-left'), 
