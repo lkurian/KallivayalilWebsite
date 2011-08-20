@@ -21,7 +21,6 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.dictionary.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.json-2.2.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.tools.min.js")"></script>
 
 <!--script type="text/javascript" src="@Url.Content("~/Scripts/verticaltabs/verticaltabs.js")"></script-->
 <script type="text/javascript" src="@Url.Content("~/Scripts/jexpand/jExpand.js")"></script>
@@ -142,8 +141,11 @@
                 {
         	<li class="selected"><a href="http://localhost/kallivayalil/Profile/Profile">Profile</a></li>
         	<li class="selected"><a href="http://localhost/kallivayalil/Event/Index">Events</a></li>
+<<<<<<< HEAD
         	<li class="selected"><a href="http://localhost/kallivayalil/FamilyTree/Index">FamilyTree</a></li>
                 }
+=======
+>>>>>>> 50b758a0759f936fd9b3d40311dde7cda905f0e4
         </ul>
     </div>
     

@@ -4,7 +4,6 @@ using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
-using Telerik.Web.Mvc.UI;
 using Website.Helpers;
 using Website.Models;
 using Website.Models.ReferenceData;
@@ -19,8 +18,10 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+
             if (Session["userName"] == null)
                 FormsAuthentication.RedirectToLoginPage();
+
             PopulateEventTypes();
             return View();
         }
@@ -41,6 +42,7 @@ namespace Website.Controllers
             return PartialView(new GridModel(GetEvents()));
         }
 
+
         private IEnumerable<Event> GetEvents()
         {
             var eventsData = HttpHelper.Get<EventsData>(string.Format("http://localhost/kallivayalilService/KallivayalilService.svc/Events?isApproved=true&startDate={0}&endDate={1}&includeBirthdays=false"
@@ -58,14 +60,18 @@ namespace Website.Controllers
         {
             var @event = new Event();
             TryUpdateModel(@event);
+
             var constituentId = (int)Session["constituentId"];
 
             @event.Constituent = new Constituent {Id = constituentId};
+
             @event.Type = new EventType() { Id = EventType };
             @event.ContactPerson = "test";
             @event.ContactNumber = "1232343434";
             @event.StartDate = DateTime.Today;
+
             @event.EndDate = DateTime.Today.AddDays(5);
+
             @event.IsApproved = true;
 
 
@@ -84,14 +90,19 @@ namespace Website.Controllers
         {
             var @event = new Event();
 
+
             var constituentId = (int)Session["constituentId"];
             TryUpdateModel(@event);
             @event.Constituent = new Constituent { Id = constituentId };
+
+
             @event.Type = new EventType() { Id = EventType };
             @event.ContactPerson = "test";
             @event.ContactNumber = "1232343434";
             @event.StartDate = DateTime.Today;
+
             @event.EndDate = DateTime.Today.AddDays(5);
+
             @event.IsApproved = true;
             mapper = new AutoDataContractMapper();
             var eventData = new EventData();

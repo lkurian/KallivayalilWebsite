@@ -1,0 +1,63 @@
+﻿using System.Web.Mvc;
+using System.Web.Security;
+using Kallivayalil.Client;
+using Website.Models.ViewModels;
+
+namespace Website.Controllers
+{
+    public class HomeController : Controller
+    {
+
+        public ActionResult Index()
+        {
+            return View();
+        }
+
+<<<<<<< HEAD
+
+        private void PopulateEvents()
+        {
+            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}"
+                                    ,"http://localhost/kallivayalilService/KallivayalilService.svc/Events",true,DateTime.Today,DateTime.Today,true));
+
+            var events = new Events();
+            mapper.MapList(eventsData, events, typeof(Event));
+            ViewData["events"] = events;
+        }
+
+
+=======
+>>>>>>> 311e7752ef19185c2b8378c54b38d04ded4462ea
+        [HttpPost]
+        public ActionResult Login(FormCollection collection)
+        {
+            var userName = collection["userName"];
+            var password = collection["password"];
+
+            var authenticated = HttpHelper.Get<bool>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Authenticate?username={0}&password={1}",userName,password));
+
+            if (authenticated)
+            {
+                var constituentData = HttpHelper.Get<ConstituentData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Find?emailId={0}", userName));
+                Session["userName"] = constituentData.Name.FirstName;
+                Session["password"] = password;
+                Session["constituentId"] = constituentData.Id;
+                FormsAuthentication.RedirectFromLoginPage(userName,false);
+            }
+
+            return View("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Logout()
+        {
+            Session["userName"] = null;
+            Session["password"] = null;
+
+            FormsAuthentication.SignOut();
+            FormsAuthentication.RedirectToLoginPage();
+
+            return View("Index");
+        }
+    }
+}
