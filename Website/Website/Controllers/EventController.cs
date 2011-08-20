@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Telerik.Web.Mvc.UI;
@@ -18,6 +19,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userName"] == null)
+                FormsAuthentication.RedirectToLoginPage();
             PopulateEventTypes();
             return View();
         }
@@ -55,8 +58,9 @@ namespace Website.Controllers
         {
             var @event = new Event();
             TryUpdateModel(@event);
+            var constituentId = (int)Session["constituentId"];
 
-            @event.Constituent = new Constituent {Id = 1};
+            @event.Constituent = new Constituent {Id = constituentId};
             @event.Type = new EventType() { Id = EventType };
             @event.ContactPerson = "test";
             @event.ContactNumber = "1232343434";
@@ -80,8 +84,9 @@ namespace Website.Controllers
         {
             var @event = new Event();
 
+            var constituentId = (int)Session["constituentId"];
             TryUpdateModel(@event);
-            @event.Constituent = new Constituent { Id = 1 };
+            @event.Constituent = new Constituent { Id = constituentId };
             @event.Type = new EventType() { Id = EventType };
             @event.ContactPerson = "test";
             @event.ContactNumber = "1232343434";

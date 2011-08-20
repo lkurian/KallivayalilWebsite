@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
@@ -14,6 +15,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userName"] == null)
+                FormsAuthentication.RedirectToLoginPage();
             PopulateOccupationTypes();
             return PartialView();
         }
@@ -35,7 +38,8 @@ namespace Website.Controllers
 
         private Occupations GetOccupations()
         {
-            var OccupationsData = HttpHelper.Get<OccupationsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId=1");
+            var constituentId = (int)Session["constituentId"];
+            var OccupationsData = HttpHelper.Get<OccupationsData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId={0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var Occupations = new Occupations();
@@ -50,14 +54,15 @@ namespace Website.Controllers
             var Occupation = new Occupation();
             TryUpdateModel(Occupation);
 
-            Occupation.Constituent = new Constituent {Id = 1};
+            var constituentId = (int)Session["constituentId"];
+            Occupation.Constituent = new Constituent {Id = constituentId};
             Occupation.Type = new OccupationType { Id = OccupationType };
 
             mapper = new AutoDataContractMapper();
             var OccupationData = new OccupationData();
             mapper.Map(Occupation, OccupationData);
 
-            var newOccupation = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId=1", OccupationData);
+            var newOccupation = HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId={0}", constituentId), OccupationData);
 
             return PartialView(new GridModel(GetOccupations()));
         }
@@ -69,9 +74,10 @@ namespace Website.Controllers
             var Occupation = new Occupation();
 
             TryUpdateModel(Occupation);
+            var constituentId = (int)Session["constituentId"];
             Occupation.Type = new OccupationType {Id = OccupationType};
             Occupation.Address = new Address() {Id = 1};
-            Occupation.Constituent = new Constituent {Id = 1};
+            Occupation.Constituent = new Constituent {Id = constituentId};
             mapper = new AutoDataContractMapper();
             var OccupationData = new OccupationData();
             mapper.Map(Occupation, OccupationData);

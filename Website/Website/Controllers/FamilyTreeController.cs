@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using System.Web.Security;
 using Website.Helpers;
 
 namespace Website.Controllers
@@ -11,6 +12,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userName"] == null)
+                FormsAuthentication.RedirectToLoginPage();
             return View();
         }
     }

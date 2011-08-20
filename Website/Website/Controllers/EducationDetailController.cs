@@ -1,4 +1,6 @@
+using System.Diagnostics.Eventing.Reader;
 using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
@@ -14,6 +16,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userName"] == null)
+                FormsAuthentication.RedirectToLoginPage();
             PopulateEducationTypes();
             return PartialView();
         }
@@ -35,7 +39,8 @@ namespace Website.Controllers
 
         private EducationDetails GetEducations()
         {
-            var educationDetailsData = HttpHelper.Get<EducationDetailsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId=1");
+            var constitinetId = (int) Session["constituentId"];
+            var educationDetailsData = HttpHelper.Get<EducationDetailsData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId={0}", constitinetId));
 
             mapper = new AutoDataContractMapper();
             var educations = new EducationDetails();
@@ -50,14 +55,15 @@ namespace Website.Controllers
             var educationDetail = new EducationDetail();
             TryUpdateModel(educationDetail);
 
-            educationDetail.Constituent = new Constituent { Id = 1 };
+            var constituentId = (int)Session["constituentId"];
+            educationDetail.Constituent = new Constituent { Id = constituentId};
             educationDetail.Type = new EducationType() { Id = educationType };
 
             mapper = new AutoDataContractMapper();
             var educationDetailData = new EducationDetailData();
             mapper.Map(educationDetail, educationDetailData);
 
-            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId=1", educationDetailData);
+            HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId={0}", constituentId), educationDetailData);
 
             return PartialView(new GridModel(GetEducations()));
         }
@@ -67,10 +73,11 @@ namespace Website.Controllers
         public ActionResult Edit(int id, int educationType)
         {
             var educationDetail = new EducationDetail();
+            var constituentId = (int)Session["constituentId"];
 
             TryUpdateModel(educationDetail);
             educationDetail.Type = new EducationType() { Id = educationType };
-            educationDetail.Constituent = new Constituent { Id = 1 };
+            educationDetail.Constituent = new Constituent { Id = constituentId };
             mapper = new AutoDataContractMapper();
             var educationDetailData = new EducationDetailData();
             mapper.Map(educationDetail, educationDetailData);

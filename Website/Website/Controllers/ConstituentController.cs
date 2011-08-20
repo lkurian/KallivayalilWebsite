@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
@@ -14,6 +15,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userName"] == null)
+                FormsAuthentication.RedirectToLoginPage();
 //            PopulateConstituentTypes();
             return PartialView(GetConstituent());
         }
@@ -35,7 +38,8 @@ namespace Website.Controllers
 
         private Constituent GetConstituent()
         {
-            var constituentData = HttpHelper.Get<ConstituentData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/1");
+            var constituentId = (int)Session["constituentId"];
+            var constituentData = HttpHelper.Get<ConstituentData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/{0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var constituent = new Constituent();

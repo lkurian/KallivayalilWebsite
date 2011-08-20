@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
@@ -14,6 +15,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userName"] == null)
+                FormsAuthentication.RedirectToLoginPage();
             PopulateAssociationTypes();
             return PartialView();
         }
@@ -35,7 +38,9 @@ namespace Website.Controllers
 
         private Associations GetAssociations()
         {
-            var associationsData = HttpHelper.Get<AssociationsData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Associations?ConstituentId=1");
+            var constituentId = (int)Session["constituentId"];
+
+            var associationsData = HttpHelper.Get<AssociationsData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Associations?ConstituentId={0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var associations = new Associations();
@@ -49,7 +54,7 @@ namespace Website.Controllers
         {
             var association = new Association();
             TryUpdateModel(association);
-
+            var constituentId = (int)Session["constituentId"];
             if (association.AssociatedConstituentId <= 0)
                 association.AssociatedConstituent = null;
             association.Type = new AssociationType { Id = associationType };
@@ -58,7 +63,7 @@ namespace Website.Controllers
             var associationData = new AssociationData();
             mapper.Map(association, associationData);
 
-            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Associations?ConstituentId=1", associationData);
+            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Associations?ConstituentId="+constituentId, associationData);
 
             return PartialView(new GridModel(GetAssociations()));
         }
@@ -69,9 +74,10 @@ namespace Website.Controllers
         {
             var association = new Association();
 
+            var constituentId = (int)Session["constituentId"];
             TryUpdateModel(association);
             association.Type = new AssociationType {Id = associationType};
-            association.Constituent = new Constituent {Id = 1};
+            association.Constituent = new Constituent {Id =constituentId };
             
             mapper = new AutoDataContractMapper();
             var associationData = new AssociationData();

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
@@ -15,6 +16,8 @@ namespace Website.Controllers
         [HttpGet]
         public ActionResult Index()
         {
+            if (Session["userName"] == null)
+                FormsAuthentication.RedirectToLoginPage();
             PopulatePhoneTypes();
             PopulateAddressTypes();
             return PartialView();
@@ -22,7 +25,8 @@ namespace Website.Controllers
 
         private void PopulateAddressTypes()
         {
-            var addressesData = HttpHelper.Get<AddressesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?constituentId=1");
+            var constituentId = (int)Session["constituentId"];
+            var addressesData = HttpHelper.Get<AddressesData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?constituentId={0}", constituentId));
 
             var addresses = new ShortAddresses();
             
@@ -53,7 +57,8 @@ namespace Website.Controllers
 
         private Phones GetPhones()
         {
-            var phonesData = HttpHelper.Get<PhonesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=1");
+            var constituentId = (int)Session["constituentId"];
+            var phonesData = HttpHelper.Get<PhonesData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId={0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var phones = new Phones();
@@ -68,7 +73,8 @@ namespace Website.Controllers
             var phone = new Phone();
             TryUpdateModel(phone);
 
-            phone.Constituent = new Constituent {Id = 1};
+            var constituentId = (int)Session["constituentId"];
+            phone.Constituent = new Constituent {Id = constituentId};
             phone.Type = new PhoneType { Id = PhoneType };
             phone.Address = new ShortAddress() { Id = ShortAddress };
 
@@ -76,7 +82,7 @@ namespace Website.Controllers
             var phoneData = new PhoneData();
             mapper.Map(phone, phoneData);
 
-            var newPhone = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId=1", phoneData);
+            var newPhone = HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId={0}", constituentId), phoneData);
 
             return PartialView(new GridModel(GetPhones()));
         }
@@ -87,9 +93,11 @@ namespace Website.Controllers
         {
             var phone = new Phone();
 
+            var constituentId = (int)Session["constituentId"];
+
             TryUpdateModel(phone);
             phone.Type = new PhoneType {Id = PhoneType};
-            phone.Constituent = new Constituent {Id = 1};
+            phone.Constituent = new Constituent {Id = constituentId};
             phone.Address = new ShortAddress() {Id = ShortAddress};
             mapper = new AutoDataContractMapper();
             var phoneData = new PhoneData();

@@ -10,8 +10,6 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
-            var userName = Session["userName"];
-
             return View();
         }
 
