@@ -1,6 +1,9 @@
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
+using Kallivayalil.Client;
 using Website.Helpers;
+using Website.Models;
 using Website.Models.ViewModels;
 
 namespace Website.Controllers
@@ -22,7 +25,18 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Submit(ContactUsInputModel model)
         {
-            return View(model);
+            var contactUs = new ContactUs();
+
+            contactUs.Name = model.Name;
+            contactUs.Email = model.Email;
+            contactUs.Comments = HttpUtility.HtmlDecode(model.Comment);
+
+            var contactUsData = new ContactUsData();
+            mapper.Map(contactUs, contactUsData);
+
+            HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/ContactUs"),contactUsData);
+            
+            return View();
         }
 
     }

@@ -1,7 +1,6 @@
 ﻿$(function () {
     $("#submit").click(function () {
-        alert("submit")
-        var feedback = { Name: $("#name").val(), Email: $("#email").val(), Comment: $("#comment").val() };
+        var feedback = { Name: $("#name").val(), Email: $("#email").val(), Comment: "test comment" };
 
         var feedbackJson = JSON.stringify(feedback);
 
