@@ -4,7 +4,6 @@ using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
 using Website.Models;
-using Website.Models.ReferenceData;
 
 namespace Website.Controllers
 {
@@ -17,18 +16,10 @@ namespace Website.Controllers
         {
             if (Session["userName"] == null)
                 FormsAuthentication.RedirectToLoginPage();
-//            PopulateConstituentTypes();
+            
             return PartialView(GetConstituent());
         }
 
-        private void PopulateConstituentTypes()
-        {
-            var salutationTypesData = HttpHelper.Get<SalutationTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/SalutationTypes");
-
-            var salutationTypes = new SalutationTypes();
-            mapper.MapList(salutationTypesData, salutationTypes, typeof (SalutationType));
-            ViewData["salutationTypes"] = salutationTypes;
-        }
 
         [GridAction]
         public ActionResult AllConstituentDetails()

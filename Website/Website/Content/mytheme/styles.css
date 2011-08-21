@@ -718,3 +718,42 @@ div#footer-links p {
 	font-size:11px;
 	font-weight:bold;
 }
+
+/* Contact Us */
+      
+        
+        #feedback-form
+        {
+            padding: 0 1em 1em;
+        }
+        
+        #feedback-form label
+        {
+            display: block;
+            line-height: 25px;
+            margin-top: 1em;
+        }
+        
+        #feedback-form input
+        {
+            width: 370px;
+        }
+        
+        .form-actions
+        {
+            padding-top: 1em;
+            overflow: hidden;
+        }
+        
+        .form-actions button
+        {
+            float: right;
+        }
+        
+        .example .t-group
+        {
+            border-width: 1px;
+            border-style: solid;
+            padding: 0 1em 1em;
+        }
+/*Contact Us */

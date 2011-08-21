@@ -35,7 +35,20 @@
                                  .Add("~/Content/telerik.rtl.min.css")
                      ))
 
-    
+@{ Html.Telerik().ScriptRegistrar()
+        .OnDocumentReady(@<text>
+            // open the initially hidden window when the button is clicked
+            $('#feedback-open-button')
+                .click(function(e) {
+                    e.preventDefault();
+                    $('#Window').data('tWindow').center().open();
+                });
+            // add button hovers
+            $('.t-button').live('mouseenter', $.telerik.buttonHover)
+                            .live('mouseleave', $.telerik.buttonLeave);
+        </text>); }
+
+
 
 <script type="text/javascript">
     function show() {
@@ -53,6 +66,8 @@
         windowElement.data('tWindow').center().open();
     }
 
+    
+
     $(document).ready(function () {
         $("#accordion").accordion();
     });
@@ -62,6 +77,39 @@
 
 
 <body class="homepage">
+
+@{  Html.Telerik().Window()
+        .Name("Window")
+        .Title("Submit feedback")
+        .Content(@<text>
+        <form>
+                <div id="feedback-form">
+                <label for="name">Name:</label>
+                @Html.TextBox("name") 
+                <label  for="email">E-mail:</label>
+                @Html.TextBox("email") 
+                <label for="comment-value">Comments:</label>
+                @(Html.Telerik().Editor()
+                        .Name("comment")
+                        .Tools(tools => tools
+                            .Clear()
+                            .Bold().Italic().Separator()
+                            .InsertOrderedList().InsertUnorderedList().Separator()
+                            .Indent().Outdent()
+                        ))
+                <div class="form-actions">
+                    <button type="submit" id="Submit" class="t-button t-state-default">Submit feedback!</button>
+                </div>
+                </div>
+            </form>
+            </text>)
+        .Width(400)
+        .Draggable(true)
+        .Modal(true)
+        .Visible(false)
+        .Render();
+}
+    
 <div class ="wrapper">
 <div id="container">
 <div id="toppanel">
@@ -143,6 +191,7 @@
         	<li class="selected"><a href="http://localhost/kallivayalil/Profile/Profile">Profile</a></li>
         	<li class="selected"><a href="http://localhost/kallivayalil/Event/Index">Events</a></li>
         	<li class="selected"><a href="http://localhost/kallivayalil/FamilyTree/Index">FamilyTree</a></li>
+        	<li id="feedback-open-button" class="selected"><a href="http://localhost/kallivayalil/ContactUs/Index">Contact Us</a></li>
                 }
         </ul>
     </div>
@@ -305,33 +354,6 @@
     </div>  
 </div>
 </div> 
-
-@{ Html.Telerik().Window()
-        .Name("Window")
-        .Title("Telerik Window for ASP.NET MVC")
-        .Draggable(true)
-        .Resizable(resizing => resizing
-            .Enabled(true)
-            .MinHeight(250)
-            .MinWidth(250)
-            .MaxHeight(500)
-            .MaxWidth(500)
-        )
-        .Modal(true)
-        .Buttons(b => b.Maximize().Close())
-        .LoadContentFrom("http://localhost/kallivayalilService/KallivayalilService.svc/Events/333")
-        .Effects(fx => fx
-            .Zoom()
-            .Opacity()
-            .OpenDuration(200)
-            .CloseDuration(300)
-
-        )
-        .Visible(false)
-        .Width(300)
-        .Height(300)
-        .Render();
-}
 
 @(Html.Telerik().ScriptRegistrar().jQuery(false));
 

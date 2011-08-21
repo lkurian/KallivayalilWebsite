@@ -11,11 +11,23 @@ namespace Website.Controllers
 {
     public class ProfileController : Controller
     {
+        private AutoDataContractMapper mapper = new AutoDataContractMapper();
+
         public ActionResult Profile()
         {
            if(Session["userName"]==null)
                FormsAuthentication.RedirectToLoginPage();
+           PopulateConstituentTypes();
             return View();
+        }
+
+        private void PopulateConstituentTypes()
+        {
+            var salutationTypesData = HttpHelper.Get<SalutationTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/SalutationTypes");
+
+            var salutationTypes = new SalutationTypes();
+            mapper.MapList(salutationTypesData, salutationTypes, typeof(SalutationType));
+            ViewData["salutationTypes"] = salutationTypes;
         }
 
         [HttpPost]
@@ -50,7 +62,9 @@ namespace Website.Controllers
             mapper.Map(constituentToSave, constituentData);
 
             ConstituentData data = HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/{0}", Session["constituentId"]), constituentData);
-            return View(data);
+            var savedConstituent = new Constituent();
+            mapper.Map(data,savedConstituent);
+            return View(savedConstituent);
         }
     }
 
