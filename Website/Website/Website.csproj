@@ -187,6 +187,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
     <Content Include="Scripts\Custom\constituent.js" />
+    <Content Include="Scripts\Custom\contactus.js" />
     <Content Include="Scripts\Custom\familytree.js" />
     <Content Include="Scripts\Custom\login.js" />
     <Content Include="Scripts\Custom\Type.js" />

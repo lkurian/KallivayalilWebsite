@@ -1,4 +1,3 @@
-using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Website.Helpers;
@@ -23,7 +22,7 @@ namespace Website.Controllers
         [HttpPost]
         public ActionResult Submit(ContactUsInputModel model)
         {
-            return View();
+            return View(model);
         }
 
     }
