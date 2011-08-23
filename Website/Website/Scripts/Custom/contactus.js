@@ -1,6 +1,6 @@
 ﻿$(function () {
     $("#submit").click(function () {
-        var feedback = { Name: $("#name").val(), Email: $("#email").val(), Comment: "test comment" };
+        var feedback = { Name: $("#name").val(), Email: $("#email").val(), Comment: $("iframe").contents().find("body[spellcheck]").contents() };
 
         var feedbackJson = JSON.stringify(feedback);
 
