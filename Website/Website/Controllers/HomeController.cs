@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
@@ -27,6 +28,23 @@ namespace Website.Controllers
             mapper.MapList(eventsData, events, typeof(Event));
             ViewData["events"] = events;
         }
+
+        [HttpPost]
+        public ActionResult Submit(string name, string email, string comment)
+        {
+            var contactUs = new ContactUs();
+
+            contactUs.Name = name;
+            contactUs.Email = email;
+            contactUs.Comments = HttpUtility.HtmlDecode(comment);
+
+            var contactUsData = new ContactUsData();
+            mapper.Map(contactUs, contactUsData);
+
+            HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/ContactUs"), contactUsData);
+            return View("Index");
+        }
+
 
         [HttpPost]
         public ActionResult Login(FormCollection collection)

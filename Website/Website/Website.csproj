@@ -66,7 +66,6 @@
   <ItemGroup>
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\ConstituentController.cs" />
-    <Compile Include="Controllers\ContactUsController.cs" />
     <Compile Include="Controllers\EducationDetailController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\EventController.cs" />
@@ -88,7 +87,6 @@
     <Compile Include="Models\ReferenceData\OccupationType.cs" />
     <Compile Include="Models\ShortAddress.cs" />
     <Compile Include="Models\ViewModels\ConstituentInputModel.cs" />
-    <Compile Include="Models\ViewModels\ContactUsInputModel.cs" />
     <Compile Include="Models\ViewModels\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

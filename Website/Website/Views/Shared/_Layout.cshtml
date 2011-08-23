@@ -82,7 +82,8 @@
         .Name("Window")
         .Title("Submit feedback")
         .Content(@<text>
-        <form>
+         @using (Html.BeginForm("Submit", "Home", FormMethod.Post))
+            {
                 <div id="feedback-form">
                 <label for="name">Name:</label>
                 @Html.TextBox("name") 
@@ -98,10 +99,10 @@
                             .Indent().Outdent()
                         ))
                 <div class="form-actions">
-                    <button type="submit" id="submit" class="t-button t-state-default">Submit feedback!</button>
+                    <button type="submit"  class="t-button t-state-default">Submit feedback!</button>
                 </div>
                 </div>
-            </form>
+             }
             </text>)
         .Width(400)
         .Draggable(true)
