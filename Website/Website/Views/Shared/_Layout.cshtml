@@ -10,11 +10,11 @@
 <link rel="stylesheet" href="@Url.Content("~/Content/slidestyle.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/verticaltabs.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/profile.css")" type="text/css" media="screen" />
+<link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/css/overlay-apple.css"/> 
 			         
 <script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/jquery.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/slider.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/login.js")"></script>
-<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/contactus.js")"></script>
 
 <script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/superfish.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/galleria/galleria-1.2.2.js")"></script>
@@ -137,19 +137,18 @@
 					<a class="lost-pwd" href="#">Lost your password?</a>
                     </fieldset>
                }
-
 			</div>
 			<div class="left right">			
 				<!-- Register Form -->
-				<form action="#" method="post">
 					<h1>Not a member yet? Sign Up!</h1>				
-					<label class="grey" for="signup">Username:</label>
-					<input class="field" type="text" name="signup" id="signup" value="" size="23" />
-					<label class="grey" for="email">Emal:</label>
-					<input class="field" type="text" name="email" id="email" size="23" />
-					<label>A password will be e-mailed to you.</label>
 					<input type="submit" name="submit" value="Register" class="bt_register" />
-				</form>
+         <!-- overlayed element --> 
+                    <div class="apple_overlay" id="overlay"> 
+ 
+	<!-- the external content is loaded inside this tag --> 
+	               <div class="contentWrap"></div> 
+ 
+                    </div> 
 			</div>
 		</div>
 </div> <!-- /login -->	
@@ -188,12 +187,12 @@
     	<ul class="sf-menu dropdown">
         	<li class="selected"><a href="http://localhost/kallivayalil/">Our Family</a></li>
             @if (!string.IsNullOrEmpty(Session["userName"] as string))
-                {
+            {
         	<li class="selected"><a href="http://localhost/kallivayalil/Profile/Profile">Profile</a></li>
         	<li class="selected"><a href="http://localhost/kallivayalil/Event/Index">Events</a></li>
         	<li class="selected"><a href="http://localhost/kallivayalil/FamilyTree/Index">FamilyTree</a></li>
         	<li id="feedback-open-button" class="selected"><a href="http://localhost/kallivayalil/ContactUs/Index">Contact Us</a></li>
-                }
+            }
         </ul>
     </div>
     
@@ -241,12 +240,13 @@
                     <h4><a href="#"><span>Todays<strong>Events</strong></span></a></h4>
                     <div>
                     <ul class="blocklist">
-                    @if(ViewData["events"]!= null){
-                     foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
-                      {
-                         if(ev.Type.Description !="Birthday")
-                         {
-                            <li><a id=@string.Format("event_{0}",ev.Id) class="t-group" href="#">@ev.EventTitle</a></li>
+                    @if (ViewData["events"] != null)
+                    {
+                        foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
+                        {
+                            if (ev.Type.Description != "Birthday")
+                            {
+                            <li><a id=@string.Format("event_{0}", ev.Id) class="t-group" href="#">@ev.EventTitle</a></li>
                             <div class="tooltip">
 	                        <img src="http://static.flowplayer.org/img/title/eye.png" alt="Flying screens" style="float:left;margin:0 15px 20px 0" />
 	                            <table style="margin:0">
@@ -269,10 +269,10 @@
 	                            </table>
                             </div>
 
-                         <script type="text/javascript">$("@string.Format("#event_{0}",ev.Id)").tooltip({ effect: 'slide'});</script> 
+                         <script type="text/javascript">$("@string.Format("#event_{0}", ev.Id)").tooltip({ effect: 'slide'});</script> 
                         
-                         }
-                      }
+                            }
+                        }
                     }
                     </ul>
                     </div>

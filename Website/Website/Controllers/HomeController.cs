@@ -10,7 +10,6 @@ namespace Website.Controllers
 {
     public class HomeController : Controller
     {
-
         private readonly AutoDataContractMapper mapper = new AutoDataContractMapper();
 
         public ActionResult Index()
@@ -21,8 +20,9 @@ namespace Website.Controllers
 
         private void PopulateEvents()
         {
-            var eventsData = HttpHelper.Get<EventsData>(string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}"
-                                    , "http://localhost/kallivayalilService/KallivayalilService.svc/Events", true, DateTime.Today, DateTime.Today, true));
+            var uri = string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}"
+                                          , "http://localhost/kallivayalilService/KallivayalilService.svc/Events", true, DateTime.Today, DateTime.Today, true);
+            var eventsData = HttpHelper.Get<EventsData>(uri);
 
             var events = new Events();
             mapper.MapList(eventsData, events, typeof(Event));

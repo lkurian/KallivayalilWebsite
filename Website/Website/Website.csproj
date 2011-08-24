@@ -74,6 +74,7 @@
     <Compile Include="Controllers\OccupationController.cs" />
     <Compile Include="Controllers\PhoneController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Models\Association.cs" />
     <Compile Include="Models\ContactUs.cs" />
@@ -122,6 +123,9 @@
     <Content Include="Content\profile\profile-button.gif" />
     <Content Include="Content\profile\profile-field-bg.gif" />
     <Content Include="Content\profile\top-banner.png" />
+    <Content Include="Content\registration\css\style.css" />
+    <Content Include="Content\registration\images\checked.png" />
+    <Content Include="Content\registration\images\error.png" />
     <Content Include="Content\Spacetree.css" />
     <Content Include="Content\Sunset\editor.png" />
     <Content Include="Content\Sunset\imagebrowser.png" />
@@ -186,7 +190,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
     <Content Include="Scripts\Custom\constituent.js" />
-    <Content Include="Scripts\Custom\contactus.js" />
+    <Content Include="Scripts\Custom\registration.js" />
     <Content Include="Scripts\Custom\familytree.js" />
     <Content Include="Scripts\Custom\login.js" />
     <Content Include="Scripts\Custom\Type.js" />
@@ -208,6 +212,7 @@
     <Content Include="Scripts\loginslider\pngfix\supersleight-min.js" />
     <Content Include="Scripts\loginslider\pngfix\x.gif" />
     <Content Include="Scripts\loginslider\slide.js" />
+    <Content Include="Scripts\sliding.form.js" />
     <Content Include="Scripts\telerik.autocomplete.min.js" />
     <Content Include="Scripts\telerik.calendar.min.js" />
     <Content Include="Scripts\telerik.combobox.min.js" />
@@ -514,6 +519,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\FamilyTree\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Registration\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
