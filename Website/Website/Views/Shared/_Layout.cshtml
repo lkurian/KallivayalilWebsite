@@ -23,6 +23,7 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.json-2.2.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.tools.min.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/registration.js")"></script>
 
 <!--script type="text/javascript" src="@Url.Content("~/Scripts/verticaltabs/verticaltabs.js")"></script-->
 <script type="text/javascript" src="@Url.Content("~/Scripts/jexpand/jExpand.js")"></script>
@@ -50,6 +51,21 @@
         </text>); }
 
 
+<style> 
+	
+	/* use a semi-transparent image for the overlay */
+	#overlay {
+		background-image:url(http://static.flowplayer.org/img/overlay/transparent.png);
+		color:#efefef;
+		height:450px;
+	}
+	
+	/* container for external content. uses vertical scrollbar, if needed */
+	div.contentWrap {
+		height:441px;
+		overflow-y:auto;
+	}
+	</style> 
 
 <script type="text/javascript">
     function show() {
@@ -138,11 +154,15 @@
                     </fieldset>
                }
 			</div>
-			<div class="left right">			
+			<div class="left right">	
+                   	
 				<!-- Register Form -->
-					<h1>Not a member yet? Sign Up!</h1>				
-					<input type="submit" name="submit" value="Register" class="bt_register" />
-         <!-- overlayed element --> 
+					<h1>Not a member yet? Sign Up!</h1>		
+                     <a href="http://localhost/kallivayalil/Registration/Index" rel="#overlay" style="text-decoration:none">	
+                     <button type="button">Show external page in overlay</button>		
+					<!--input type="submit" name="submit" value="Register" class="bt_register" /-->
+                    </a>
+                     <!-- overlayed element --> 
                     <div class="apple_overlay" id="overlay"> 
  
 	<!-- the external content is loaded inside this tag --> 
