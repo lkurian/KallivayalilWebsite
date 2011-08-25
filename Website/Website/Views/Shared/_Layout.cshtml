@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="@Url.Content("~/Content/slidestyle.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/verticaltabs.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/profile.css")" type="text/css" media="screen" />
-<link rel="stylesheet" type="text/css" href="http://static.flowplayer.org/tools/css/overlay-apple.css"/> 
+<link rel="stylesheet" href="@Url.Content("~/Content/overlay-apple.css")" type="text/css" media="screen" />
 			         
 <script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/jquery.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/slider.js")"></script>
@@ -51,22 +51,6 @@
         </text>); }
 
 
-<style> 
-	
-	/* use a semi-transparent image for the overlay */
-	#overlay {
-		background-image:url(http://static.flowplayer.org/img/overlay/transparent.png);
-		color:#efefef;
-		height:450px;
-	}
-	
-	/* container for external content. uses vertical scrollbar, if needed */
-	div.contentWrap {
-		height:441px;
-		overflow-y:auto;
-	}
-	</style> 
-
 <script type="text/javascript">
     function show() {
         var element = $("#readMore");
@@ -88,6 +72,20 @@
         $("#accordion").accordion();
     });
    </script>
+
+   <style type="text/css">
+       /* use a semi-transparent image for the overlay */
+#overlay {
+	background: url('../Content/images/transparent.png');
+	color:#efefef;
+}
+	
+/* container for external content. uses vertical scrollbar, if needed */
+div.contentWrap {
+	height:640px;
+	overflow-y:auto;
+}
+   </style>
 
 </head>
 
@@ -164,7 +162,7 @@
                     </a>
                      <!-- overlayed element --> 
                     <div class="apple_overlay" id="overlay"> 
- 
+                    <a class="close"></a>
 	<!-- the external content is loaded inside this tag --> 
 	               <div class="contentWrap"></div> 
  

@@ -108,6 +108,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\base.css" />
+    <Content Include="Content\images\transparent.png" />
+    <Content Include="Content\overlay-apple.css" />
     <Content Include="Content\profile.css" />
     <Content Include="Content\images\address.jpg" />
     <Content Include="Content\images\email.jpg" />
