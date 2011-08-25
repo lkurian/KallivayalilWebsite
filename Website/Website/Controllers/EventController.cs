@@ -56,7 +56,7 @@ namespace Website.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [GridAction]
-        public ActionResult Create(int EventType)
+        public ActionResult Create(int EventType, DateTime StartDate, DateTime EndDate)
         {
             var @event = new Event();
             TryUpdateModel(@event);
@@ -68,10 +68,6 @@ namespace Website.Controllers
             @event.Type = new EventType() { Id = EventType };
             @event.ContactPerson = "test";
             @event.ContactNumber = "1232343434";
-            @event.StartDate = DateTime.Today;
-
-            @event.EndDate = DateTime.Today.AddDays(5);
-
             @event.IsApproved = true;
 
 
