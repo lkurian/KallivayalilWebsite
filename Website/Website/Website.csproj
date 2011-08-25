@@ -64,6 +64,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\registration\css\overlay.css" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\ConstituentController.cs" />
     <Compile Include="Controllers\EducationDetailController.cs" />
@@ -128,6 +129,7 @@
     <Content Include="Content\registration\css\style.css" />
     <Content Include="Content\registration\images\checked.png" />
     <Content Include="Content\registration\images\error.png" />
+    <Content Include="Content\registration\images\transparent.png" />
     <Content Include="Content\Spacetree.css" />
     <Content Include="Content\Sunset\editor.png" />
     <Content Include="Content\Sunset\imagebrowser.png" />

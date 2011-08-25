@@ -1,0 +1,10 @@
+﻿#overlay {
+	background: transparent url('../images/transparent.png');
+	color:#efefef;
+	height:650px;
+	width:675px;
+}
+div.contentWrap {
+	height:640px;
+	overflow-y:auto;
+}
