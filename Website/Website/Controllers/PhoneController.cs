@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
@@ -12,7 +13,7 @@ namespace Website.Controllers
     public class PhoneController : Controller
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
-
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
         [HttpGet]
         public ActionResult Index()
         {
@@ -26,7 +27,7 @@ namespace Website.Controllers
         private void PopulateAddressTypes()
         {
             var constituentId = (int)Session["constituentId"];
-            var addressesData = HttpHelper.Get<AddressesData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?constituentId={0}", constituentId));
+            var addressesData = HttpHelper.Get<AddressesData>(string.Format(serviceBaseUri+"/Addresses?constituentId={0}", constituentId));
 
             var addresses = new ShortAddresses();
             
@@ -42,7 +43,7 @@ namespace Website.Controllers
 
         private void PopulatePhoneTypes()
         {
-            var phoneTypesData = HttpHelper.Get<PhoneTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/PhoneTypes");
+            var phoneTypesData = HttpHelper.Get<PhoneTypesData>(serviceBaseUri+"/PhoneTypes");
 
             var phoneTypes = new PhoneTypes();
             mapper.MapList(phoneTypesData, phoneTypes, typeof (PhoneType));
@@ -58,7 +59,7 @@ namespace Website.Controllers
         private Phones GetPhones()
         {
             var constituentId = (int)Session["constituentId"];
-            var phonesData = HttpHelper.Get<PhonesData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId={0}", constituentId));
+            var phonesData = HttpHelper.Get<PhonesData>(string.Format(serviceBaseUri+"/Phones?ConstituentId={0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var phones = new Phones();
@@ -82,7 +83,7 @@ namespace Website.Controllers
             var phoneData = new PhoneData();
             mapper.Map(phone, phoneData);
 
-            var newPhone = HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones?ConstituentId={0}", constituentId), phoneData);
+            var newPhone = HttpHelper.Post(string.Format(serviceBaseUri+"/Phones?ConstituentId={0}", constituentId), phoneData);
 
             return PartialView(new GridModel(GetPhones()));
         }
@@ -103,7 +104,7 @@ namespace Website.Controllers
             var phoneData = new PhoneData();
             mapper.Map(phone, phoneData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones/{0}",id), phoneData);
+            HttpHelper.Put(string.Format(serviceBaseUri+"/Phones/{0}",id), phoneData);
             return PartialView(new GridModel(GetPhones()));
         }
 
@@ -111,7 +112,7 @@ namespace Website.Controllers
         [GridAction]
         public ActionResult Delete(int id)
         {
-            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Phones/{0}", id));
+            HttpHelper.DoHttpDelete(string.Format(serviceBaseUri+"/Phones/{0}", id));
             return PartialView(new GridModel(GetPhones()));
         }
     }

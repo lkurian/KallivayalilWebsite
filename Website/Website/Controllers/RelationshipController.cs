@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
@@ -11,7 +12,7 @@ namespace Website.Controllers
     public class RelationshipController : Controller
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
-
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
         [HttpGet]
         public ActionResult Index()
         {
@@ -23,7 +24,7 @@ namespace Website.Controllers
 
         private void PopulateAssociationTypes()
         {
-            var typesData = HttpHelper.Get<AssociationTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/AssociationTypes");
+            var typesData = HttpHelper.Get<AssociationTypesData>(serviceBaseUri+"/AssociationTypes");
 
             var associationTypes = new AssociationTypes();
             mapper.MapList(typesData, associationTypes, typeof (AssociationType));
@@ -40,7 +41,7 @@ namespace Website.Controllers
         {
             var constituentId = (int)Session["constituentId"];
 
-            var associationsData = HttpHelper.Get<AssociationsData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Associations?ConstituentId={0}", constituentId));
+            var associationsData = HttpHelper.Get<AssociationsData>(string.Format(serviceBaseUri+"/Associations?ConstituentId={0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var associations = new Associations();
@@ -63,7 +64,7 @@ namespace Website.Controllers
             var associationData = new AssociationData();
             mapper.Map(association, associationData);
 
-            HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Associations?ConstituentId="+constituentId, associationData);
+            HttpHelper.Post(serviceBaseUri+"/Associations?ConstituentId="+constituentId, associationData);
 
             return PartialView(new GridModel(GetAssociations()));
         }
@@ -83,7 +84,7 @@ namespace Website.Controllers
             var associationData = new AssociationData();
             mapper.Map(association, associationData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Associations/{0}", id), associationData);
+            HttpHelper.Put(string.Format(serviceBaseUri+"/Associations/{0}", id), associationData);
             return PartialView(new GridModel(GetAssociations()));
         }
 
@@ -91,7 +92,7 @@ namespace Website.Controllers
         [GridAction]
         public ActionResult Delete(int id)
         {
-            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Associations/{0}", id));
+            HttpHelper.DoHttpDelete(string.Format(serviceBaseUri+"/Associations/{0}", id));
             return PartialView(new GridModel(GetAssociations()));
         }
     }

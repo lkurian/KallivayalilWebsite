@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
@@ -10,7 +11,7 @@ namespace Website.Controllers
     public class ConstituentController : Controller
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
-
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
         [HttpGet]
         public ActionResult Index()
         {
@@ -30,7 +31,7 @@ namespace Website.Controllers
         private Constituent GetConstituent()
         {
             var constituentId = (int)Session["constituentId"];
-            var constituentData = HttpHelper.Get<ConstituentData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/{0}", constituentId));
+            var constituentData = HttpHelper.Get<ConstituentData>(string.Format(serviceBaseUri+"/Constituents/{0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var constituent = new Constituent();
@@ -50,7 +51,7 @@ namespace Website.Controllers
             var constituentData = new ConstituentData();
             mapper.Map(constituent, constituentData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/{0}",id),constituentData);
+            HttpHelper.Put(string.Format(serviceBaseUri+"/Constituents/{0}",id),constituentData);
             return PartialView(GetConstituent());
         }
 

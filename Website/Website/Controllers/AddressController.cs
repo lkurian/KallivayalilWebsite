@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
@@ -11,7 +12,7 @@ namespace Website.Controllers
     public class AddressController : Controller
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
-
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
         [HttpGet]
         public ActionResult Index()
         {
@@ -23,7 +24,7 @@ namespace Website.Controllers
 
         private void PopulateAddressTypes()
         {
-            var addressTypesData = HttpHelper.Get<AddressTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/AddressTypes");
+            var addressTypesData = HttpHelper.Get<AddressTypesData>(serviceBaseUri+"/AddressTypes");
 
             var addressTypes = new AddressTypes();
             mapper.MapList(addressTypesData, addressTypes, typeof (AddressType));
@@ -39,7 +40,7 @@ namespace Website.Controllers
         private Addresses GetAddress()
         {
             var constituentId = (int)Session["constituentId"];
-            var addressesData = HttpHelper.Get<AddressesData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId={0}", constituentId));
+            var addressesData = HttpHelper.Get<AddressesData>(string.Format(serviceBaseUri+"/Addresses?ConstituentId={0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var addresses = new Addresses();
@@ -61,7 +62,7 @@ namespace Website.Controllers
             var addressData = new AddressData();
             mapper.Map(address, addressData);
 
-            var newAddress = HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses?ConstituentId={0}", constituentId), addressData);
+            var newAddress = HttpHelper.Post(string.Format(serviceBaseUri+"/Addresses?ConstituentId={0}", constituentId), addressData);
 
             return PartialView(new GridModel(GetAddress()));
         }
@@ -81,7 +82,7 @@ namespace Website.Controllers
             var addressData = new AddressData();
             mapper.Map(address, addressData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses/{0}",id),addressData);
+            HttpHelper.Put(string.Format(serviceBaseUri+"/Addresses/{0}",id),addressData);
             return PartialView(new GridModel(GetAddress()));
         }
 
@@ -89,7 +90,7 @@ namespace Website.Controllers
         [GridAction]
         public ActionResult Delete(int id)
         {
-            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Addresses/{0}", id));
+            HttpHelper.DoHttpDelete(string.Format(serviceBaseUri+"/Addresses/{0}", id));
             return PartialView(new GridModel(GetAddress()));
         }
     }

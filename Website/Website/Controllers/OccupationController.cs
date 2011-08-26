@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
@@ -11,6 +12,7 @@ namespace Website.Controllers
     public class OccupationController : Controller
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
 
         [HttpGet]
         public ActionResult Index()
@@ -23,7 +25,7 @@ namespace Website.Controllers
 
         private void PopulateOccupationTypes()
         {
-            var occupationTypesData = HttpHelper.Get<OccupationTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/OccupationTypes");
+            var occupationTypesData = HttpHelper.Get<OccupationTypesData>(serviceBaseUri+"/OccupationTypes");
 
             var occupationTypes = new OccupationTypes();
             mapper.MapList(occupationTypesData, occupationTypes, typeof (OccupationType));
@@ -39,7 +41,7 @@ namespace Website.Controllers
         private Occupations GetOccupations()
         {
             var constituentId = (int)Session["constituentId"];
-            var OccupationsData = HttpHelper.Get<OccupationsData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId={0}", constituentId));
+            var OccupationsData = HttpHelper.Get<OccupationsData>(string.Format(serviceBaseUri+"/Occupations?ConstituentId={0}", constituentId));
 
             mapper = new AutoDataContractMapper();
             var Occupations = new Occupations();
@@ -62,7 +64,7 @@ namespace Website.Controllers
             var OccupationData = new OccupationData();
             mapper.Map(Occupation, OccupationData);
 
-            var newOccupation = HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations?ConstituentId={0}", constituentId), OccupationData);
+            var newOccupation = HttpHelper.Post(string.Format(serviceBaseUri+"/Occupations?ConstituentId={0}", constituentId), OccupationData);
 
             return PartialView(new GridModel(GetOccupations()));
         }
@@ -82,7 +84,7 @@ namespace Website.Controllers
             var OccupationData = new OccupationData();
             mapper.Map(Occupation, OccupationData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations/{0}",id), OccupationData);
+            HttpHelper.Put(string.Format(serviceBaseUri+"/Occupations/{0}",id), OccupationData);
             return PartialView(new GridModel(GetOccupations()));
         }
 
@@ -90,7 +92,7 @@ namespace Website.Controllers
         [GridAction]
         public ActionResult Delete(int id)
         {
-            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Occupations/{0}", id));
+            HttpHelper.DoHttpDelete(string.Format(serviceBaseUri+"/Occupations/{0}", id));
             return PartialView(new GridModel(GetOccupations()));
         }
     }

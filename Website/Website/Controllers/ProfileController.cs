@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
@@ -12,7 +13,7 @@ namespace Website.Controllers
     public class ProfileController : Controller
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
-
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
         public ActionResult Profile()
         {
            if(Session["userName"]==null)
@@ -23,7 +24,7 @@ namespace Website.Controllers
 
         private void PopulateConstituentTypes()
         {
-            var salutationTypesData = HttpHelper.Get<SalutationTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/SalutationTypes");
+            var salutationTypesData = HttpHelper.Get<SalutationTypesData>(serviceBaseUri+"/SalutationTypes");
 
             var salutationTypes = new SalutationTypes();
             mapper.MapList(salutationTypesData, salutationTypes, typeof(SalutationType));
@@ -61,7 +62,7 @@ namespace Website.Controllers
             var constituentData = new ConstituentData();
             mapper.Map(constituentToSave, constituentData);
 
-            ConstituentData data = HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Constituents/{0}", Session["constituentId"]), constituentData);
+            ConstituentData data = HttpHelper.Put(string.Format(serviceBaseUri+"/Constituents/{0}", Session["constituentId"]), constituentData);
             var savedConstituent = new Constituent();
             mapper.Map(data,savedConstituent);
             return View(savedConstituent);

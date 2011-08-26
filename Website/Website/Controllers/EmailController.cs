@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Configuration;
+using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
@@ -11,6 +12,7 @@ namespace Website.Controllers
     public class EmailController : Controller
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
 
         [HttpGet]
         public ActionResult Index()
@@ -23,7 +25,7 @@ namespace Website.Controllers
 
         private void PopulateEmailTypes()
         {
-            var emailTypesData = HttpHelper.Get<EmailTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/EmailTypes");
+            var emailTypesData = HttpHelper.Get<EmailTypesData>(serviceBaseUri+"/EmailTypes");
 
             var emailTypes = new EmailTypes();
             mapper.MapList(emailTypesData, emailTypes, typeof(EmailType));
@@ -39,7 +41,7 @@ namespace Website.Controllers
         private Emails GetEmails()
         {
             var constituentId = (int)Session["constituentId"];
-            var emailsData = HttpHelper.Get<EmailsData>("http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId="+constituentId);
+            var emailsData = HttpHelper.Get<EmailsData>(serviceBaseUri+"/Emails?ConstituentId="+constituentId);
 
             mapper = new AutoDataContractMapper();
             var emails = new Emails();
@@ -63,7 +65,7 @@ namespace Website.Controllers
             var emailData = new EmailData();
             mapper.Map(email, emailData);
 
-            HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails?ConstituentId={0}", constituentId), emailData);
+            HttpHelper.Post(string.Format(serviceBaseUri+"/Emails?ConstituentId={0}", constituentId), emailData);
 
             return PartialView(new GridModel(GetEmails()));
         }
@@ -81,7 +83,7 @@ namespace Website.Controllers
             var emailData = new EmailData();
             mapper.Map(email, emailData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails/{0}",id), emailData);
+            HttpHelper.Put(string.Format(serviceBaseUri+"/Emails/{0}",id), emailData);
             return PartialView(new GridModel(GetEmails()));
         }
 
@@ -89,7 +91,7 @@ namespace Website.Controllers
         [GridAction]
         public ActionResult Delete(int id)
         {
-            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Emails/{0}", id));
+            HttpHelper.DoHttpDelete(string.Format(serviceBaseUri+"/Emails/{0}", id));
             return PartialView(new GridModel(GetEmails()));
         }
 
