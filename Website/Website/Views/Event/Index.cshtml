@@ -45,7 +45,7 @@
             .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
                    
             .DataBinding(dataBinding => dataBinding.Ajax()
-                                            .Select("AllEvents", "Event")
+                                                .Select("AllEvents", "Event")
                                                 .Update("Edit", "Event")
                                                 .Insert("Create", "Event")
                                                 .Delete("Delete", "Event"))
@@ -57,7 +57,7 @@
 @*                columns.Bound(p => p.ContactPerson);            
                 columns.Bound(p => p.ContactNumber);        *@    
                 columns.Bound(p => p.StartDate).EditorTemplateName("StartDate");
-                columns.Bound(p => p.EndDate);            
+                columns.Bound(p => p.EndDate).EditorTemplateName("EndDate");         
                 columns.Bound(p => p.CreatedBy);
                 columns.Bound(p => p.Constituent).ReadOnly();
                 columns.Bound(p => p.CreatedDateTime).Hidden(true);
