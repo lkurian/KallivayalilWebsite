@@ -1,3 +1,4 @@
+using System;
 using System.Web.Mvc;
 using Kallivayalil.Client;
 
@@ -8,9 +9,9 @@ namespace Website.Controllers
         public ActionResult Index()
         {
             return View();
-        } 
-        
-        public void Register( FormCollection formCollection)
+        }
+
+        public void Register(FormCollection formCollection)
         {
             var registerationData = new RegisterationData();
 
@@ -22,9 +23,31 @@ namespace Website.Controllers
                                                 State = formCollection["state"],
                                                 PostCode = formCollection["postcode"],
                                                 Country = formCollection["country"],
-                                                Type = new AddressTypeData {Id = 1}
+                                                Type = new AddressTypeData {Id = 1},
+                                                IsPrimary = true
                                             };
-
+            registerationData.Constituent = new ConstituentData
+                                                {
+                                                    BornOn = DateTime.Parse(formCollection["dob"]).Date,
+                                                    BranchName = Convert.ToInt16(formCollection["branchname"]),
+                                                    Gender = formCollection["gender"],
+                                                    HouseName = formCollection["housename"],
+                                                    MaritialStatus = Convert.ToInt16(formCollection["maritalstatus"]),
+                                                    Name = new ConstituentNameData
+                                                               {
+                                                                   FirstName = formCollection["firstname"],
+                                                                   MiddleName = formCollection["middlename"],
+                                                                   LastName = formCollection["lastname"],
+                                                                   PreferedName = formCollection["preferedname"],
+                                                                   Salutation = new SalutationTypeData {Id = Convert.ToInt16(formCollection["salutation"])}
+                                                               }
+                                                };
+            registerationData.Phone = new PhoneData
+                                          {
+                                              Number = formCollection["phonenumber"],
+                                              Type = new PhoneTypeData {Id = Convert.ToInt16(formCollection["phonetype"])},
+                                              IsPrimary = true
+                                          };
 
             RedirectToAction("Index", "Home");
         }
