@@ -1,4 +1,5 @@
 using System;
+using System.Configuration;
 using System.Web.Mvc;
 using Kallivayalil.Client;
 
@@ -6,6 +7,7 @@ namespace Website.Controllers
 {
     public class RegistrationController : Controller
     {
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
         public ActionResult Index()
         {
             return View();
@@ -49,6 +51,10 @@ namespace Website.Controllers
                                               IsPrimary = true
                                           };
 
+            registerationData.Email = formCollection["email"];
+            registerationData.Password = formCollection["password"];
+
+            var registeredData = HttpHelper.Post(serviceBaseUri+"/Registration",registerationData);
             RedirectToAction("Index", "Home");
         }
     }

@@ -47,7 +47,7 @@ namespace Website.Controllers
 
         private IEnumerable<Event> GetEvents()
         {
-            var eventsData = HttpHelper.Get<EventsData>(string.Format(serviceBaseUri+"/Events?isApproved=true&startDate={0}&endDate={1}&includeBirthdays=false"
+            var eventsData = HttpHelper.Get<EventsData>(string.Format(serviceBaseUri + "/Events?isApproved=true&startDate={0}&endDate={1}&includeBirthdaysAndAnniversarys=false"
                 ,DateTime.Today.AddDays(-5),DateTime.Today.AddDays(5)));
 
             mapper = new AutoDataContractMapper();

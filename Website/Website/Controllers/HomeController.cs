@@ -22,7 +22,7 @@ namespace Website.Controllers
 
         private void PopulateEvents()
         {
-            var uri = string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}"
+            var uri = string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdaysAndAnniversarys={4}"
                                           , serviceBaseUri+"/Events", true, DateTime.Today, DateTime.Today, true);
             var eventsData = HttpHelper.Get<EventsData>(uri);
 
