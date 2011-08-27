@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Diagnostics.Eventing.Reader;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -12,6 +13,7 @@ namespace Website.Controllers
     public class EducationDetailController : Controller
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
 
         [HttpGet]
         public ActionResult Index()
@@ -24,7 +26,7 @@ namespace Website.Controllers
 
         private void PopulateEducationTypes()
         {
-            var educationTypesData = HttpHelper.Get<EducationTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationTypes");
+            var educationTypesData = HttpHelper.Get<EducationTypesData>(serviceBaseUri+"/EducationTypes");
 
             var educationTypes = new EducationTypes();
             mapper.MapList(educationTypesData, educationTypes, typeof(EducationType));
@@ -40,7 +42,7 @@ namespace Website.Controllers
         private EducationDetails GetEducations()
         {
             var constitinetId = (int) Session["constituentId"];
-            var educationDetailsData = HttpHelper.Get<EducationDetailsData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId={0}", constitinetId));
+            var educationDetailsData = HttpHelper.Get<EducationDetailsData>(string.Format(serviceBaseUri+"/EducationDetails?ConstituentId={0}", constitinetId));
 
             mapper = new AutoDataContractMapper();
             var educations = new EducationDetails();
@@ -63,7 +65,7 @@ namespace Website.Controllers
             var educationDetailData = new EducationDetailData();
             mapper.Map(educationDetail, educationDetailData);
 
-            HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails?ConstituentId={0}", constituentId), educationDetailData);
+            HttpHelper.Post(string.Format(serviceBaseUri+"/EducationDetails?ConstituentId={0}", constituentId), educationDetailData);
 
             return PartialView(new GridModel(GetEducations()));
         }
@@ -82,7 +84,7 @@ namespace Website.Controllers
             var educationDetailData = new EducationDetailData();
             mapper.Map(educationDetail, educationDetailData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails/{0}",id), educationDetailData);
+            HttpHelper.Put(string.Format(serviceBaseUri+"/EducationDetails/{0}",id), educationDetailData);
             return PartialView(new GridModel(GetEducations()));
         }
 
@@ -90,7 +92,7 @@ namespace Website.Controllers
         [GridAction]
         public ActionResult Delete(int id)
         {
-            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/EducationDetails/{0}", id));
+            HttpHelper.DoHttpDelete(string.Format(serviceBaseUri+"/EducationDetails/{0}", id));
             return PartialView(new GridModel(GetEducations()));
         }
 

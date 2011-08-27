@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
@@ -14,6 +15,7 @@ namespace Website.Controllers
     {
 
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
 
         [HttpGet]
         public ActionResult Index()
@@ -29,7 +31,7 @@ namespace Website.Controllers
 
         private void PopulateEventTypes()
         {
-            var eventTypesData = HttpHelper.Get<EventTypesData>(@"http://localhost/kallivayalilService/KallivayalilService.svc/EventTypes");
+            var eventTypesData = HttpHelper.Get<EventTypesData>(serviceBaseUri+"/EventTypes");
 
             var eventTypes = new EventTypes();
             mapper.MapList(eventTypesData, eventTypes, typeof (EventType));
@@ -45,7 +47,7 @@ namespace Website.Controllers
 
         private IEnumerable<Event> GetEvents()
         {
-            var eventsData = HttpHelper.Get<EventsData>(string.Format("http://localhost/kallivayalilService/KallivayalilService.svc/Events?isApproved=true&startDate={0}&endDate={1}&includeBirthdays=false"
+            var eventsData = HttpHelper.Get<EventsData>(string.Format(serviceBaseUri+"/Events?isApproved=true&startDate={0}&endDate={1}&includeBirthdays=false"
                 ,DateTime.Today.AddDays(-5),DateTime.Today.AddDays(5)));
 
             mapper = new AutoDataContractMapper();
@@ -75,7 +77,7 @@ namespace Website.Controllers
             var eventData = new EventData();
             mapper.Map(@event, eventData);
 
-            var newPhone = HttpHelper.Post(@"http://localhost/kallivayalilService/KallivayalilService.svc/Events", eventData);
+            var newPhone = HttpHelper.Post(serviceBaseUri+"/Events", eventData);
 
             return PartialView(new GridModel(GetEvents()));
         }
@@ -104,7 +106,7 @@ namespace Website.Controllers
             var eventData = new EventData();
             mapper.Map(@event, eventData);
 
-            HttpHelper.Put(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Events/{0}",id), eventData);
+            HttpHelper.Put(string.Format(serviceBaseUri+"/Events/{0}",id), eventData);
             return PartialView(new GridModel(GetEvents()));
         }
 
@@ -112,7 +114,7 @@ namespace Website.Controllers
         [GridAction]
         public ActionResult Delete(int id)
         {
-            HttpHelper.DoHttpDelete(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Events/{0}", id));
+            HttpHelper.DoHttpDelete(string.Format(serviceBaseUri+"/Events/{0}", id));
             return PartialView(new GridModel(GetEvents()));
         }
     }

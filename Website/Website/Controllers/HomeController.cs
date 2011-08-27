@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -11,6 +12,7 @@ namespace Website.Controllers
     public class HomeController : Controller
     {
         private readonly AutoDataContractMapper mapper = new AutoDataContractMapper();
+        private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
 
         public ActionResult Index()
         {
@@ -21,7 +23,7 @@ namespace Website.Controllers
         private void PopulateEvents()
         {
             var uri = string.Format("{0}?isApproved={1}&startDate={2}&endDate={3}&includeBirthdays={4}"
-                                          , "http://localhost/kallivayalilService/KallivayalilService.svc/Events", true, DateTime.Today, DateTime.Today, true);
+                                          , serviceBaseUri+"/Events", true, DateTime.Today, DateTime.Today, true);
             var eventsData = HttpHelper.Get<EventsData>(uri);
 
             var events = new Events();
@@ -41,7 +43,7 @@ namespace Website.Controllers
             var contactUsData = new ContactUsData();
             mapper.Map(contactUs, contactUsData);
 
-            HttpHelper.Post(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/ContactUs"), contactUsData);
+            HttpHelper.Post(string.Format(serviceBaseUri+"/ContactUs"), contactUsData);
             return View("Index");
         }
 
@@ -52,11 +54,11 @@ namespace Website.Controllers
             var userName = collection["userName"];
             var password = collection["password"];
 
-            var authenticated = HttpHelper.Get<bool>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Authenticate?username={0}&password={1}",userName,password));
+            var authenticated = HttpHelper.Get<bool>(string.Format(serviceBaseUri+"/Authenticate?username={0}&password={1}",userName,password));
 
             if (authenticated)
             {
-                var constituentData = HttpHelper.Get<ConstituentData>(string.Format(@"http://localhost/kallivayalilService/KallivayalilService.svc/Find?emailId={0}", userName));
+                var constituentData = HttpHelper.Get<ConstituentData>(string.Format(serviceBaseUri+"/Find?emailId={0}", userName));
                 Session["userName"] = constituentData.Name.FirstName;
                 Session["password"] = password;
                 Session["constituentId"] = constituentData.Id;
