@@ -25,7 +25,7 @@ body{
     border:2px solid #fff;
     background-color:#f9f9f9;
     width:600px;
-    height:503px;
+    height:585px;
     overflow:hidden;
 }
 #steps{
@@ -115,7 +115,14 @@ span.error{
 #steps form fieldset{
     border:none;
     padding-bottom:20px;
+    height:522px;
 }
+
+#steps fieldset
+{
+   height:438px;
+}
+
 #steps form legend{
     text-align:left;
     background-color:#f0f0f0;
@@ -209,3 +216,15 @@ span.error{
     text-shadow:1px 1px 1px #fff;
 }
 
+
+.form_tags { margin-bottom: 10px; }
+ 
+			/* Setting widget width example */
+			.textboxlist { width: 400px; }
+ 
+			/* Preloader for autocomplete */
+			.textboxlist-loading { background: url('images/spinner.gif') no-repeat 380px center; }
+ 
+		
+			.note { color: #666; font-size: 90%; }
+			#footer { margin: 50px; text-align: center; }

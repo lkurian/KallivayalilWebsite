@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="@Url.Content("~/Content/slidestyle.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/verticaltabs.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/profile.css")" type="text/css" media="screen" />
+<link rel="stylesheet" href="@Url.Content("~/Content/textboxlist.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/overlay-apple.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/registration/css/overlay.css")" type="text/css" media="screen" />
 			         
@@ -25,6 +26,9 @@
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-ui.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.tools.min.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/registration.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/textBoxList.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/growingInput.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/textBoxList.AutoComplete.js")"></script>
 
 <!--script type="text/javascript" src="@Url.Content("~/Scripts/verticaltabs/verticaltabs.js")"></script-->
 <script type="text/javascript" src="@Url.Content("~/Scripts/jexpand/jExpand.js")"></script>
@@ -191,6 +195,7 @@
     <div id="nav">
     	<ul class="sf-menu dropdown">
         	<li class="selected"><a href="http://localhost/kallivayalil/">Our Family</a></li>
+        	<li class="selected"><a href="http://localhost/kallivayalil/Search/Index">Search</a></li>
             @if (!string.IsNullOrEmpty(Session["userName"] as string))
             {
         	<li class="selected"><a href="http://localhost/kallivayalil/Profile/Profile">Profile</a></li>
