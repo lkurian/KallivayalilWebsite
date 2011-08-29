@@ -58,7 +58,7 @@ namespace Website.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [GridAction]
-        public ActionResult Create(int EventType, DateTime StartDate, DateTime EndDate)
+        public ActionResult Create(int EventType)
         {
             var @event = new Event();
             TryUpdateModel(@event);

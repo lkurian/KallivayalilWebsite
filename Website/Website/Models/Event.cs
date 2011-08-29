@@ -28,11 +28,9 @@ namespace Website.Models
         public virtual string ContactNumber { get; set; }
 
         [UIHint("StartDate"), DisplayName("Start Displaying From")]
-        [DataType(DataType.Date)]
         public virtual DateTime StartDate { get; set; }
 
         [UIHint("EndDate"), DisplayName("Date of Event")]
-        [DataType(DataType.Date)]
         public virtual DateTime EndDate { get; set; }
 
         [DisplayName("Constituent")]

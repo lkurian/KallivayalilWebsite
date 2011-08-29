@@ -1,0 +1,23 @@
+﻿
+<script type="text/javascript">
+    var t;
+    $(document).ready(function () {
+        t = new $.TextboxList('#t2');
+    });
+
+    function add() {
+        var value = $("#t1").val();
+        t.add(value);
+        $("t1").val() = "";
+        alert($('#t2').val);
+    };
+
+
+</script>
+<div id="test">
+
+<div class="form_tags"><input id="t2" type="text" /></div>
+<div class="form_tags"><input id="t1" type="text" /></div>
+<input id="t3" type="submit" onclick="add()" value ="Add"/>
+
+</div>
