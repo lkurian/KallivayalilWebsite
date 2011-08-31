@@ -1,6 +1,7 @@
 using System.Configuration;
 using System.Web.Mvc;
 using Kallivayalil.Client;
+using Telerik.Web.Mvc;
 using Website.Helpers;
 using Website.Models;
 using Website.Models.ViewModels;
@@ -19,6 +20,7 @@ namespace Website.Controllers
             return View();
         }
 
+     
 
         [HttpPost]
         public ActionResult Search(SearchModel searchCriteria)
@@ -28,7 +30,7 @@ namespace Website.Controllers
             mapper = new AutoDataContractMapper();
             var constituents = new Constituents();
             mapper.MapList(constituentsData, constituents,typeof(Constituent));
-            return View("Index");
+            return View(new GridModel(constituents));
         }
     }
 

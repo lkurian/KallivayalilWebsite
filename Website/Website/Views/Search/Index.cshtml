@@ -10,4 +10,14 @@
 <input id="t3" type="submit" onclick="add()" value ="Add"/>
 <input id="searchBtn" type="submit" onclick="search()" value ="Search"/>
 
-</div>
+
+@(Html.Telerik().Grid<Website.Models.Constituent>()
+        .Name("ConstituentsGrid")
+        .DataKeys(keys => keys.Add(p => p.Id))
+        .Columns(c=>
+            c.Bound(p=>p.Gender)
+            )
+        .Sortable()
+      )
+
+    </div>
