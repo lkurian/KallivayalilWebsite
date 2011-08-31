@@ -1,42 +1,4 @@
-﻿
-<script type="text/javascript">
-    var t;
-    var list = [];
-  
-    $(document).ready(function () {
-        t = new $.TextboxList('#t2', { unique: true });
-    });
-
-    function add() {
-        var value = $("#t1").val();
-        var e = document.getElementById("search");
-        var strUser = e.options[e.selectedIndex].value;
-        t.add(strUser + '=' + value);
-        list.push(t.getValues()[t.getValues().length-1][1]);
-        alert(unique(list).join('\n'));
-    };
-
-    var unique = function (origArr) {
-        var newArr = [],
-        origLen = origArr.length,
-        found,
-        x, y;
-
-        for (x = 0; x < origLen; x++) {
-            found = undefined;
-            for (y = 0; y < newArr.length; y++) {
-                if (origArr[x] === newArr[y]) {
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) newArr.push(origArr[x]);
-        }
-        return newArr;
-    };  
-
-
-</script>
+﻿<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/search.js")"></script>
 <div id="test">
 
 <div class="form_tags"><input id="t2" type="text" /></div>
@@ -46,5 +8,6 @@
   <option value="LastName">LastName</option>
 </select>
 <input id="t3" type="submit" onclick="add()" value ="Add"/>
+<input id="searchBtn" type="submit" onclick="search()" value ="Search"/>
 
 </div>

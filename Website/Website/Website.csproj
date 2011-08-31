@@ -91,6 +91,7 @@
     <Compile Include="Models\ReferenceData\OccupationType.cs" />
     <Compile Include="Models\ShortAddress.cs" />
     <Compile Include="Models\ViewModels\ConstituentInputModel.cs" />
+    <Compile Include="Models\ViewModels\SearchModel.cs" />
     <Compile Include="Models\ViewModels\User.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -197,6 +198,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
     <Content Include="Scripts\Custom\constituent.js" />
+    <Content Include="Scripts\Custom\search.js" />
     <Content Include="Scripts\Custom\growingInput.js" />
     <Content Include="Scripts\Custom\registration.js" />
     <Content Include="Scripts\Custom\familytree.js" />

@@ -1,4 +1,5 @@
 using System.Web.Mvc;
+using Website.Models.ViewModels;
 
 namespace Website.Controllers
 {
@@ -11,5 +12,13 @@ namespace Website.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        public ActionResult Search(SearchModel strings)
+        {
+
+            return View("Index");
+        }
     }
+
 }
