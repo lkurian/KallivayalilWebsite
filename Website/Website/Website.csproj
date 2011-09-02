@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\images\close.gif" />
+    <Content Include="Content\images\close.png" />
     <Content Include="Content\registration\css\overlay.css" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\ConstituentController.cs" />

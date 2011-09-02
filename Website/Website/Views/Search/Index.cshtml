@@ -11,13 +11,13 @@
 <input id="searchBtn" type="submit" onclick="search()" value ="Search"/>
 
 
-@(Html.Telerik().Grid<Website.Models.Constituent>()
+@(Html.Telerik().Grid((Website.Models.Constituents)ViewData["Constituents"])
         .Name("ConstituentsGrid")
-        .DataKeys(keys => keys.Add(p => p.Id))
+        .DataKeys(keys => keys.Add(p => p.Id)) 
         .Columns(c=>
             c.Bound(p=>p.Gender)
             )
         .Sortable()
-      )
+          )
 
-    </div>
+        </div>

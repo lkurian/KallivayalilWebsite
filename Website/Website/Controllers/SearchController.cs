@@ -12,6 +12,8 @@ namespace Website.Controllers
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
         private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
+        private string firstName;
+        private string lastName;
 
         public ActionResult Index()
         {
@@ -20,17 +22,19 @@ namespace Website.Controllers
             return View();
         }
 
-     
-
-        [HttpPost]
+   
+        [GridAction]
         public ActionResult Search(SearchModel searchCriteria)
         {
-            var constituentsData = HttpHelper.Get<ConstituentsData>(string.Format(serviceBaseUri + "/Search?firstname={0}&lastname={1}", searchCriteria.FirstName,searchCriteria.LastName));
+            firstName = searchCriteria.FirstName;
+            lastName = searchCriteria.LastName;
+            var constituentsData = HttpHelper.Get<ConstituentsData>(string.Format(serviceBaseUri + "/Search?firstname={0}&lastname={1}", firstName,lastName));
 
             mapper = new AutoDataContractMapper();
             var constituents = new Constituents();
             mapper.MapList(constituentsData, constituents,typeof(Constituent));
-            return View(new GridModel(constituents));
+            ViewData["Constituents"] = constituents;
+            return View();
         }
     }
 
