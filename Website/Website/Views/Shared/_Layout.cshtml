@@ -49,6 +49,13 @@
                 .click(function(e) {
                     e.preventDefault();
                     $('#Window').data('tWindow').center().open();
+                }); 
+                
+                $('#register')
+                .click(function(e) {
+                    e.preventDefault();
+                    $("div#panel").slideUp("slow");	
+                    $('#RegistrationOverlay').data('tWindow').center().open();
                 });
             // add button hovers
             $('.t-button').live('mouseenter', $.telerik.buttonHover)
@@ -70,8 +77,9 @@
     function openWindow() {
         var windowElement = $('#Window');
         windowElement.data('tWindow').center().open();
-    }
-
+    }  
+    
+   
   
     $(document).ready(function () {
         $("#accordion").accordion();
@@ -116,6 +124,21 @@
         .Render();
 }
     
+
+    
+@{  Html.Telerik().Window()
+        .Name("RegistrationOverlay")
+        .Title("Registeration")
+        .LoadContentFrom("Registration", "Index")
+        .Width(670)
+        .Height(620)
+        .Scrollable(false)
+        .Draggable(true)
+        .Modal(true)
+        .Visible(false)
+        .Render();
+}
+ 
 <div class ="wrapper">
 <div id="container">
 <div id="toppanel">
@@ -147,20 +170,26 @@
                    	
 				<!-- Register Form -->
 					<h1>Not a member yet? Sign Up!</h1>		
-                     <a href="http://localhost/kallivayalil/Registration/Index" rel="#overlay" style="text-decoration:none">	
-                     <button type="button">Show external page in overlay</button>		
-					<!--input type="submit" name="submit" value="Register" class="bt_register" /-->
-                    </a>
-                     <!-- overlayed element --> 
+                    <input id="register" value="Register" type="submit" />
+                      <!--a href="http://localhost/kallivayalil/Registration/Index" class="bt_register" rel="#overlay" style="text-decoration:none">	
+    					Register 
+                    </a-->
+                   
+			</div>
+		</div>
+</div> <!-- /login -->	
+
+<div>
+  <!-- overlayed element --> 
                     <div class="apple_overlay" id="overlay"> 
+                   
                     <a class="close"></a>
 	<!-- the external content is loaded inside this tag --> 
 	               <div class="contentWrap"></div> 
  
                     </div> 
-			</div>
-		</div>
-</div> <!-- /login -->	
+</div>
+
 
 	<!-- The tab on top -->	
 	<div class="tab">
@@ -172,12 +201,12 @@
 			<li id="toggle">
                 @if (string.IsNullOrEmpty(Session["userName"] as string))
                 {
-				<a id="open" class="open" href="#">Log In | Register</a>
-				<a id="close" style="display: none;" class="close" href="#">Close Panel</a>			
+				<a id="open" class="open">Log In | Register</a>
+				<a id="close" style="display: none;" class="close">Close Panel</a>			
                 }
                 else
                 {
-                <a id="logOut" href="" onclick="logout()">Log out</a>
+                <a id="logOut" onclick="logout()">Log out</a>
                 }
 
 			</li>
