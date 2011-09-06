@@ -30,13 +30,13 @@ $(function() {
 	/*
 	show the navigation bar
 	*/
-	$('#navigation').show();
+	$('#reg_navigation').show();
 	
 	/*
 	when clicking on a navigation link 
 	the form slides to the corresponding fieldset
 	*/
-    $('#navigation a').bind('click',function(e){
+    $('#reg_navigation a').bind('click',function(e){
 		var $this	= $(this);
 		var prev	= current;
 		$this.closest('ul').find('li').removeClass('selected');
@@ -76,7 +76,7 @@ $(function() {
 		var $fieldset = $(this);
 		$fieldset.children(':last').find(':input').keydown(function(e){
 			if (e.which == 9){
-				$('#navigation li:nth-child(' + (parseInt(current)+1) + ') a').click();
+				$('#reg_navigation li:nth-child(' + (parseInt(current)+1) + ') a').click();
 				/* force the blur for validation */
 				$(this).blur();
 				e.preventDefault();
@@ -118,7 +118,7 @@ $(function() {
 			else
 				$this.css('background-color','#FFFFFF');	
 		});
-		var $link = $('#navigation li:nth-child(' + parseInt(step) + ') a');
+		var $link = $('#reg_navigation li:nth-child(' + parseInt(step) + ') a');
 		$link.parent().find('.error,.checked').remove();
 		
 		var valclass = 'checked';

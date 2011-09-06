@@ -1,44 +1,16 @@
 ﻿@{
     Layout = null;
 }
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Kallivayalil - Registration</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-        <meta name="description" content="Fancy Sliding Form with jQuery" />
-        <meta name="keywords" content="jquery, form, sliding, usability, css3, validation, javascript"/>
-        <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.5.1.js")"></script>
         <link rel="stylesheet" href="@Url.Content("~/Content/registration/css/style.css")" type="text/css" media="screen" />
         <script type="text/javascript" src="@Url.Content("~/Scripts/sliding.form.js")"></script>
-        <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.tools.min.js")"></script>
     </head>
-    <style>
-        span.reference{
-            position:fixed;
-            left:5px;
-            top:5px;
-            font-size:10px;
-            text-shadow:1px 1px 1px #fff;
-        }
-        span.reference a{
-            color:#555;
-            text-decoration:none;
-			text-transform:uppercase;
-        }
-        span.reference a:hover{
-            color:#000;
-            
-        }
-        h1{
-            color:#ccc;
-            font-size:36px;
-            text-shadow:1px 1px 1px #fff;
-            padding:20px;
-        }
-    </style>
-    <body>
-        <div id="content" class="dialog_content">
+   
+    <body id="reg_body">
+        <div id="reg_content">
             <h1>Kallivayalil - Registration</h1>
             <div id="wrapper">
                 <div id="steps">
@@ -169,7 +141,7 @@
                         </fieldset>
                     </form>
                 </div>
-                <div id="navigation" style="display:none;">
+                <div id="reg_navigation" style="display:none;">
                     <ul>
                         <li class="selected">
                             <a href="#">Name</a>
