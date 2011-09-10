@@ -13,7 +13,7 @@ namespace Website.Controllers
             return View();
         }
 
-        public void Register(FormCollection formCollection)
+        public ActionResult Register(FormCollection formCollection)
         {
             var registerationData = new RegisterationData();
 
@@ -55,7 +55,7 @@ namespace Website.Controllers
             registerationData.Password = formCollection["password"];
 
             var registeredData = HttpHelper.Post(serviceBaseUri+"/Registration",registerationData);
-            RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
