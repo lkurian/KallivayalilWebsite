@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="@Url.Content("~/Content/textboxlist.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/overlay-apple.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/registration/css/overlay.css")" type="text/css" media="screen" />
+
 			         
 <script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/jquery.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Content/mytheme/js/slider.js")"></script>
@@ -140,7 +141,15 @@
     <head>
         <title>Kallivayalil - Registration</title>
         <link rel="stylesheet" href="@Url.Content("~/Content/registration/css/style.css")" type="text/css" media="screen" />
-        <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/sliding_form.js")"></script>
+        <link rel="stylesheet" href="@Url.Content("~/Scripts/themes/base/jquery.ui.datepicker.css")" type="text/css" media="screen" />
+        <script type="text/javascript" src="@Url.Content("~/Scripts/sliding.form.js")"></script>
+        <script>
+            $(function () {
+                $("#dob").datepicker();
+            });
+	</script>
+
+
     </head>
    
     <body id="reg_body">
@@ -190,7 +199,7 @@
                             </p>
                             <p>
                                 <label for="dob">Date Of Birth</label>
-                                <input id="dob" name="dob" type="date" AUTOCOMPLETE=OFF />
+                                <input id="dob" name="dob" type="text" AUTOCOMPLETE=OFF />
                             </p>
                              <p>
                                 <label for="gender">Gender</label>

@@ -134,6 +134,7 @@
     <Content Include="Content\registration\images\checked.png" />
     <Content Include="Content\registration\images\error.png" />
     <Content Include="Content\registration\images\transparent.png" />
+    <Content Include="Content\Search\search.css" />
     <Content Include="Content\Spacetree.css" />
     <Content Include="Content\Sunset\editor.png" />
     <Content Include="Content\Sunset\imagebrowser.png" />
@@ -271,7 +272,6 @@
     <Content Include="Scripts\themes\base\jquery.ui.base.css" />
     <Content Include="Scripts\themes\base\jquery.ui.button.css" />
     <Content Include="Scripts\themes\base\jquery.ui.core.css" />
-    <Content Include="Scripts\themes\base\jquery.ui.datepicker.css" />
     <Content Include="Scripts\themes\base\jquery.ui.dialog.css" />
     <Content Include="Scripts\themes\base\jquery.ui.progressbar.css" />
     <Content Include="Scripts\themes\base\jquery.ui.resizable.css" />
@@ -279,6 +279,7 @@
     <Content Include="Scripts\themes\base\jquery.ui.slider.css" />
     <Content Include="Scripts\themes\base\jquery.ui.tabs.css" />
     <Content Include="Scripts\themes\base\jquery.ui.theme.css" />
+    <Content Include="Scripts\themes\base\jquery.ui.datepicker.css" />
     <Content Include="Scripts\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
     <Content Include="Scripts\themes\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
     <Content Include="Scripts\themes\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
