@@ -130,10 +130,12 @@
         .Name("RegistrationOverlay")
         .Title("Registeration")
         .Content(@<text>
-        @{
-    Layout = null;
-}
+        
+            @{
+                 Layout = null;
+             }
 
+        
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <title>Kallivayalil - Registration</title>
@@ -146,7 +148,9 @@
             <h1>Kallivayalil - Registration</h1>
             <div id="wrapper">
                 <div id="steps">
-                    <form id="formElem" name="formElem" action="Register" method="post">
+                            @using (Html.BeginForm("Register", "Registration", FormMethod.Post, new {Id = "formElem"}))
+                            {
+
                       <fieldset class="step">
                             <legend>Name</legend>
                            <p>
@@ -271,7 +275,7 @@
                                 <button id="registerButton" type="submit">Register</button>
                             </p>
                         </fieldset>
-                    </form>
+                            }
                 </div>
                 <div id="reg_navigation" style="display:none;">
                     <ul>
