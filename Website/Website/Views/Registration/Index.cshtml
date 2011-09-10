@@ -6,7 +6,12 @@
     <head>
         <title>Kallivayalil - Registration</title>
         <link rel="stylesheet" href="@Url.Content("~/Content/registration/css/style.css")" type="text/css" media="screen" />
-        <script type="text/javascript" src="@Url.Content("~/Scripts/sliding.form.js")"></script>
+        @{ Html.Telerik().ScriptRegistrar()
+        .OnDocumentReady(@<text>
+                    $.holdReady(true);
+                    $.getScript('~/Scripts/Custom/sliding_form.js', function(data, textStatus){$.holdReady(false);});	
+                    
+        </text>); }
     </head>
    
     <body id="reg_body">

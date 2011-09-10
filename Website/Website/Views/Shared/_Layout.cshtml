@@ -96,7 +96,7 @@
         .Title("Submit feedback")
         .Content(@<text>
          @using (Html.BeginForm("Submit", "Home", FormMethod.Post))
-            {
+         {
                 <div id="feedback-form">
                 <label for="name">Name:</label>
                 @Html.TextBox("name") 
@@ -115,7 +115,7 @@
                     <button type="submit"  class="t-button t-state-default">Submit feedback!</button>
                 </div>
                 </div>
-             }
+         }
             </text>)
         .Width(400)
         .Draggable(true)
@@ -129,7 +129,174 @@
 @{  Html.Telerik().Window()
         .Name("RegistrationOverlay")
         .Title("Registeration")
-        .LoadContentFrom("Index", "Registration")
+        .Content(@<text>
+        @{
+    Layout = null;
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Kallivayalil - Registration</title>
+        <link rel="stylesheet" href="@Url.Content("~/Content/registration/css/style.css")" type="text/css" media="screen" />
+        <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/sliding_form.js")"></script>
+    </head>
+   
+    <body id="reg_body">
+        <div id="reg_content">
+            <h1>Kallivayalil - Registration</h1>
+            <div id="wrapper">
+                <div id="steps">
+                    <form id="formElem" name="formElem" action="Register" method="post">
+                      <fieldset class="step">
+                            <legend>Name</legend>
+                           <p>
+                                <label for="salutation">Salutation</label>
+                                <select id="salutation" name="salutation">
+                                    <option value ="1">Mr</option>
+                                    <option value ="2">Ms</option>
+                                    <option value ="3">Mrs</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label for="firstname">First Name</label>
+                                <input id="firstname" name="firstname" type="text" AUTOCOMPLETE=OFF />
+                            </p>
+                             <p>
+                                <label for="middlename">Middle Name</label>
+                                <input id="middlename" name="middlename" type="text" AUTOCOMPLETE=OFF />
+                            </p> 
+                            <p>
+                                <label for="lastname">Last Name</label>
+                                <input id="lastname" name="lastname" type="text" AUTOCOMPLETE=OFF />
+                            </p> 
+                            <p>
+                                <label for="prefferedname">Preffered Name</label>
+                                <input id="prefferedname" name="prefferedname" type="text" AUTOCOMPLETE=OFF />
+                            </p>
+                        </fieldset> 
+                        <fieldset class="step">
+                            <legend>Personal</legend>
+                           <p>
+                                <label for="branch">Branch</label>
+                                <select id="branch" name="branch">
+                                    <option value ="1">Kallivayalil</option>
+                                    <option value ="2">Anavalaril</option>
+                                    <option value ="3">bla</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label for="dob">Date Of Birth</label>
+                                <input id="dob" name="dob" type="date" AUTOCOMPLETE=OFF />
+                            </p>
+                             <p>
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender">
+                                    <option value ="M">Male</option>
+                                    <option value ="F">Female</option>
+                                    <option value ="O">Other</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label for="housename">House Name</label>
+                                <input id="housename" name="housename" type="text" AUTOCOMPLETE=OFF />
+                            </p> 
+                             <p>
+                                <label for="status">Maritial Status</label>
+                                <select id="status" name="status">
+                                    <option value ="1">Married</option>
+                                    <option value ="2">Single</option>
+                                    <option value ="3">Divorced</option>
+                                    <option value ="3">Defacto</option>
+                                </select>
+                            </p>
+                        </fieldset>
+                        <fieldset class="step">
+                            <legend>Address</legend>
+                            <p>
+                                <label for="line1">Line 1</label>
+                                <input id="line1" name="line1" type="text" AUTOCOMPLETE=OFF />
+                            </p> 
+                            <p>
+                                <label for="line2">Line 2</label>
+                                <input id="line2" name="line2" type="text" AUTOCOMPLETE=OFF />
+                            </p>
+                            
+                             <p>
+                                <label for="city">City</label>
+                                <input id="city" name="city" type="text" AUTOCOMPLETE=OFF />
+                            </p> 
+                             <p>
+                                <label for="postcode">Post Code</label>
+                                <input id="postcode" name="postcode" type="text" AUTOCOMPLETE=OFF />
+                            </p> 
+                             <p>
+                                <label for="state">State</label>
+                                <input id="state" name="state" type="text" AUTOCOMPLETE=OFF />
+                            </p> 
+                             <p>
+                                <label for="country">Country</label>
+                                <input id="country" name="country" type="text" AUTOCOMPLETE=OFF />
+                            </p>
+                        </fieldset>
+                        <fieldset class="step">
+                            <legend>Contacts</legend>
+                             <p>
+                                <label for="phonetype">Type</label>
+                                <select id="phonetype" name="phonetype">
+                                    <option value ="1">Home</option>
+                                    <option value ="2">Office</option>
+                                    <option value ="3">Mobile</option>
+                                </select>
+                            </p>
+                            <p>
+                                <label for="phonenumber">Phone Number</label>
+                                <input id="phonenumber" name="phonenumber" />
+                            </p>
+                        </fieldset>
+                        <fieldset class="step">
+                            <legend>Account</legend>
+                            <p>
+                                <label for="email">Email</label>
+                                <input id="email" name="email" placeholder="info@info.com" type="email" AUTOCOMPLETE=OFF />
+                            </p>
+                            <p>
+                                <label for="password">Password</label>
+                                <input id="password" name="password" type="password" AUTOCOMPLETE=OFF />
+                            </p>
+							<p>
+								The registration details will be submitted to the Admin. Admin will validate and approve the request
+                                based on the authenticity of the details.
+							</p>
+                            <p class="submit">
+                                <button id="registerButton" type="submit">Register</button>
+                            </p>
+                        </fieldset>
+                    </form>
+                </div>
+                <div id="reg_navigation" style="display:none;">
+                    <ul>
+                        <li class="selected">
+                            <a href="#">Name</a>
+                        </li>
+                        <li>
+                            <a href="#">Personal</a>
+                        </li>
+                        <li>
+                            <a href="#">Address</a>
+                        </li>
+                        <li>
+                            <a href="#">Contacts</a>
+                        </li> 
+                        <li>
+                            <a href="#">Account</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+            </text>)
         .Width(670)
         .Height(537)
         .Scrollable(false)
@@ -151,7 +318,7 @@
 			</div>
 			<div class="left">
 				<!-- Login Form -->
-               @using (Html.BeginForm("Login", "Home", FormMethod.Post ))
+               @using (Html.BeginForm("Login", "Home", FormMethod.Post))
                { 
                     <fieldset>
                     <h1>Member Login</h1>
