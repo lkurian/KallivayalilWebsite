@@ -39,14 +39,29 @@ function getSearchValues() {
     }
 };
 
-function search() {
+function onDataBinding(e) 
+{
+    var grid = $(this).data('tGrid');
     getSearchValues();
+  
+    // call the twitter search api
     $.ajax({
-        url: "http://localhost/Kallivayalil/Search/Search",
-        type: "POST",
-        datatype: "json",
+        url: 'http://localhost/Kallivayalil/Search/Search',
+        type: 'POST',
+        dataType: 'json',
+        error: function (xhr, status) {
+            alert(status);
+        },
         data: list,
         accept: "application/json",
-        contenttype: "application/json ; charse=UTF-8"
+        success: function (result) {
+            grid.dataBind(result);
+  
+        }
     });
+};
+
+function search() {
+  
+    $('#ConstituentsGrid').data('tGrid').ajaxRequest();
 }

@@ -23,8 +23,7 @@ namespace Website.Controllers
         }
 
    
-        [GridAction]
-        public ActionResult Search(SearchModel searchCriteria)
+        public JsonResult Search(SearchModel searchCriteria)
         {
             firstName = searchCriteria.FirstName;
             lastName = searchCriteria.LastName;
@@ -34,7 +33,8 @@ namespace Website.Controllers
             var constituents = new Constituents();
             mapper.MapList(constituentsData, constituents,typeof(Constituent));
             ViewData["Constituents"] = constituents;
-            return View();
+
+            return this.Json(constituents);
         }
     }
 
