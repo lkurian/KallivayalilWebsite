@@ -15,24 +15,9 @@ var labelType, useGradients, nativeTextSupport, animate;
   animate = !(iStuff || !nativeCanvasSupport);
 })();
 
-var Log = {
-  elem: false,
-  write: function(text){
-    if (!this.elem) 
-      this.elem = document.getElementById('log');
-    this.elem.innerHTML = text;
-    this.elem.style.left = (500 - this.elem.offsetWidth / 2) + 'px';
-  }
-};
-
-
 function init(constituentId){
-    //init data
-    //var json = { "children": [{ "children": null, "id": 2, "name": "Mary" }, { "children": null, "id": -1, "name": "Bla" }, { "children": null, "id": -2, "name": "mary"}], "id": 1, "name": "James" };
-    //var constituentId = @ (int)Session["constituentId"];
     var jsonData = "";
    
-    //end
     //init Spacetree
     //Create a new ST instance
     var st = new $jit.ST({
@@ -44,6 +29,7 @@ function init(constituentId){
         transition: $jit.Trans.Quart.easeInOut,
         //set distance between node and its children
         levelDistance: 50,
+        orientation: 'top',
         //enable panning
         Navigation: {
           enable:true,
@@ -53,9 +39,9 @@ function init(constituentId){
         //set overridable=true for styling individual
         //nodes or edges
         Node: {
-            height: 20,
-            width: 60,
-            type: 'rectangle',
+            height: 40,
+            width: 120,
+            type: 'stroke-rect',
             color: '#aaa',
             overridable: true
         },
@@ -66,11 +52,11 @@ function init(constituentId){
         },
         
         onBeforeCompute: function(node){
-            Log.write("loading " + node.name);
+           // Console.write("loading " + node.name);
         },
         
         onAfterCompute: function(){
-            Log.write("done");
+            //Console.write("done");
         },
         
         //This method is called on DOM label creation.
@@ -88,11 +74,11 @@ function init(constituentId){
             };
             //set label styles
             var style = label.style;
-            style.width = 60 + 'px';
-            style.height = 17 + 'px';            
+            style.width = 120 + 'px';
+            style.height = 37 + 'px';            
             style.cursor = 'pointer';
             style.color = '#333';
-            style.fontSize = '0.8em';
+            style.fontSize = '0.9em';
             style.textAlign= 'center';
             style.paddingTop = '3px';
         },
@@ -138,6 +124,46 @@ function init(constituentId){
             }
         }
     });
+
+    $jit.ST.Plot.NodeTypes.implement({
+        "stroke-rect": {
+            render: function (p, o) {
+                var width = p.getData("width"),
+                    height = p.getData("height"),
+                    align = p.getData("align"),
+                    alignedPos = this.getAlignedPos(p.pos.getc(true), width, height, align),
+                    linewidth = p.getData("lineWidth"),
+                    z = st.canvas.getCtx();
+                z.save();
+                z.lineWidth = linewidth;
+                var originX = alignedPos.x,
+                    originY = alignedPos.y,
+                    calculatedX = alignedPos.x + width,
+                    calculatedY = alignedPos.y + height,
+                    m = p.getData("dim");
+                var l = Math.PI / 180;
+                if ((calculatedX - originX) - (2 * m) < 0) {
+                    m = ((calculatedX - originX) / 2)
+                }
+                if ((calculatedY - originY) - (2 * m) < 0) {
+                    m = ((calculatedY - originY) / 2)
+                }
+                z.beginPath();
+                z.moveTo(originX + m, originY);
+                z.lineTo(calculatedX - m, originY);
+                z.arc(calculatedX - m, originY + m, m, l * 270, l * 360, false);
+                z.lineTo(calculatedX, calculatedY - m);
+                z.arc(calculatedX - m, calculatedY - m, m, l * 0, l * 90, false);
+                z.lineTo(originX + m, calculatedY);
+                z.arc(originX + m, calculatedY - m, m, l * 90, l * 180, false);
+                z.lineTo(originX, originY + m);
+                z.arc(originX + m, originY + m, m, l * 180, l * 270, false);
+                z.stroke();
+                z.restore()
+            }
+        }
+    });
+
     $.getJSON('http://localhost/kallivayalilService/KallivayalilService.svc/Relationships?constituentId=' + constituentId, function (data) {
         jsonData = data;
         //load json data
@@ -145,32 +171,16 @@ function init(constituentId){
         //compute node positions and layout
         st.compute();
         //optional: make a translation of the tree
-        st.geom.translate(new $jit.Complex(-200, 0), "current");
+        st.geom.translate(new $jit.Complex(0, 0), "current");
         //emulate a click on the root node.
-        st.onClick(st.root);
+        st.onClick(st.root, {
+            Move: {
+                offsetY: 90
+            }
+        });
         //end
     });
     
-    //Add event handlers to switch spacetree orientation.
-    var top = $jit.id('r-top'), 
-        left = $jit.id('r-left'), 
-        bottom = $jit.id('r-bottom'), 
-        right = $jit.id('r-right'),
-        normal = $jit.id('s-normal');
-        
-    
-    function changeHandler() {
-        if(this.checked) {
-            top.disabled = bottom.disabled = right.disabled = left.disabled = true;
-            st.switchPosition(this.value, "animate", {
-                onComplete: function(){
-                    top.disabled = bottom.disabled = right.disabled = left.disabled = false;
-                }
-            });
-        }
-    };
-    
-    top.onchange = left.onchange = bottom.onchange = right.onchange = changeHandler;
     //end
 
 }
