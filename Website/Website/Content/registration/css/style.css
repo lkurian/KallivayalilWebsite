@@ -213,38 +213,3 @@ span.error{
 }
 
 
-.form_tags { margin-bottom: 10px; }
- 
-			/* Setting widget width example */
-			.textboxlist { width: 400px; }
- 
-			/* Preloader for autocomplete */
-			.textboxlist-loading { background: url('images/spinner.gif') no-repeat 380px center; }
- 
-		
-			.note { color: #666; font-size: 90%; }
-			#footer { margin: 50px; text-align: center; }
-
-
-     span.reference{
-            position:fixed;
-            left:5px;
-            top:5px;
-            font-size:10px;
-            text-shadow:1px 1px 1px #fff;
-        }
-        span.reference a{
-            color:#555;
-            text-decoration:none;
-			text-transform:uppercase;
-        }
-        span.reference a:hover{
-            color:#000;
-            
-        }
-        h1{
-            color:#ccc;
-            font-size:36px;
-            text-shadow:1px 1px 1px #fff;
-            padding:20px;
-        }
