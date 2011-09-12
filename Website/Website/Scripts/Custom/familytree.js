@@ -15,9 +15,12 @@ var labelType, useGradients, nativeTextSupport, animate;
   animate = !(iStuff || !nativeCanvasSupport);
 })();
 
+
+
 function init(constituentId){
     var jsonData = "";
-   
+
+    $("#nodeTemplate").template("nodeTemplate");
     //init Spacetree
     //Create a new ST instance
     var st = new $jit.ST({
@@ -32,8 +35,8 @@ function init(constituentId){
         orientation: 'top',
         //enable panning
         Navigation: {
-          enable:true,
-          panning:true
+            enable: true,
+            panning: true
         },
         //set node and edge styles
         //set overridable=true for styling individual
@@ -45,50 +48,54 @@ function init(constituentId){
             color: '#aaa',
             overridable: true
         },
-        
+
         Edge: {
             type: 'bezier',
             overridable: true
         },
-        
-        onBeforeCompute: function(node){
-           // Console.write("loading " + node.name);
+
+        onBeforeCompute: function (node) {
+            // Console.write("loading " + node.name);
         },
-        
-        onAfterCompute: function(){
+
+        onAfterCompute: function () {
             //Console.write("done");
         },
-        
+
         //This method is called on DOM label creation.
         //Use this method to add event handlers and styles to
         //your node.
-        onCreateLabel: function(label, node){
-            label.id = node.id;            
-            label.innerHTML = node.name;
-            label.onclick = function(){
-            	if(normal.checked) {
-            	  st.onClick(node.id);
-            	} else {
-                st.setRoot(node.id, 'animate');
-            	}
+        
+
+        onCreateLabel: function (label, node) {
+            label.id = node.id;
+            //label.innerHTML = node.name;
+
+            var o = $.tmpl("nodeTemplate", {id:node.id,name:node.name,spouseName:getSpouseName(node)}).appendTo(label);
+            label.onclick = function () {
+                if (normal.checked) {
+                    st.onClick(node.id);
+                } else {
+                    st.setRoot(node.id, 'animate');
+                }
             };
             //set label styles
             var style = label.style;
             style.width = 120 + 'px';
-            style.height = 37 + 'px';            
+            style.height = 37 + 'px';
             style.cursor = 'pointer';
             style.color = '#333';
             style.fontSize = '0.9em';
-            style.textAlign= 'center';
+            style.textAlign = 'center';
             style.paddingTop = '3px';
         },
-        
+
         //This method is called right before plotting
         //a node. It's useful for changing an individual node
         //style properties before plotting it.
         //The data properties prefixed with a dollar
         //sign will override the global node style properties.
-        onBeforePlotNode: function(node){
+        onBeforePlotNode: function (node) {
             //add some color to the nodes in the path between the
             //root node and the selected node.
             if (node.selected) {
@@ -97,23 +104,23 @@ function init(constituentId){
             else {
                 delete node.data.$color;
                 //if the node belongs to the last plotted level
-                if(!node.anySubnode("exist")) {
+                if (!node.anySubnode("exist")) {
                     //count children number
                     var count = 0;
-                    node.eachSubnode(function(n) { count++; });
+                    node.eachSubnode(function (n) { count++; });
                     //assign a node color based on
                     //how many children it has
-                    node.data.$color = ['#aaa', '#baa', '#caa', '#daa', '#eaa', '#faa'][count];                    
+                    node.data.$color = ['#aaa', '#baa', '#caa', '#daa', '#eaa', '#faa'][count];
                 }
             }
         },
-        
+
         //This method is called right before plotting
         //an edge. It's useful for changing an individual edge
         //style properties before plotting it.
         //Edge data proprties prefixed with a dollar sign will
         //override the Edge global style properties.
-        onBeforePlotLine: function(adj){
+        onBeforePlotLine: function (adj) {
             if (adj.nodeFrom.selected && adj.nodeTo.selected) {
                 adj.data.$color = "#eed";
                 adj.data.$lineWidth = 3;
@@ -124,6 +131,13 @@ function init(constituentId){
             }
         }
     });
+
+    function getSpouseName (node) {
+        var name = node.data.spouse;
+        if (name != null && name != undefined)
+            return name;
+        return "";
+    };
 
     $jit.ST.Plot.NodeTypes.implement({
         "stroke-rect": {

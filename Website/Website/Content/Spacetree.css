@@ -57,3 +57,12 @@
   background: -moz-linear-gradient(top,  #ededed,  #fff);
   filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#ededed', endColorstr='#ffffff');
 }
+
+#nodeInfo{
+   float: left;
+  margin-top: 5%; 
+   margin-left: 2%;
+   font-size: 0.9em;
+}
+img{float:left;border:2px solid #333}
+#nodeDetails{float:left;padding:0px 0 0px 0}
