@@ -27,14 +27,47 @@ namespace Website.Controllers
         {
             firstName = searchCriteria.FirstName;
             lastName = searchCriteria.LastName;
-            var constituentsData = HttpHelper.Get<ConstituentsData>(string.Format(serviceBaseUri + "/Search?firstname={0}&lastname={1}", firstName,lastName));
+            var constituentsData = HttpHelper.Get<SearchResultsData>(string.Format(serviceBaseUri + "/Search?firstname={0}&lastname={1}", firstName,lastName));
 
             mapper = new AutoDataContractMapper();
-            var constituents = new Constituents();
-            mapper.MapList(constituentsData, constituents,typeof(Constituent));
+            var constituents = new SearchResults();
+            mapper.MapList(constituentsData, constituents,typeof(SearchResult));
             ViewData["Constituents"] = constituents;
 
             return this.Json(constituents);
+        }
+
+
+        [GridAction]
+        public ActionResult AllPhones(int constituentId)
+        {
+            return PartialView(new GridModel(GetPhones(constituentId)));
+        }
+
+        private Phones GetPhones(int constituentId)
+        {
+            var phonesData = HttpHelper.Get<PhonesData>(string.Format(serviceBaseUri + "/Phones?ConstituentId={0}", constituentId));
+
+            mapper = new AutoDataContractMapper();
+            var phones = new Phones();
+            mapper.MapList(phonesData, phones, typeof(Phone));
+            return phones;
+        }
+
+        private Addresses GetAddress(int constituentId)
+        {
+            var addressesData = HttpHelper.Get<AddressesData>(string.Format(serviceBaseUri + "/Addresses?ConstituentId={0}", constituentId));
+
+            mapper = new AutoDataContractMapper();
+            var addresses = new Addresses();
+            mapper.MapList(addressesData, addresses, typeof(Address));
+            return addresses;
+        }
+
+        [GridAction]
+        public ActionResult AllAddresses(int constituentId)
+        {
+            return View(new GridModel(GetAddress(constituentId)));
         }
     }
 

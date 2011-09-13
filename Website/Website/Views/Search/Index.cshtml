@@ -20,7 +20,48 @@
         .ClientEvents(events => events
                 .OnDataBinding("onDataBinding")
         )
-        .Sortable()
+        .DetailView(details => details.ClientTemplate(
+                Html.Telerik().TabStrip()
+                    .Name("TabStrip_<#= Id #>")
+                    .SelectedIndex(0)
+                    .Items(items =>
+                    {
+                        items.Add().Text("Addresses").Content(
+                                Html.Telerik().Grid<Website.Models.Address>()
+                                    .Name("Addresses_<#= Id #>")
+                                    .Columns(columns =>
+                                    {
+                                        columns.Bound(p => p.Line1);
+                                        columns.Bound(p => p.Line2);
+                                        columns.Bound(p => p.City);
+                                        columns.Bound(p => p.State);
+                                        columns.Bound(p => p.Country);
+                                        columns.Bound(p => p.PostCode);
+                                    })
+                                     .DataBinding(dataBinding => dataBinding.Ajax()
+                                        .Select("AllAddresses", "Search", new { constituentId = "<#= Id #>" }))
+                                    .Pageable()
+                                    .Sortable()
+                                    .Filterable()
+                                    .ToHtmlString());
+                        items.Add().Text("Phones").Content(
+                               Html.Telerik().Grid<Website.Models.Phone>()
+                                   .Name("Phones_<#= Id #>")
+                                   .Columns(columns =>
+                                   {
+                                       columns.Bound(p => p.Number);
+                                   })
+                                    .DataBinding(dataBinding => dataBinding.Ajax()
+                                       .Select("AllPhones", "Search", new { constituentId = "<#= Id #>" }))
+                                   .Pageable()
+                                   .Sortable()
+                                   .Filterable()
+                                   .ToHtmlString());
+                    }).ToHtmlString()))
+             .Sortable()
+                    
           )
 
-        </div>
+</div>
+
+
