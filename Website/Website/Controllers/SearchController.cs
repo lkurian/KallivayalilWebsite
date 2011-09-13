@@ -117,6 +117,22 @@ namespace Website.Controllers
             mapper.MapList(OccupationsData, Occupations, typeof(Occupation));
             return Occupations;
         }
+
+        [GridAction]
+        public ActionResult AllAssociations(int constituentId)
+        {
+            return View(new GridModel(GetAssociations(constituentId)));
+        }
+
+        private Associations GetAssociations(int constituentId)
+        {
+            var associationsData = HttpHelper.Get<AssociationsData>(string.Format(serviceBaseUri + "/Associations?ConstituentId={0}", constituentId));
+
+            mapper = new AutoDataContractMapper();
+            var associations = new Associations();
+            mapper.MapList(associationsData, associations, typeof(Association));
+            return associations;
+        }
     }
 
 }

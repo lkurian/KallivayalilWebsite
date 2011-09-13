@@ -137,6 +137,22 @@
                                    .Pageable()
                                    .Sortable()
                                    .Filterable()
+                                   .ToHtmlString());  
+                        items.Add().Text("Relationships").Content(
+                               Html.Telerik().Grid<Website.Models.Association>()
+                                   .Name("Relationships_<#= Id #>")
+                                   .Columns(columns =>
+                                   {
+                                        columns.Bound(p => p.ConstituentId);
+                                        columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+                                        columns.Bound(p => p.AssociatedConstituentId);
+                                        columns.Bound(p => p.AssociatedConstituentName);
+                                   })
+                                    .DataBinding(dataBinding => dataBinding.Ajax()
+                                       .Select("AllAssociations", "Search", new { constituentId = "<#= Id #>" }))
+                                   .Pageable()
+                                   .Sortable()
+                                   .Filterable()
                                    .ToHtmlString());
                     }).ToHtmlString()))
              .Sortable()
