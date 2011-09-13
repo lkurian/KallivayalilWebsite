@@ -9,5 +9,7 @@ namespace Website.Models
         public virtual string LastName { get; set; }
         public virtual string PreferedName { get; set; }
         public virtual SalutationType Salutation { get; set; }
+
+
     }
 }
