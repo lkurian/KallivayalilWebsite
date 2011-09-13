@@ -65,13 +65,19 @@ function init(constituentId){
         //This method is called on DOM label creation.
         //Use this method to add event handlers and styles to
         //your node.
-        
+
 
         onCreateLabel: function (label, node) {
             label.id = node.id;
             //label.innerHTML = node.name;
 
-            var o = $.tmpl("nodeTemplate", {id:node.id,name:node.name,spouseName:getSpouseName(node)}).appendTo(label);
+            var o = $.tmpl("nodeTemplate", { id: node.id, name: node.name, spouseName: getSpouseName(node),
+                familyMemberUrl: getFamilyMemberUrl(node), familyMemberId: getFamilyMemberId(node),
+                spouseUrl: getSpouseUrl(node), spouseId: getSpouseId(node)
+            }).appendTo(label);
+
+            appendAction(node.data.familyMemberId);
+
             label.onclick = function () {
                 if (normal.checked) {
                     st.onClick(node.id);
@@ -137,6 +143,37 @@ function init(constituentId){
         if (name != null && name != undefined)
             return name;
         return "";
+    };
+
+    function appendAction(id) 
+    {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        script.text = "$('#" + id + "').tooltip({ effect: 'slide' });";
+        document.body.appendChild(script);
+        eval("$('#" + id + "').tooltip({ effect: 'slide' })");
+    };
+    
+    function getFamilyMemberUrl (node) {
+        var name = node.data.familyMemberUrl;
+        if (name != null && name != undefined)
+            return name;
+        return "";
+    };
+    
+    function getFamilyMemberId (node) {
+        return node.data.familyMemberId;
+    }; 
+    
+    function getSpouseUrl (node) {
+        var name = node.data.spouseUrl;
+        if (name != null && name != undefined)
+            return name;
+        return "";
+    }; 
+    
+    function getSpouseId (node) {
+       return node.data.spouseId;
     };
 
     $jit.ST.Plot.NodeTypes.implement({

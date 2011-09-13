@@ -17,9 +17,8 @@
 
 <script id="nodeTemplate" type="text/x-jQuery-tmpl">
 <div id="nodeInfo">
-    <!--img class="photo" alt="" src="" alt="image"/-->
     <div id="nodeDetails">
-            <label class="label">${name}</label> <a id=${name} class="t-group" href="#">info</a> 
+            <label class="label">${name}</label> <a id=${familyMemberId} class="t-group" href="#">info</a> 
                             <div class="tooltip">
 	                        <img src="http://static.flowplayer.org/img/title/eye.png" alt="Flying screens" style="float:left;margin:0 15px 20px 0" />
 	                            <table style="margin:0">
@@ -40,31 +39,10 @@
 			                            <td>Bla 3</td>
 		                            </tr>		
 	                            </table>
-                            </div> <br/> 
-
-            <label class="label">${spouseName}</label> <a id=#{spouseName} class="t-group" href="#">info</a>
-                            <div class="tooltip">
-	                        <img src="http://static.flowplayer.org/img/title/eye.png" alt="Flying screens" style="float:left;margin:0 15px 20px 0" />
-	                            <table style="margin:0">
-		                            <tr>
-			                            <td class="label">Name</td>
-			                            <td>${spouseName}</td>
-		                            </tr>
-		                            <tr>
-			                            <td class="label">Bla 1</td>
-			                            <td>Bla 1</td>
-		                            </tr>
-		                            <tr>
-			                            <td class="label">Bla 2</td>
-			                            <td>Bla 2</td>
-		                            </tr>
-		                            <tr>
-			                            <td class="label">Bla 3</td>
-			                            <td>Bla 3</td>
-		                            </tr>		
-	                            </table>
                             </div>
-
+                             <br/> 
+            <label class="label">${spouseName}</label> <a id=${spouseId}1 class="t-group" href="#">info</a>
+    
    </div>
 </div>
 </script>
