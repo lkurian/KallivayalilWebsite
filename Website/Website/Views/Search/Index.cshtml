@@ -1,4 +1,28 @@
 ﻿<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/search.js")"></script>
+        <script type="text/javascript">
+
+            $(function () {
+
+                $('#eventsSidebar').addClass('sidebar-hidden');
+
+                var $items = $('#vtab>ul>li');
+
+                $items.click(function () {
+
+                    $items.removeClass('selected');
+
+                    $(this).addClass('selected');
+
+                    var index = $items.index($(this));
+
+                    $('#vtab>div').hide().eq(index).show();
+
+                }).eq(0).click();
+
+            });
+
+    </script>
+
 <div id="test">
 
 <div class="form_tags"><input id="t2" type="text" /></div>
@@ -13,10 +37,18 @@
 
 @(Html.Telerik().Grid<Website.Models.Constituent>()
         .Name("ConstituentsGrid")
-        .DataKeys(keys => keys.Add(p => p.Id)) 
-        .Columns(c=>
-            c.Bound(p=>p.Gender)
-            )
+        .DataKeys(keys => keys.Add(p => p.Id))
+        .Columns(c =>
+        {
+            c.Bound(p => p.Name.FirstName);
+            c.Bound(p => p.Name.LastName);
+            c.Bound(p => p.Name.MiddleName);
+            c.Bound(p => p.Name.PreferedName);
+            c.Bound(p => p.Gender);
+            c.Bound(p => p.HouseName);
+            c.Bound(p => p.MaritialStatus);
+            c.Bound(p => p.BranchName);
+        })
         .ClientEvents(events => events
                 .OnDataBinding("onDataBinding")
         )
@@ -59,7 +91,7 @@
                                    .Pageable()
                                    .Sortable()
                                    .Filterable()
-                                   .ToHtmlString()); 
+                                   .ToHtmlString());
                         items.Add().Text("Emails").Content(
                                Html.Telerik().Grid<Website.Models.Email>()
                                    .Name("Emails_<#= Id #>")
@@ -79,11 +111,11 @@
                                    .Name("EducationDetails_<#= Id #>")
                                    .Columns(columns =>
                                    {
-                                        columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
-                                        columns.Bound(p => p.Qualification);
-                                        columns.Bound(p => p.InstituteName);
-                                        columns.Bound(p => p.InstituteLocation);
-                                        columns.Bound(p => p.YearOfGraduation);
+                                       columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+                                       columns.Bound(p => p.Qualification);
+                                       columns.Bound(p => p.InstituteName);
+                                       columns.Bound(p => p.InstituteLocation);
+                                       columns.Bound(p => p.YearOfGraduation);
                                    })
                                     .DataBinding(dataBinding => dataBinding.Ajax()
                                        .Select("AllEducationDetails", "Search", new { constituentId = "<#= Id #>" }))
@@ -108,7 +140,7 @@
                                    .ToHtmlString());
                     }).ToHtmlString()))
              .Sortable()
-                    
+
           )
 
 </div>
