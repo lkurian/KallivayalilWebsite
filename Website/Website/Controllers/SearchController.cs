@@ -27,11 +27,11 @@ namespace Website.Controllers
         {
             firstName = searchCriteria.FirstName;
             lastName = searchCriteria.LastName;
-            var constituentsData = HttpHelper.Get<SearchResultsData>(string.Format(serviceBaseUri + "/Search?firstname={0}&lastname={1}", firstName,lastName));
+            var constituentsData = HttpHelper.Get<ConstituentsData>(string.Format(serviceBaseUri + "/Search?firstname={0}&lastname={1}", firstName,lastName));
 
             mapper = new AutoDataContractMapper();
-            var constituents = new SearchResults();
-            mapper.MapList(constituentsData, constituents,typeof(SearchResult));
+            var constituents = new Constituents();
+            mapper.MapList(constituentsData, constituents,typeof(Constituent));
             ViewData["Constituents"] = constituents;
 
             return this.Json(constituents);
