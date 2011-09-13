@@ -37,11 +37,26 @@ namespace Website.Controllers
             return this.Json(constituents);
         }
 
+        [GridAction]
+        public ActionResult AllEmails(int constituentId)
+        {
+            return View(new GridModel(GetEmails(constituentId)));
+        }
+
+        private Emails GetEmails(int constituentId)
+        {
+            var emailsData = HttpHelper.Get<EmailsData>(serviceBaseUri + "/Emails?ConstituentId=" + constituentId);
+
+            mapper = new AutoDataContractMapper();
+            var emails = new Emails();
+            mapper.MapList(emailsData, emails, typeof(Email));
+            return emails;
+        }
 
         [GridAction]
         public ActionResult AllPhones(int constituentId)
         {
-            return PartialView(new GridModel(GetPhones(constituentId)));
+            return View(new GridModel(GetPhones(constituentId)));
         }
 
         private Phones GetPhones(int constituentId)
@@ -68,6 +83,39 @@ namespace Website.Controllers
         public ActionResult AllAddresses(int constituentId)
         {
             return View(new GridModel(GetAddress(constituentId)));
+        }
+
+        [GridAction]
+        public ActionResult AllEducationDetails(int constituentId)
+        {
+            return View(new GridModel(GetEducations(constituentId)));
+        }
+
+        private EducationDetails GetEducations(int constituentId)
+        {
+            var educationDetailsData = HttpHelper.Get<EducationDetailsData>(string.Format(serviceBaseUri + "/EducationDetails?ConstituentId={0}", constituentId));
+
+            mapper = new AutoDataContractMapper();
+            var educations = new EducationDetails();
+            mapper.MapList(educationDetailsData, educations, typeof(EducationDetail));
+            return educations;
+        }
+
+
+        [GridAction]
+        public ActionResult AllOccupations(int constituentId)
+        {
+            return PartialView(new GridModel(GetOccupations(constituentId)));
+        }
+
+        private Occupations GetOccupations(int constituentId)
+        {
+            var OccupationsData = HttpHelper.Get<OccupationsData>(string.Format(serviceBaseUri + "/Occupations?ConstituentId={0}", constituentId));
+
+            mapper = new AutoDataContractMapper();
+            var Occupations = new Occupations();
+            mapper.MapList(OccupationsData, Occupations, typeof(Occupation));
+            return Occupations;
         }
     }
 

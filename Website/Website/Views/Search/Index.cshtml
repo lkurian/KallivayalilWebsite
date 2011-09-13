@@ -31,6 +31,7 @@
                                     .Name("Addresses_<#= Id #>")
                                     .Columns(columns =>
                                     {
+                                        columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
                                         columns.Bound(p => p.Line1);
                                         columns.Bound(p => p.Line2);
                                         columns.Bound(p => p.City);
@@ -49,10 +50,58 @@
                                    .Name("Phones_<#= Id #>")
                                    .Columns(columns =>
                                    {
+                                       columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+                                       columns.Bound(p => p.Address).ClientTemplate("<#= Address.Description#>");
                                        columns.Bound(p => p.Number);
                                    })
                                     .DataBinding(dataBinding => dataBinding.Ajax()
                                        .Select("AllPhones", "Search", new { constituentId = "<#= Id #>" }))
+                                   .Pageable()
+                                   .Sortable()
+                                   .Filterable()
+                                   .ToHtmlString()); 
+                        items.Add().Text("Emails").Content(
+                               Html.Telerik().Grid<Website.Models.Email>()
+                                   .Name("Emails_<#= Id #>")
+                                   .Columns(columns =>
+                                   {
+                                       columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+                                       columns.Bound(p => p.Address);
+                                   })
+                                    .DataBinding(dataBinding => dataBinding.Ajax()
+                                       .Select("AllEmails", "Search", new { constituentId = "<#= Id #>" }))
+                                   .Pageable()
+                                   .Sortable()
+                                   .Filterable()
+                                   .ToHtmlString());
+                        items.Add().Text("EducationDetails").Content(
+                               Html.Telerik().Grid<Website.Models.EducationDetail>()
+                                   .Name("EducationDetails_<#= Id #>")
+                                   .Columns(columns =>
+                                   {
+                                        columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+                                        columns.Bound(p => p.Qualification);
+                                        columns.Bound(p => p.InstituteName);
+                                        columns.Bound(p => p.InstituteLocation);
+                                        columns.Bound(p => p.YearOfGraduation);
+                                   })
+                                    .DataBinding(dataBinding => dataBinding.Ajax()
+                                       .Select("AllEducationDetails", "Search", new { constituentId = "<#= Id #>" }))
+                                   .Pageable()
+                                   .Sortable()
+                                   .Filterable()
+                                   .ToHtmlString());
+                        items.Add().Text("Occupations").Content(
+                               Html.Telerik().Grid<Website.Models.Occupation>()
+                                   .Name("Occupations_<#= Id #>")
+                                   .Columns(columns =>
+                                   {
+                                       columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+                                       columns.Bound(p => p.OccupationName);
+                                       columns.Bound(p => p.Description);
+                                   })
+                                    .DataBinding(dataBinding => dataBinding.Ajax()
+                                       .Select("AllOccupations", "Search", new { constituentId = "<#= Id #>" }))
                                    .Pageable()
                                    .Sortable()
                                    .Filterable()
