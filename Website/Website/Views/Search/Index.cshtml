@@ -40,9 +40,7 @@
         .DataKeys(keys => keys.Add(p => p.Id))
         .Columns(c =>
         {
-            c.Bound(p => p.Name.FirstName);
-            c.Bound(p => p.Name.LastName);
-            c.Bound(p => p.Name.MiddleName);
+            c.Bound(p => p.Name.NameString).Title("Name");
             c.Bound(p => p.Name.PreferedName);
             c.Bound(p => p.Gender);
             c.Bound(p => p.HouseName);
@@ -143,10 +141,10 @@
                                    .Name("Relationships_<#= Id #>")
                                    .Columns(columns =>
                                    {
-                                        columns.Bound(p => p.ConstituentId);
+                                        columns.Bound(p => p.Constituent.Name.NameString).Title("Name");
                                         columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
-                                        columns.Bound(p => p.AssociatedConstituentId);
-                                        columns.Bound(p => p.AssociatedConstituentName);
+                                        columns.Bound(p => p.AssociatedConstituentName).Title("Associated Name");
+                                        columns.Bound(p => p.AssociatedConstituent.Name.NameString).Title("Associated Individual");
                                    })
                                     .DataBinding(dataBinding => dataBinding.Ajax()
                                        .Select("AllAssociations", "Search", new { constituentId = "<#= Id #>" }))
