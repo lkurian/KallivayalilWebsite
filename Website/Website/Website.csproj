@@ -197,6 +197,9 @@
     <Content Include="Content\telerik.rtl.min.css" />
     <Content Include="Content\telerik.sunset.min.css" />
     <Content Include="Content\textboxlist.css" />
+    <Content Include="Content\tip-yellow\tip-yellow.css" />
+    <Content Include="Content\tip-yellow\tip-yellow.png" />
+    <Content Include="Content\tip-yellow\tip-yellow_arrows.png" />
     <Content Include="Content\verticaltabs.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
@@ -222,6 +225,7 @@
     <Content Include="Scripts\jquery-1.5.1.min.js" />
     <Content Include="Scripts\jquery.dictionary.js" />
     <Content Include="Scripts\jquery.json-2.2.js" />
+    <Content Include="Scripts\jquery.poshytip.js" />
     <Content Include="Scripts\jquery.tools.min.js" />
     <Content Include="Scripts\loginslider\jquery-1.3.2.min.js" />
     <Content Include="Scripts\loginslider\pngfix\supersleight-min.js" />

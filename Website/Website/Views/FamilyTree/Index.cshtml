@@ -1,9 +1,11 @@
 ﻿<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/familytree.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.poshytip.js")"></script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/jit-yc.js")"></script>
 <script type="text/javascript" src="http://ajax.microsoft.com/ajax/jquery.templates/beta1/jquery.tmpl.min.js"></script>
 
 <link rel="stylesheet" href="@Url.Content("~/Content/base.css")" type="text/css" media="screen" />
 <link rel="stylesheet" href="@Url.Content("~/Content/Spacetree.css")" type="text/css" media="screen" />
+<link rel="stylesheet" href="@Url.Content("~/Content/tip-yellow/tip-yellow.css")" type="text/css" media="screen" />
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -15,36 +17,20 @@
     <div id="infovis"></div>    
 </div>
 
-<script id="nodeTemplate" type="text/x-jQuery-tmpl">
-<div id="nodeInfo">
-    <div id="nodeDetails">
-            <label class="label">${name}</label> <a id=${familyMemberId} class="t-group" href="#">info</a> 
-                            <div class="tooltip">
-	                        <img src="http://static.flowplayer.org/img/title/eye.png" alt="Flying screens" style="float:left;margin:0 15px 20px 0" />
-	                            <table style="margin:0">
-		                            <tr>
-			                            <td class="label">Name</td>
-			                            <td>${name}</td>
-		                            </tr>
-		                            <tr>
-			                            <td class="label">Bla 1</td>
-			                            <td>Bla 1</td>
-		                            </tr>
-		                            <tr>
-			                            <td class="label">Bla 2</td>
-			                            <td>Bla 2</td>
-		                            </tr>
-		                            <tr>
-			                            <td class="label">Bla 3</td>
-			                            <td>Bla 3</td>
-		                            </tr>		
-	                            </table>
-                            </div>
-                             <br/> 
-            <label class="label">${spouseName}</label> <a id=${spouseId}1 class="t-group" href="#">info</a>
-    
-   </div>
-</div>
+<script id="nodePopupTemplate" type="text/x-jQuery-tmpl">
+   <table><tr>
+      <td class="popup-content">
+         <div class="popup-fullname"><a class="popup-anchor" href="#">${name}</a></div>
+         <div class="popup-links"><a class="popup-newwindow" href="${familyMemberUrl}">Open in new tab</a></div>
+      </td>
+   </tr></table>
 </script>
+
+<script id="nodeTemplate" type="text/x-jQuery-tmpl">
+    <label class="label">${name}</label> <a id=${familyMemberId} class="t-group" href="#">info</a> 
+    <label class="label">${spouseName}</label> <a id=${spouseId}1 class="t-group" href="#">info</a>
+</script>
+
+
 
 

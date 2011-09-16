@@ -71,12 +71,29 @@ function init(constituentId){
             label.id = node.id;
             //label.innerHTML = node.name;
 
-            var o = $.tmpl("nodeTemplate", { id: node.id, name: node.name, spouseName: getSpouseName(node),
+          
+            var nodeData = { id: node.id, name: node.name, spouseName: getSpouseName(node),
                 familyMemberUrl: getFamilyMemberUrl(node), familyMemberId: getFamilyMemberId(node),
                 spouseUrl: getSpouseUrl(node), spouseId: getSpouseId(node)
-            }).appendTo(label);
+            };
 
-            appendAction(node.data.familyMemberId);
+            $("#nodeTemplate").tmpl(nodeData).appendTo(label);
+            var x=$("#nodePopupTemplate").tmpl(nodeData);
+            
+            $(label).poshytip({
+                className: "tip-yellow",
+                bgImageFrameSize: 10,
+                alignTo: "target",
+                alignX: "center",
+                offsetY: 5,
+                showTimeout: 500,
+                hideTimeout: 250,
+                fade: false,
+                slide: false,
+                showOn: "hover",
+                allowTipHover: true,
+                content: x
+            });
 
             label.onclick = function () {
                 if (normal.checked) {
