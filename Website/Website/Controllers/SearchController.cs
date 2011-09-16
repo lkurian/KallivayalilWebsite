@@ -12,8 +12,6 @@ namespace Website.Controllers
     {
         private AutoDataContractMapper mapper = new AutoDataContractMapper();
         private string serviceBaseUri = ConfigurationManager.AppSettings["serviceBaseUri"];
-        private string firstName;
-        private string lastName;
 
         public ActionResult Index()
         {
@@ -25,13 +23,15 @@ namespace Website.Controllers
    
         public JsonResult Search(SearchModel searchCriteria)
         {
-            firstName = searchCriteria.FirstName;
-            lastName = searchCriteria.LastName;
-            var constituentsData = HttpHelper.Get<SearchResultsData>(string.Format(serviceBaseUri + "/Search?firstname={0}&lastname={1}", firstName,lastName));
+            var uriString = string.Format(serviceBaseUri + @"/Search?firstName={0}&lastName={1}&email={2}&phone={3}&occupationName={4}&occupationDescription={5}&instituteName={6}&instituteLocation={7}&qualification={8}&yearOfGradutation={9}&address={10}&state={11}&city={12}&country={13}&postcode={14}"
+                                          ,searchCriteria.FirstName, searchCriteria.LastName,searchCriteria.Email,searchCriteria.Phone,searchCriteria.OccupationName,searchCriteria.OccupationDescription
+                                          ,searchCriteria.InstituteName,searchCriteria.InstituteLocation,searchCriteria.Qualification,searchCriteria.YearOfGraduation
+                                          ,searchCriteria.Address,searchCriteria.State,searchCriteria.City,searchCriteria.Country,searchCriteria.Postcode);
+            var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
 
             mapper = new AutoDataContractMapper();
-            var constituents = new SearchResults();
-            mapper.MapList(constituentsData, constituents,typeof(SearchResult));
+            var constituents = new Constituents();
+            mapper.MapList(constituentsData, constituents,typeof(Constituent));
             ViewData["Constituents"] = constituents;
 
             return this.Json(constituents);
@@ -116,6 +116,22 @@ namespace Website.Controllers
             var Occupations = new Occupations();
             mapper.MapList(OccupationsData, Occupations, typeof(Occupation));
             return Occupations;
+        }
+
+        [GridAction]
+        public ActionResult AllAssociations(int constituentId)
+        {
+            return View(new GridModel(GetAssociations(constituentId)));
+        }
+
+        private Associations GetAssociations(int constituentId)
+        {
+            var associationsData = HttpHelper.Get<AssociationsData>(string.Format(serviceBaseUri + "/Associations?ConstituentId={0}", constituentId));
+
+            mapper = new AutoDataContractMapper();
+            var associations = new Associations();
+            mapper.MapList(associationsData, associations, typeof(Association));
+            return associations;
         }
     }
 

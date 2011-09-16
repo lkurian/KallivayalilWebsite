@@ -25,24 +25,39 @@
 
 <div id="test">
 
-<div class="form_tags"><input id="t2" type="text" /></div>
-<div class="form_tags"><input id="t1" type="text" /></div>
-<select id="search">
-  <option value="FirstName">FirstName</option>
-  <option value="LastName">LastName</option>
-</select>
-<input id="t3" type="submit" onclick="add()" value ="Add"/>
-<input id="searchBtn" type="submit" onclick="search()" value ="Search"/>
+
 
 
 @(Html.Telerik().Grid<Website.Models.Constituent>()
         .Name("ConstituentsGrid")
+         .ToolBar(toolBar => toolBar.Template( @<text>
+            <div class="form_tags"><input id="t1" type="text" /></div>
+            <select id="search">
+              <option value="FirstName">FirstName</option>
+              <option value="LastName">LastName</option>
+              <option value="Phone">Phone</option>
+              <option value="Email">Email</option>
+              <option value="OccupationName">OccupationName</option>
+              <option value="OccupationDescription">OccupationDescription</option>
+              <option value="InstituteName">InstituteName</option>
+              <option value="InstituteLocation">InstituteLocation</option>
+              <option value="Qualification">Qualification</option>
+              <option value="YearOfGraduation">YearOfGraduation</option>
+              <option value="Address">Address</option>
+              <option value="State">State</option>
+              <option value="City">City</option>
+              <option value="Country">Country</option>
+              <option value="Postcode">Postcode</option>
+            </select>
+            <input id="t3" type="submit" onclick="add()" value ="Add"/>
+            <div class="form_tags"><input id="t2" type="text" /></div>
+            <input id="searchBtn" type="submit" onclick="search()" value ="Search"/>  
+
+        </text>))
         .DataKeys(keys => keys.Add(p => p.Id))
         .Columns(c =>
         {
-            c.Bound(p => p.Name.FirstName);
-            c.Bound(p => p.Name.LastName);
-            c.Bound(p => p.Name.MiddleName);
+            c.Bound(p => p.Name.NameString).Title("Name");
             c.Bound(p => p.Name.PreferedName);
             c.Bound(p => p.Gender);
             c.Bound(p => p.HouseName);
@@ -137,11 +152,26 @@
                                    .Pageable()
                                    .Sortable()
                                    .Filterable()
+                                   .ToHtmlString());  
+                        items.Add().Text("Relationships").Content(
+                               Html.Telerik().Grid<Website.Models.Association>()
+                                   .Name("Relationships_<#= Id #>")
+                                   .Columns(columns =>
+                                   {
+                                        columns.Bound(p => p.Constituent.Name.NameString).Title("Name");
+                                        columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+                                        columns.Bound(p => p.AssociatedConstituentName).Title("Associated Name");
+                                        columns.Bound(p => p.AssociatedConstituent.Name.NameString).Title("Associated Individual");
+                                   })
+                                    .DataBinding(dataBinding => dataBinding.Ajax()
+                                       .Select("AllAssociations", "Search", new { constituentId = "<#= Id #>" }))
+                                   .Pageable()
+                                   .Sortable()
+                                   .Filterable()
                                    .ToHtmlString());
                     }).ToHtmlString()))
-             .Sortable()
-
-          )
+                .Sortable()
+            )
 
 </div>
 

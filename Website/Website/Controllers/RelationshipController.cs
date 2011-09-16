@@ -34,13 +34,12 @@ namespace Website.Controllers
         [GridAction]
         public ActionResult AllAssociations()
         {
-            return PartialView(new GridModel(GetAssociations()));
+            return PartialView(new GridModel(GetAssociations((int)Session["constituentId"])));
         }
+        
 
-        private Associations GetAssociations()
+        private Associations GetAssociations(int constituentId)
         {
-            var constituentId = (int)Session["constituentId"];
-
             var associationsData = HttpHelper.Get<AssociationsData>(string.Format(serviceBaseUri+"/Associations?ConstituentId={0}", constituentId));
 
             mapper = new AutoDataContractMapper();
@@ -66,7 +65,7 @@ namespace Website.Controllers
 
             HttpHelper.Post(serviceBaseUri+"/Associations?ConstituentId="+constituentId, associationData);
 
-            return PartialView(new GridModel(GetAssociations()));
+            return PartialView(new GridModel(GetAssociations((int)Session["constituentId"])));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -85,7 +84,7 @@ namespace Website.Controllers
             mapper.Map(association, associationData);
 
             HttpHelper.Put(string.Format(serviceBaseUri+"/Associations/{0}", id), associationData);
-            return PartialView(new GridModel(GetAssociations()));
+            return PartialView(new GridModel(GetAssociations((int)Session["constituentId"])));
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
@@ -93,7 +92,7 @@ namespace Website.Controllers
         public ActionResult Delete(int id)
         {
             HttpHelper.DoHttpDelete(string.Format(serviceBaseUri+"/Associations/{0}", id));
-            return PartialView(new GridModel(GetAssociations()));
+            return PartialView(new GridModel(GetAssociations((int)Session["constituentId"])));
         }
     }
 }

@@ -90,7 +90,6 @@
     <Compile Include="Models\ReferenceData\EducationType.cs" />
     <Compile Include="Models\ReferenceData\EventType.cs" />
     <Compile Include="Models\ReferenceData\OccupationType.cs" />
-    <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Models\ShortAddress.cs" />
     <Compile Include="Models\ViewModels\ConstituentInputModel.cs" />
     <Compile Include="Models\ViewModels\SearchModel.cs" />
