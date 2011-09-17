@@ -21,15 +21,12 @@ $(function () {
         var constituent = JSON.stringify(person);
 
         $.ajax({
-            url: "http://localhost/Kallivayalil/Profile/Save",
+            url: "http://localhost/Kallivayalil/Constituent/Save",
             type: "POST",
             datatype: "json",
             data: constituent,
             accept: "application/json",
             contentType: "application/json charset=utf-8",
-            success: function (data) {
-                alert("HI");
-            }
         });
 
     });
