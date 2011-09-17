@@ -31,7 +31,7 @@ namespace Website.Controllers
             registerationData.Constituent = new ConstituentData
                                                 {
                                                     BornOn = DateTime.Parse(formCollection["dob"]).Date,
-                                                    BranchName = Convert.ToInt16(formCollection["branchname"]),
+                                                    BranchName = new BranchTypeData(){Id = Convert.ToInt16(formCollection["branchname"])},
                                                     Gender = formCollection["gender"],
                                                     HouseName = formCollection["housename"],
                                                     MaritialStatus = Convert.ToInt16(formCollection["maritalstatus"]),

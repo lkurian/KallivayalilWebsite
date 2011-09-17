@@ -18,17 +18,37 @@
 </div>
 
 <script id="nodePopupTemplate" type="text/x-jQuery-tmpl">
-   <table><tr>
-      <td class="popup-content">
-         <div class="popup-fullname"><a class="popup-anchor" href="#">${name}</a></div>
-         <div class="popup-links"><a class="popup-newwindow" href="${familyMemberUrl}">Open in new tab</a></div>
-      </td>
-   </tr></table>
+   <div>
+<table>
+  <td class="popup-content">
+    {{if name}} 
+  <div class="popup-fullname">
+  <span class="popup-spousename">{{if memberUrl}} 
+  <a class="popup-member" href="${memberUrl}">
+  ${name}</a>{{else}} ${name}
+  {{/if}}</span>
+  </div>{{/if}} 
+  <div class ="popup-children">
+  {{if spouseName}}
+  <div class="popup-spouse"> married to
+  <span class="popup-spousename">{{if spouseUrl}} 
+  <a class="popup-spouse" href="${spouseUrl}">
+  ${spouseName}</a>{{else}} ${spouseName} {{/if}}</span>
+  </div>{{/if}} 
+  {{if marriagedate}} 
+  <div class="popup-marriage">on:&#160; 
+  <span class="popup-date">${marriagedate}</span>
+  </div>{{/if}}  {{if parents}} <div class="popup-child">born to: 
+    <span class="popup-parentname"> ${parents}</span>
+  </div>{{/if}}
+  </div></td></tr>
+</table>
+</div>
 </script>
 
 <script id="nodeTemplate" type="text/x-jQuery-tmpl">
-    <label class="label">${name}</label> <a id=${familyMemberId} class="t-group" href="#">info</a> 
-    <label class="label">${spouseName}</label> <a id=${spouseId}1 class="t-group" href="#">info</a>
+    <label class="label">${name}</label>  <br/>
+    <label class="label">${spouseName}</label> 
 </script>
 
 
