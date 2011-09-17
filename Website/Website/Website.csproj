@@ -64,6 +64,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Events\anniversary.jpg" />
+    <Content Include="Content\Events\bday.jpg" />
     <Content Include="Content\images\close.gif" />
     <Content Include="Content\images\close.png" />
     <Content Include="Content\registration\css\overlay.css" />
