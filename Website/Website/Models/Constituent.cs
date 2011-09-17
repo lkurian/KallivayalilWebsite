@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using Website.Models.ReferenceData;
 
 namespace Website.Models
 {
@@ -9,7 +12,8 @@ namespace Website.Models
     public class Constituent : Entity
     {
         public virtual string Gender { get; set; }
-        public virtual int BranchName { get; set; }
+        [UIHint("BranchTypes"), DisplayName("Branch Type")]
+        public virtual BranchType BranchName { get; set; }
         public virtual string HouseName { get; set; }
         public virtual DateTime BornOn { get; set; }
         public virtual DateTime? DiedOn { get; set; }

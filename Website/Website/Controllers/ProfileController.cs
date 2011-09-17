@@ -49,7 +49,7 @@ namespace Website.Controllers
 
                                          };
             constituentToSave.HouseName = constituent.HouseName;
-            constituentToSave.BranchName = constituent.BranchName;
+            constituentToSave.BranchName = new BranchType(){Id = 1};
             constituentToSave.Gender = constituent.Gender;
             constituentToSave.MaritialStatus = constituent.MaritialStatus;
             constituentToSave.HasExpired = constituent.HasExpired;
