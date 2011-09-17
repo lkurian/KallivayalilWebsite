@@ -82,3 +82,7 @@ function onDataBinding(e)
     });
 };
 
+function search() {
+  
+    $('#ConstituentsGrid').data('tGrid').ajaxRequest();
+}
