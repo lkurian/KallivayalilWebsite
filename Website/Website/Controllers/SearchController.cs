@@ -1,5 +1,6 @@
 using System.Configuration;
 using System.Web.Mvc;
+using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
 using Website.Helpers;
@@ -15,8 +16,8 @@ namespace Website.Controllers
 
         public ActionResult Index()
         {
-//            if(Session["userName"]==null)
-//                FormsAuthentication.RedirectToLoginPage();
+            if(Session["userName"]==null)
+                FormsAuthentication.RedirectToLoginPage();
             return View();
         }
 
