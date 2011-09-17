@@ -23,10 +23,11 @@ namespace Website.Controllers
    
         public JsonResult Search(SearchModel searchCriteria)
         {
-            var uriString = string.Format(serviceBaseUri + @"/Search?firstName={0}&lastName={1}&email={2}&phone={3}&occupationName={4}&occupationDescription={5}&instituteName={6}&instituteLocation={7}&qualification={8}&yearOfGradutation={9}&address={10}&state={11}&city={12}&country={13}&postcode={14}"
+            var uriString = string.Format(serviceBaseUri + @"/Search?firstName={0}&lastName={1}&email={2}&phone={3}&occupationName={4}&occupationDescription={5}&instituteName={6}&instituteLocation={7}&qualification={8}&yearOfGradutation={9}&address={10}&state={11}&city={12}&country={13}&postcode={14}&preferedName={15}&houseName={16}&branch={17}"
                                           ,searchCriteria.FirstName, searchCriteria.LastName,searchCriteria.Email,searchCriteria.Phone,searchCriteria.OccupationName,searchCriteria.OccupationDescription
                                           ,searchCriteria.InstituteName,searchCriteria.InstituteLocation,searchCriteria.Qualification,searchCriteria.YearOfGraduation
-                                          ,searchCriteria.Address,searchCriteria.State,searchCriteria.City,searchCriteria.Country,searchCriteria.Postcode);
+                                          ,searchCriteria.Address,searchCriteria.State,searchCriteria.City,searchCriteria.Country,searchCriteria.Postcode
+                                          ,searchCriteria.PreferedName,searchCriteria.HouseName,searchCriteria.Branch);
             var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
 
             mapper = new AutoDataContractMapper();
