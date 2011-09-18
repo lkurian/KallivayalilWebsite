@@ -64,6 +64,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Events\anniversary.jpg" />
+    <Content Include="Content\Events\bday.jpg" />
+    <Content Include="Content\Events\events.jpg" />
     <Content Include="Content\images\close.gif" />
     <Content Include="Content\images\close.png" />
     <Content Include="Content\registration\css\overlay.css" />
@@ -87,6 +90,7 @@
     <Compile Include="Models\Occupation.cs" />
     <Compile Include="Models\ReferenceData\AddressType.cs" />
     <Compile Include="Models\ReferenceData\AssociationType.cs" />
+    <Compile Include="Models\ReferenceData\BranchType.cs" />
     <Compile Include="Models\ReferenceData\EducationType.cs" />
     <Compile Include="Models\ReferenceData\EventType.cs" />
     <Compile Include="Models\ReferenceData\OccupationType.cs" />
@@ -472,6 +476,7 @@
     <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
     <Content Include="Scripts\verticaltabs\verticaltabs.js" />
     <Content Include="Views\Address\EditorTemplates\AddressTypes.ascx" />
+    <Content Include="Views\Constituent\EditorTemplates\BranchTypes.ascx" />
     <Content Include="Views\Constituent\EditorTemplates\SalutationsTypes.ascx" />
     <Content Include="Views\Event\EditorTemplates\EndDate.ascx" />
     <Content Include="Views\Event\EditorTemplates\StartDate.ascx" />

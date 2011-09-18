@@ -133,7 +133,7 @@
         .Content(@<text>
         
             @{
-                 Layout = null;
+                Layout = null;
              }
 
         
@@ -157,7 +157,7 @@
             <h1>Kallivayalil - Registration</h1>
             <div id="wrapper">
                 <div id="steps">
-                            @using (Html.BeginForm("Register", "Registration", FormMethod.Post, new {Id = "formElem"}))
+                            @using (Html.BeginForm("Register", "Registration", FormMethod.Post, new { Id = "formElem" }))
                             {
 
                       <fieldset class="step">
@@ -404,12 +404,12 @@
     <div id="nav">
     	<ul class="sf-menu dropdown">
         	<li class="selected"><a href="http://localhost/kallivayalil/">Our Family</a></li>
-        	<li class="selected"><a href="http://localhost/kallivayalil/Search/Index">Search</a></li>
             @if (!string.IsNullOrEmpty(Session["userName"] as string))
             {
         	<li class="selected"><a href="http://localhost/kallivayalil/Profile/Profile">Profile</a></li>
         	<li class="selected"><a href="http://localhost/kallivayalil/Event/Index">Events</a></li>
         	<li class="selected"><a href="http://localhost/kallivayalil/FamilyTree/Index">FamilyTree</a></li>
+        	<li class="selected"><a href="http://localhost/kallivayalil/Search/Index">Search</a></li>                
         	<li id="feedback-open-button" class="selected"><a href="http://localhost/kallivayalil/ContactUs/Index">Contact Us</a></li>
             }
         </ul>
@@ -463,11 +463,11 @@
                     {
                         foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
                         {
-                            if (ev.Type.Description != "Birthday")
+                            if (ev.Type.Description != "Birthday" && ev.Type.Description != "Anniversary")
                             {
                             <li><a id=@string.Format("event_{0}", ev.Id) class="t-group" href="#">@ev.EventTitle</a></li>
                             <div class="tooltip">
-	                        <img src="http://static.flowplayer.org/img/title/eye.png" alt="Flying screens" style="float:left;margin:0 15px 20px 0" />
+	                        <img src="@Url.Content("~/Content/Events/events.jpg")" alt="Flying screens" style="float:left;margin:0 15px 20px 0" />
 	                            <table style="margin:0">
 		                            <tr>
 			                            <td class="label">Description</td>
@@ -507,7 +507,30 @@
                         {
                             if (ev.Type.Description == "Birthday")
                             {
-                            <li><a class="t-group" href="#" onclick="openWindow()">@ev.EventTitle</a></li>
+                              <li><a id=@string.Format("event_{0}", ev.Id) class="t-group" href="#">@ev.EventTitle</a></li>
+                            <div class="tooltip">
+	                        <img src="@Url.Content("~/Content/Events/bday.jpg")" alt="Flying screens" style="float:left;margin:0 15px 20px 0" />
+	                            <table style="margin:0">
+		                            <tr>
+			                            <td class="label">Description</td>
+			                            <td>@ev.EventDescription</td>
+		                            </tr>
+		                            <tr>
+			                            <td class="label">Date</td>
+			                            <td>@ev.EndDate.Day</td>
+		                            </tr>
+		                            <tr>
+			                            <td class="label">ContactPerson</td>
+			                            <td>@ev.ContactPerson</td>
+		                            </tr>
+		                            <tr>
+			                            <td class="label">ContactNumber</td>
+			                            <td>@ev.ContactNumber</td>
+		                            </tr>		
+	                            </table>
+                            </div>
+
+                         <script type="text/javascript">$("@string.Format("#event_{0}", ev.Id)").tooltip({ effect: 'slide'});</script> 
                             }
                         }
                     }
@@ -519,8 +542,39 @@
                     <h4 class="h4"><a href="#"><span><strong>Anniversaries</strong></span></a></h4>
                     <div>
                      <ul class="blocklist">
-                        <li><a href="#">Anniversary 1</a></li>
-                        <li><a href="#">Anniversary 2</a></li>
+                      @if (ViewData["events"] != null)
+                    {
+                        foreach (var ev in ViewData["events"] as IEnumerable<Website.Models.Event>)
+                        {
+                            if (ev.Type.Description == "Anniversary")
+                            {
+                              <li><a id=@string.Format("event_{0}", ev.Id) class="t-group" href="#">@ev.EventTitle</a></li>
+                            <div class="tooltip">
+	                        <img src="@Url.Content("~/Content/Events/anniversary.jpg")" alt="Flying screens" style="float:left;margin:0 15px 20px 0" />
+	                            <table style="margin:0">
+		                            <tr>
+			                            <td class="label">Description</td>
+			                            <td>@ev.EventDescription</td>
+		                            </tr>
+		                            <tr>
+			                            <td class="label">Date</td>
+			                            <td>@ev.EndDate.Day</td>
+		                            </tr>
+		                            <tr>
+			                            <td class="label">ContactPerson</td>
+			                            <td>@ev.ContactPerson</td>
+		                            </tr>
+		                            <tr>
+			                            <td class="label">ContactNumber</td>
+			                            <td>@ev.ContactNumber</td>
+		                            </tr>		
+	                            </table>
+                            </div>
+
+                         <script type="text/javascript">$("@string.Format("#event_{0}", ev.Id)").tooltip({ effect: 'slide'});</script> 
+                            }
+                        }
+                    }
                     </ul>
                     </div>
                 </li>

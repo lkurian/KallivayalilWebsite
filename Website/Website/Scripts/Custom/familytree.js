@@ -105,18 +105,8 @@ function init(constituentId){
                 });
 
                 label.onclick = function () {
-                    $.getJSON('http://localhost/kallivayalilService/KallivayalilService.svc/Relationships?constituentId=' + node.data.familyMemberId, function (data) {
-                        jsonData = data;
-                        //load json data
-                        st.addSubtree(jsonData, 'animate', {
-                            onComplete: function () {
-                                st.onClick(node.id, { Move: {
-                                    enable: false
-                                }
-                                });
-                            }
-                        }); 
-                    });
+                    st.clearNodesInPath(st.root);
+
                 };
                 //set label styles
                 var style = label.style;

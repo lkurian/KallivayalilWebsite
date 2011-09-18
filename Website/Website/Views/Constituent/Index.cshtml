@@ -22,7 +22,7 @@
         <span class="label">Middle Name</span>
         <span id="labelMiddleName" class="viewField">@Model.Name.MiddleName</span>
         <span class="label">BranchName</span>
-        <span id="labelBranchName" class="viewField">@Model.BranchName</span>
+        <span id="labelBranchName" class="viewField">@Model.BranchName.Description</span>
         <span class="label">BornOn</span>
         <span class="viewfield">@String.Format("{0:g}", Model.BornOn)</span>
     </div>
@@ -55,7 +55,17 @@
 
          <div style="float: left; clear: left; width: 748px;">
             Middle Name :<input class="editField" type="text"  name="input" id="MiddleName" value="@Model.Name.MiddleName"/>
-            BranchName : <input  class="editField"  type="text" name="input" id="BranchName" value="@Model.BranchName"/>
+            BranchName : <select class="editField" name="input" id="BranchName">
+                        @if (ViewData["branchTypes"] != null)
+                        {   
+                            foreach (var ev in ViewData["branchTypes"] as IEnumerable<Website.Models.ReferenceData.BranchType>){
+                                if(@Model.BranchName.Description.Equals(ev.Description))
+                                {<option value=@string.Format("{0}",ev.Id) selected="selected">@ev.Description</option>}
+                              else
+                                {<option value=@string.Format("{0}",ev.Id)>@ev.Description</option>}
+                            }
+                        }
+                         </select>
             BornOn : <input class="editField" type="text" name="input" id="BornOn" value="@Model.BornOn"/>
         </div> 
     

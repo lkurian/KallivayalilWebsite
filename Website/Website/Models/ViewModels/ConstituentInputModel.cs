@@ -11,7 +11,7 @@ namespace Website.Models.ViewModels
         public  DateTime BornOn { get; set; }
         public  DateTime? DiedOn { get; set; }
         public  bool HasExpired { get; set; }
-        public  int MaritialStatus { get; set; }
+        public int MaritalStatus { get; set; }
         public  bool IsRegistered { get; set; }
           public string FirstName { get; set; }
         public  string MiddleName { get; set; }

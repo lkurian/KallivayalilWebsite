@@ -7,6 +7,7 @@ namespace Website.Models.ViewModels
     {
         public string FirstName { get; set; }
         public  string LastName { get; set; }
+        public  string PreferedName { get; set; }
         public  string Phone { get; set; }
         public  string Email { get; set; }
         public  string OccupationName { get; set; }
@@ -20,6 +21,8 @@ namespace Website.Models.ViewModels
         public  string City { get; set; }
         public  string Country { get; set; }
         public  string Postcode { get; set; }
+        public  string Branch { get; set; }
+        public  string HouseName { get; set; }
 
     }
 }

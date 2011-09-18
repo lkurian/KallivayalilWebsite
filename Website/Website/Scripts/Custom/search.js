@@ -1,15 +1,26 @@
 ﻿var t;
 var list = {};
+var queryList = {};
 
 $(document).ready(function () {
-    t = new $.TextboxList('#t2', { unique: true });
+    t = new $.TextboxList('#t2', {  });
 });
 
 function add() {
     var value = $("#t1").val();
     var e = document.getElementById("search");
     var strUser = e.options[e.selectedIndex].value;
-    t.add(strUser + '=' + value);
+    getQueryKeys();
+    var isPresent = include(queryList,strUser);
+    if (isPresent == false)
+        t.add(strUser + '=' + value);
+};
+
+function include(arr, obj) {
+    for (var i = 0; i < $(arr).length; i++) {
+        if (arr[i] == obj) return true;
+    }
+    return false;
 };
 
 var unique = function (origArr) {
@@ -30,12 +41,22 @@ var unique = function (origArr) {
     }
     return newArr;
 };
+
 function getSearchValues() {
     list = {};
     for (i = 0; i < t.getValues().length; i++) {
         var searchStr = t.getValues()[i][1];
         var splitStr = searchStr.split('=');
         list[splitStr[0]] = splitStr[1];
+    }
+};
+
+function getQueryKeys() {
+    queryList = {};
+    for (i = 0; i < t.getValues().length; i++) {
+        var searchStr = t.getValues()[i][1];
+        var splitStr = searchStr.split('=');
+        queryList[i] = splitStr[0];
     }
 };
 
@@ -60,8 +81,6 @@ function onDataBinding(e)
         }
     });
 };
-
-
 
 function search() {
   
