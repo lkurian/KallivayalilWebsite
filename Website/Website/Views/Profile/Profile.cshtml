@@ -34,42 +34,67 @@
 
 @{ Html.RenderAction("Index","Constituent"); } 
 </div>
-<div id="vtab">
+ <div class="profileTab">
+  <ul  id="accordion">	
+    <li>
+            <h4><a href="#"><span>Contact Details</span></a></h4>
+            <div id="vtab">
 
     <ul>
         <li class="address"></li>
         <li class="email"></li>
         <li class="phone"></li>
-        <li class="educationDetail"></li>
-        <li class="occupation"></li>
     </ul>
     <div>
-        <h4>Addresses</h4>
+        <h3>Addresses</h3>
         @{ Html.RenderAction("Index","Address"); }
     </div>
     <div>
-        <h4>Emails</h4>
+        <h3>Emails</h3>
         @{ Html.RenderAction("Index","Email"); }
     </div>
     <div>
-        <h4>Phones</h4>
+        <h3>Phones</h3>
          @{ Html.RenderAction("Index","Phone"); }
     </div> 
+    
+</div>
+    </li>
+     <li>
+            <h4><a href="#"><span>Education</span></a></h4>
+<div id="vtab">
+
+    <ul>
+        <li class="educationDetail selected"></li>
+        <li class="occupation"></li>
+    </ul>
     <div>
-        <h4>EducationDetails</h4>
+        <h3>EducationDetails</h3>
          @{ Html.RenderAction("Index","EducationDetail"); }
     </div>
     
-   <div>
-        <h4>Relationships</h4>
-         @{ Html.RenderAction("Index","Relationship"); }
-    </div>
      <div>
-        <h4>Occupations</h4>
+        <h3>Occupations</h3>
          @{ Html.RenderAction("Index","Occupation"); }
     </div>
 </div>
+    </li>
+     <li>
+            <h4><a href="#"><span>Relationship</span></a></h4>
+<div id="vtab">
 
+    <ul>
+        <li class="relationship selected"></li>
+    </ul>
+   <div>
+        <h3>Relationships</h3>
+         @{ Html.RenderAction("Index","Relationship"); }
+    </div>
+    
+</div>  
+    </li>
+</ul>
+</div>
 </div>
 
 
