@@ -208,6 +208,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\demos.css" />
     <Content Include="Scripts\Custom\constituent.js" />
+    <Content Include="Scripts\Custom\profile.js" />
     <Content Include="Scripts\Custom\search.js" />
     <Content Include="Scripts\Custom\growingInput.js" />
     <Content Include="Scripts\Custom\registration.js" />
