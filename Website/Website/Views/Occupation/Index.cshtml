@@ -14,7 +14,6 @@
             columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
             columns.Bound(p => p.OccupationName);
             columns.Bound(p => p.Description);
-            columns.Bound(p => p.Constituent).ReadOnly();
             columns.Bound(p => p.CreatedBy).Hidden(true);
             columns.Bound(p => p.CreatedDateTime).Hidden(true);
             columns.Bound(p => p.UpdatedBy).Hidden(true);
