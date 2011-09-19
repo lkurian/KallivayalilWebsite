@@ -1,0 +1,76 @@
+﻿           <script type="text/javascript">
+
+               $(function () {
+
+                   $('#eventsSidebar').addClass('sidebar-hidden');
+
+                   var $items = $('#vtab>ul>li');
+
+                   $items.click(function () {
+
+                       $items.removeClass('selected');
+
+                       $(this).addClass('selected');
+
+                       var index = $items.index($(this));
+
+                       $('#vtab>div').hide().eq(index).show();
+
+                   }).eq(0).click();
+
+               });
+
+               $(document).ready(function () {
+                   $("#report tr:odd").addClass("odd");
+                   $("#report tr:not(.odd)").hide();
+                   $("#report tr:first-child").show();
+
+                   $("#report tr.odd").click(function () {
+                       $(this).next("tr").toggle();
+                       $(this).find(".arrow").toggleClass("up");
+                   });
+                   //$("#report").jExpand();
+               });
+
+    </script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/Type.js")"> </script>
+<div>
+
+    <div>
+        <h4>Committees</h4>
+        
+       @(Html.Telerik().Grid<Website.Models.Committee>()
+            .Name("CommitteeGrid")
+            .DataKeys(keys => keys.Add(p => p.Id))
+            .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
+                   
+            .DataBinding(dataBinding => dataBinding.Ajax()
+                                            .Select("AllCommitteeMembers", "Committee")
+                                            .Update("Edit", "Committee")
+                                            .Insert("Create", "Committee")
+                                            .Delete("Delete", "Committee"))
+            .Columns(columns =>
+            {
+                columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
+                columns.Bound(p => p.Constituent.Name.NameString);            
+                columns.Bound(p => p.StartDate).EditorTemplateName("StartDate");
+                columns.Bound(p => p.EndDate).EditorTemplateName("EndDate");
+                columns.Bound(p => p.CreatedBy).Hidden(true);
+                columns.Bound(p => p.CreatedDateTime).Hidden(true);
+                columns.Bound(p => p.UpdatedBy).Hidden(true);
+                columns.Bound(p => p.UpdatedDateTime).Hidden(true);
+                columns.Command(commands =>
+                {
+                    commands.Edit().ButtonType(GridButtonType.Image);
+                    commands.Delete().ButtonType(GridButtonType.Image);
+                }).Width(180).Title("Commands");
+            })
+            .ClientEvents(events => events.OnEdit("onEdit"))
+            .Sortable()
+          )
+ 
+</div>
+
+</div>
+
+

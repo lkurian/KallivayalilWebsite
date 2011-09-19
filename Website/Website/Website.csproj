@@ -72,6 +72,7 @@
     <Content Include="Content\mytheme\images\h4_profile.png" />
     <Content Include="Content\registration\css\overlay.css" />
     <Compile Include="Controllers\AddressController.cs" />
+    <Compile Include="Controllers\CommitteeController.cs" />
     <Compile Include="Controllers\ConstituentController.cs" />
     <Compile Include="Controllers\EducationDetailController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="Controllers\RelationshipController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="Models\Association.cs" />
+    <Compile Include="Models\Committee.cs" />
     <Compile Include="Models\ContactUs.cs" />
     <Compile Include="Models\Event.cs" />
     <Compile Include="Models\EducationDetail.cs" />
@@ -95,6 +97,7 @@
     <Compile Include="Models\ReferenceData\EducationType.cs" />
     <Compile Include="Models\ReferenceData\EventType.cs" />
     <Compile Include="Models\ReferenceData\OccupationType.cs" />
+    <Compile Include="Models\ReferenceData\PositionTypes.cs" />
     <Compile Include="Models\ShortAddress.cs" />
     <Compile Include="Models\ViewModels\ConstituentInputModel.cs" />
     <Compile Include="Models\ViewModels\SearchModel.cs" />
@@ -480,6 +483,10 @@
     <Content Include="Views\Address\EditorTemplates\AddressTypes.ascx" />
     <Content Include="Views\Constituent\EditorTemplates\BranchTypes.ascx" />
     <Content Include="Views\Constituent\EditorTemplates\SalutationsTypes.ascx" />
+    <Content Include="Views\Committee\EditorTemplates\DateTime.ascx" />
+    <Content Include="Views\Committee\EditorTemplates\EndDate.ascx" />
+    <Content Include="Views\Committee\EditorTemplates\PositionTypes.ascx" />
+    <Content Include="Views\Committee\EditorTemplates\StartDate.ascx" />
     <Content Include="Views\Event\EditorTemplates\EndDate.ascx" />
     <Content Include="Views\Event\EditorTemplates\StartDate.ascx" />
     <Content Include="Views\Event\EditorTemplates\EventTypes.ascx" />
@@ -550,6 +557,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Search\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Committee\Index.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
