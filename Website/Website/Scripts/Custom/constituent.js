@@ -32,6 +32,7 @@ $(function () {
     });
 });
 
+
 function getPerson() {
     var firstName = $("#FirstName").val();
     var gender = $("#Gender").val();

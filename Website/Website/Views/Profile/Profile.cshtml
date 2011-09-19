@@ -29,6 +29,7 @@
 </style>
 <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/Type.js")"> </script>
 <script type="text/javascript" src="@Url.Content("~/Scripts/Custom/constituent.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Scripts/Custom/profile.js")"></script>
 <div>
 <div id="profile">
 
@@ -37,7 +38,7 @@
  <div class="profileTab">
   <ul  id="accordion">	
     <li>
-            <h4><a href="#"><span>Contact Details</span></a></h4>
+            <h4><a href="#" onclick="click('address')"><span>Contact Details</span></a></h4>
             <div id="vtab">
 
     <ul>
@@ -61,11 +62,11 @@
 </div>
     </li>
      <li>
-            <h4><a href="#"><span>Education</span></a></h4>
+            <h4><a href="#" onclick="click('educationDetail')"><span>Education</span></a></h4>
 <div id="vtab">
 
     <ul>
-        <li class="educationDetail selected"></li>
+        <li class="educationDetail"></li>
         <li class="occupation"></li>
     </ul>
     <div>
@@ -80,11 +81,11 @@
 </div>
     </li>
      <li>
-            <h4><a href="#"><span>Relationship</span></a></h4>
+            <h4><a href="#" onclick="click('relationship')" ><span>Relationship</span></a></h4>
 <div id="vtab">
 
     <ul>
-        <li class="relationship selected"></li>
+        <li class="relationship"></li>
     </ul>
    <div>
         <h3>Relationships</h3>
