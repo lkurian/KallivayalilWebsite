@@ -757,3 +757,91 @@ div#footer-links p {
             padding: 0 1em 1em;
         }
 /*Contact Us */
+
+/*Profile*/
+
+.profileTab {
+	width: 200px;
+	padding: 25px 0 0;
+}
+
+.profileTab-hidden {
+	display : none;
+}
+
+.profileTab ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.profileTab ul li {
+	margin-bottom: 20px;
+	line-height: 1.9em;
+}
+
+.profileTab li ul {
+	padding: 10px;
+}
+
+.profileTab li ul li {
+	display: block;
+	border-top: none;
+	padding: 6px 2px;
+	margin: 0;
+	line-height: 1.5em;
+	font-size: 13px;
+	border: none;
+}
+
+.profileTab li ul li a {
+	font-weight: normal;
+	color: #666;
+}
+
+.profileTab li ul li a:hover {
+	color: #F87B27;
+}
+
+.profileTab li ul.blocklist {
+	padding: 0;
+}
+
+.profileTab li ul.blocklist li {
+	padding: 0;
+	display: inline;
+}
+
+.profileTab li ul.blocklist li a {
+	display: block;
+	border-bottom:1px solid #e0e0e0;
+	padding: 8px 10px;
+	text-decoration: none;
+	font-weight: bold;
+	text-transform: uppercase;
+	font-family: Lucida,"Lucida Sans",Geneva,Arial,sans-serif;
+	font-size: 12px;
+}
+
+.profileTab li ul.blocklist li a:hover {
+	color: #F87B27;
+}
+
+
+
+.profileTab h4  {
+	color: #333;
+	font-family: Lucida, "Lucida Sans", Geneva, Arial, sans-serif;
+	font-size: 16px;
+	text-transform:uppercase;
+	margin: 0;
+	line-height: 1.9em;
+	padding: 0px 0px 15px 5px;
+	font-weight: bold;
+	background: transparent url('images/h4_profile.png') no-repeat scroll left bottom;
+	width:900px;
+}
+
+.profileTab h4 strong {
+	color: #F87B27;
+}

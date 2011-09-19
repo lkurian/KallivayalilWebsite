@@ -69,6 +69,7 @@
     <Content Include="Content\Events\events.jpg" />
     <Content Include="Content\images\close.gif" />
     <Content Include="Content\images\close.png" />
+    <Content Include="Content\mytheme\images\h4_profile.png" />
     <Content Include="Content\registration\css\overlay.css" />
     <Compile Include="Controllers\AddressController.cs" />
     <Compile Include="Controllers\ConstituentController.cs" />
