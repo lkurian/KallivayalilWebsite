@@ -11,27 +11,27 @@ namespace Website.Models
         public AssociationType Type { get; set; }
 
         [DisplayName("Constituent")]
-        public Constituent Constituent { get; set; }
+        public virtual Constituent Constituent { get; set; }
 
         [DisplayName("ConstituentId")]
-        public int ConstituentId
+        public virtual int ConstituentId
         {
             get { return Constituent== null ? -1 : Constituent.Id; }
             set { Constituent = new Constituent {Id = value}; }
         }
 
         [DisplayName("AssociatedConstituentId")]
-        public int AssociatedConstituentId
+        public virtual int AssociatedConstituentId
         {
             get { return AssociatedConstituent == null ? -1 : AssociatedConstituent.Id; }
             set { AssociatedConstituent = new Constituent {Id = value}; }
         }
 
-        [DisplayName("AssociatedConstituent")]
-        public Constituent AssociatedConstituent { get; set; } 
+        [UIHint("Editor"),DisplayName("AssociatedConstituent")]
+        public virtual Constituent AssociatedConstituent { get; set; } 
         
         [DisplayName("AssociatedName")]
-        public string AssociatedConstituentName
+        public virtual string AssociatedConstituentName
         { get; set; }
     }
 

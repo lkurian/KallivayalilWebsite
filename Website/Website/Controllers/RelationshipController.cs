@@ -1,8 +1,12 @@
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Threading;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
+using Telerik.Web.Mvc.Extensions;
 using Website.Helpers;
 using Website.Models;
 using Website.Models.ReferenceData;
@@ -36,7 +40,32 @@ namespace Website.Controllers
         {
             return PartialView(new GridModel(GetAssociations((int)Session["constituentId"])));
         }
-        
+
+        [HttpPost]
+        public ActionResult GetConstituent(string text)
+        {
+            Thread.Sleep(1000);
+            var uriString = string.Format(serviceBaseUri + @"/Search?firstName={0}&lastName={0}&email={1}&phone={1}&occupationName={1}&occupationDescription={1}&instituteName={1}&instituteLocation={1}&qualification={1}&yearOfGradutation={1}&address={1}&state={1}&city={1}&country={1}&postcode={1}&preferedName={0}&houseName={1}&branch={1}", text, null);
+            var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
+            mapper = new AutoDataContractMapper();
+            var constituents = new Constituents();
+            mapper.MapList(constituentsData, constituents, typeof(Constituent));
+            IEnumerable<Constituent> enumerable = null;
+            if (text.HasValue())
+            {
+                enumerable = constituents.Where((p) => p.Name.FirstName.StartsWith(text, true, null) || p.Name.LastName.StartsWith(text, true, null));
+            }
+
+            IEnumerable<SelectListItem> selectList =
+                                                    from c in enumerable
+                                                    select new SelectListItem
+                                                    {
+                                                        Text = c.Name.NameWithoutSalutation,
+                                                        Value = c.Id.ToString()
+                                                    };
+
+            return new JsonResult { Data = selectList };
+        }
 
         private Associations GetAssociations(int constituentId)
         {
@@ -50,13 +79,15 @@ namespace Website.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [GridAction]
-        public ActionResult Create(int associationType)
+        public ActionResult Create(int associationType, int constiuent)
         {
             var association = new Association();
             TryUpdateModel(association);
             var constituentId = (int)Session["constituentId"];
             if (association.AssociatedConstituentId <= 0)
                 association.AssociatedConstituent = null;
+            association.AssociatedConstituent = new Constituent() { Id = constiuent }; 
+            association.Constituent = new Constituent(){Id = constituentId};
             association.Type = new AssociationType { Id = associationType };
 
             mapper = new AutoDataContractMapper();
@@ -70,7 +101,7 @@ namespace Website.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [GridAction]
-        public ActionResult Edit(int id, int associationType)
+        public ActionResult Edit(int id, int associationType, int constiuent)
         {
             var association = new Association();
 
@@ -78,6 +109,7 @@ namespace Website.Controllers
             TryUpdateModel(association);
             association.Type = new AssociationType {Id = associationType};
             association.Constituent = new Constituent {Id =constituentId };
+            association.AssociatedConstituent = new Constituent() { Id = constiuent };
             
             mapper = new AutoDataContractMapper();
             var associationData = new AssociationData();

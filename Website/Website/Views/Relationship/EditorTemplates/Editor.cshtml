@@ -1,0 +1,10 @@
+
+  @(Html.Telerik().ComboBox()
+                .Name("Constiuent")
+                .DataBinding(binding => binding.Ajax().Select("GetConstituent", "Committee"))
+                .HighlightFirstMatch(true)
+                .ClientEvents(events => events.OnChange("onAutoCompleteChange"))
+                .HtmlAttributes(new { style = "width: 200px;" })
+                .AutoFill(true)
+
+              )
