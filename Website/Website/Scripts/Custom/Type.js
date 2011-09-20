@@ -5,8 +5,3 @@ function onEdit(e) {
     });
 }
 
-
-function onAutoCompleteChange(e) {
-    alert(e.value);
-}
-

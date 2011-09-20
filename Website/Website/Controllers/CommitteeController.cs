@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -54,15 +55,15 @@ namespace Website.Controllers
 
         [AcceptVerbs(HttpVerbs.Post)]
         [GridAction]
-        public ActionResult Create(int positionType)
+        public ActionResult Create(int positionType, int constiuent)
         {
             var committee = new Committee();
             TryUpdateModel(committee);
 
-            var constituentId = (int)Session["constituentId"];
-
-            committee.Constituent = new Constituent { Id = constituentId };
+            committee.Constituent = new Constituent { Id = constiuent };
             committee.Type = new PositionType() { Id = positionType };
+            committee.StartDate = DateTime.Today;
+            committee.EndDate = DateTime.Today.AddDays(20);
 
             mapper = new AutoDataContractMapper();
             var committeeData = new CommitteeData();
@@ -108,6 +109,10 @@ namespace Website.Controllers
             TryUpdateModel(committee);
             committee.Type = new PositionType() { Id = positionType };
             committee.Constituent = new Constituent { Id = constiuent };
+            committee.StartDate = DateTime.Today;
+            committee.EndDate = DateTime.Today.AddDays(20);
+
+
             mapper = new AutoDataContractMapper();
             var committeeData = new CommitteeData();
             mapper.Map(committee, committeeData);
