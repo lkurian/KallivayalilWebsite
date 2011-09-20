@@ -1,23 +1,23 @@
 var labelType, useGradients, nativeTextSupport, animate;
 
-(function() {
-  var ua = navigator.userAgent,
+(function () {
+    var ua = navigator.userAgent,
       iStuff = ua.match(/iPhone/i) || ua.match(/iPad/i),
       typeOfCanvas = typeof HTMLCanvasElement,
       nativeCanvasSupport = (typeOfCanvas == 'object' || typeOfCanvas == 'function'),
-      textSupport = nativeCanvasSupport 
+      textSupport = nativeCanvasSupport
         && (typeof document.createElement('canvas').getContext('2d').fillText == 'function');
-  //I'm setting this based on the fact that ExCanvas provides text support for IE
-  //and that as of today iPhone/iPad current text support is lame
-  labelType = (!nativeCanvasSupport || (textSupport && !iStuff))? 'Native' : 'HTML';
-  nativeTextSupport = labelType == 'Native';
-  useGradients = nativeCanvasSupport;
-  animate = !(iStuff || !nativeCanvasSupport);
+    //I'm setting this based on the fact that ExCanvas provides text support for IE
+    //and that as of today iPhone/iPad current text support is lame
+    labelType = (!nativeCanvasSupport || (textSupport && !iStuff)) ? 'Native' : 'HTML';
+    nativeTextSupport = labelType == 'Native';
+    useGradients = nativeCanvasSupport;
+    animate = !(iStuff || !nativeCanvasSupport);
 })();
 
 
 
-function init(constituentId){
+function init(constituentId) {
     var jsonData = "";
 
     $("#nodeTemplate").template("nodeTemplate");
@@ -71,15 +71,24 @@ function init(constituentId){
             label.id = node.id;
             //label.innerHTML = node.name;
 
-          
-            var nodeData = { id: node.id, name: node.name, spouseName: getSpouseName(node),
-                familyMemberUrl: getFamilyMemberUrl(node), familyMemberId: getFamilyMemberId(node),
-                spouseUrl: getSpouseUrl(node), spouseId: getSpouseId(node)
+
+            var nodeData = { id: node.id, name: node.name, spouseName: node.data.spouse,
+                memberUrl: node.data.familyMemberUrl, memberId: "const_" + node.data.familyMemberId,
+                spouseUrl: node.data.spouseUrl, spouseId: "const_" + node.spouseId, marriagedate: node.data.marriageDate, parents: node.data.spouseParents
             };
 
             $("#nodeTemplate").tmpl(nodeData).appendTo(label);
-            var x=$("#nodePopupTemplate").tmpl(nodeData);
-            
+            var tooltip = $("#nodePopupTemplate").tmpl(nodeData);
+
+            $(".popup-member", tooltip).click(function () {
+                window.open(node.data.memberUrl);
+                return false
+            });
+
+            $(".popup-spouse", tooltip).click(function () {
+                window.open(node.data.spouseUrl);
+                return false
+            });
             $(label).poshytip({
                 className: "tip-yellow",
                 bgImageFrameSize: 10,
@@ -92,15 +101,31 @@ function init(constituentId){
                 slide: false,
                 showOn: "hover",
                 allowTipHover: true,
-                content: x
+                content: tooltip
             });
 
             label.onclick = function () {
-                if (normal.checked) {
-                    st.onClick(node.id);
-                } else {
-                    st.setRoot(node.id, 'animate');
+
+                var constId = node.data.familyMemberId;
+                if (constId > 0) {
+                    $.getJSON('http://localhost/kallivayalilService/KallivayalilService.svc/Relationships?constituentId=' + constId, function (data) {
+                        jsonData = data;
+                        //load json data
+                        st.loadJSON(jsonData);
+                        //compute node positions and layout
+                        st.compute();
+                        //optional: make a translation of the tree
+                        st.geom.translate(new $jit.Complex(0, 0), "current");
+                        //emulate a click on the root node.
+                        st.onClick(st.root, {
+                            Move: {
+                                offsetY: 90
+                            }
+                        });
+                        //end
+                    });
                 }
+
             };
             //set label styles
             var style = label.style;
@@ -121,7 +146,7 @@ function init(constituentId){
         onBeforePlotNode: function (node) {
             //add some color to the nodes in the path between the
             //root node and the selected node.
-            if (node.selected) {
+            if (node.data.familyMemberId == constituentId) {
                 node.data.$color = "#ff7";
             }
             else {
@@ -154,44 +179,6 @@ function init(constituentId){
             }
         }
     });
-
-    function getSpouseName (node) {
-        var name = node.data.spouse;
-        if (name != null && name != undefined)
-            return name;
-        return "";
-    };
-
-    function appendAction(id) 
-    {
-        var script = document.createElement("script");
-        script.type = "text/javascript";
-        script.text = "$('#" + id + "').tooltip({ effect: 'slide' });";
-        document.body.appendChild(script);
-        eval("$('#" + id + "').tooltip({ effect: 'slide' })");
-    };
-    
-    function getFamilyMemberUrl (node) {
-        var name = node.data.familyMemberUrl;
-        if (name != null && name != undefined)
-            return name;
-        return "";
-    };
-    
-    function getFamilyMemberId (node) {
-        return node.data.familyMemberId;
-    }; 
-    
-    function getSpouseUrl (node) {
-        var name = node.data.spouseUrl;
-        if (name != null && name != undefined)
-            return name;
-        return "";
-    }; 
-    
-    function getSpouseId (node) {
-       return node.data.spouseId;
-    };
 
     $jit.ST.Plot.NodeTypes.implement({
         "stroke-rect": {
@@ -248,7 +235,6 @@ function init(constituentId){
         });
         //end
     });
-    
-    //end
+
 
 }
