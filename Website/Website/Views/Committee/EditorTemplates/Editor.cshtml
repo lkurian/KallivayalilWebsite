@@ -1,0 +1,16 @@
+  <script type="text/javascript">
+      function onAutoCompleteChange(e) {
+          alert(e.value);
+      }
+  </script>
+  
+  @(Html.Telerik().AutoComplete()
+                .Name("Editor")
+                .DataBinding(binding => binding.Ajax().Select("GetConstituent", "Committee"))
+                .HighlightFirstMatch(true)
+                .ClientEvents(events => events
+                           .OnChange("onAutoCompleteChange")
+                        )
+                .AutoFill(true)
+                
+        )

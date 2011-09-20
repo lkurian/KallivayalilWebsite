@@ -52,9 +52,9 @@
             .Columns(columns =>
             {
                 columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
-                columns.Bound(p => p.Constituent.Name.NameString);            
-                columns.Bound(p => p.StartDate).EditorTemplateName("StartDate");
-                columns.Bound(p => p.EndDate).EditorTemplateName("EndDate");
+                columns.Bound(p => p.StartDate).EditorTemplateName("Date.cshtml");
+                columns.Bound(p => p.EndDate).EditorTemplateName("Date.cshtml");
+                columns.Bound(p => p.Constituent);
                 columns.Bound(p => p.CreatedBy).Hidden(true);
                 columns.Bound(p => p.CreatedDateTime).Hidden(true);
                 columns.Bound(p => p.UpdatedBy).Hidden(true);

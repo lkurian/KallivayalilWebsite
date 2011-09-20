@@ -14,6 +14,11 @@ namespace Website.Models
         {
             get { return ToString(); }
         }
+ 
+        public virtual string NameWithoutSalutation
+        {
+            get { return string.Format("{0} {1} {2}", FirstName, MiddleName, LastName); }
+        }
 
 
         public override string ToString()

@@ -486,7 +486,8 @@
     <Content Include="Views\Committee\EditorTemplates\DateTime.ascx" />
     <Content Include="Views\Committee\EditorTemplates\EndDate.ascx" />
     <Content Include="Views\Committee\EditorTemplates\PositionTypes.ascx" />
-    <Content Include="Views\Committee\EditorTemplates\StartDate.ascx" />
+    <Content Include="Views\Committee\EditorTemplates\Editor.cshtml" />
+    <None Include="Views\Committee\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Event\EditorTemplates\EndDate.ascx" />
     <Content Include="Views\Event\EditorTemplates\StartDate.ascx" />
     <Content Include="Views\Event\EditorTemplates\EventTypes.ascx" />

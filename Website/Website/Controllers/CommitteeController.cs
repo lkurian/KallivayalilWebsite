@@ -1,8 +1,12 @@
+using System.Collections.Generic;
 using System.Configuration;
+using System.Linq;
+using System.Threading;
 using System.Web.Mvc;
 using System.Web.Security;
 using Kallivayalil.Client;
 using Telerik.Web.Mvc;
+using Telerik.Web.Mvc.Extensions;
 using Website.Helpers;
 using Website.Models;
 using Website.Models.ReferenceData;
@@ -67,6 +71,24 @@ namespace Website.Controllers
             HttpHelper.Post(string.Format(serviceBaseUri+"/Committees"), committeeData);
 
             return PartialView(new GridModel(GetCommitteeMembers()));
+        }
+
+
+        [HttpPost]
+        public ActionResult GetConstituent(string text)
+        {
+            Thread.Sleep(1000);
+            var uriString = string.Format(serviceBaseUri + @"/Search?firstName={0}&lastName={0}&email={1}&phone={1}&occupationName={1}&occupationDescription={1}&instituteName={1}&instituteLocation={1}&qualification={1}&yearOfGradutation={1}&address={1}&state={1}&city={1}&country={1}&postcode={1}&preferedName={0}&houseName={1}&branch={1}", text,null);
+            var constituentsData = HttpHelper.Get<ConstituentsData>(uriString);
+            mapper = new AutoDataContractMapper();
+            var constituents = new Constituents();
+            mapper.MapList(constituentsData, constituents, typeof(Constituent));
+            IEnumerable<Constituent> enumerable = null;
+            if (text.HasValue())
+            {
+                enumerable = constituents.Where((p) => p.Name.FirstName.StartsWith(text,true,null) || p.Name.LastName.StartsWith(text,true,null));
+            }
+            return new JsonResult { Data = new SelectList(enumerable.ToList(), "Id", "Name.NameWithoutSalutation") };
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
