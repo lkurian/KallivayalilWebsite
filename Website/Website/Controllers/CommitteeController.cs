@@ -88,18 +88,26 @@ namespace Website.Controllers
             {
                 enumerable = constituents.Where((p) => p.Name.FirstName.StartsWith(text,true,null) || p.Name.LastName.StartsWith(text,true,null));
             }
-            return new JsonResult { Data = new SelectList(enumerable.ToList(), "Id", "Name.NameWithoutSalutation") };
+
+            IEnumerable<SelectListItem> selectList =
+                                                    from c in enumerable
+                                                    select new SelectListItem
+                                                    {
+                                                        Text = c.Name.NameWithoutSalutation,
+                                                        Value = c.Id.ToString()
+                                                    };
+            
+            return new JsonResult { Data = selectList };
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
         [GridAction]
-        public ActionResult Edit(int id, int positionType)
+        public ActionResult Edit(int id, int positionType, int constiuent)
         {
             var committee = new Committee();
-            var constituentId = (int)Session["constituentId"];
             TryUpdateModel(committee);
             committee.Type = new PositionType() { Id = positionType };
-            committee.Constituent = new Constituent { Id = constituentId };
+            committee.Constituent = new Constituent { Id = constiuent };
             mapper = new AutoDataContractMapper();
             var committeeData = new CommitteeData();
             mapper.Map(committee, committeeData);
