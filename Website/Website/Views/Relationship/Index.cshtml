@@ -27,6 +27,7 @@
         .Groupable(settings => settings.Groups(groups =>
         {
             groups.Add(c => c.Type.Description);
+           
            }))        
         .ClientEvents(events => events.OnEdit("onEdit"))
         .Sortable()

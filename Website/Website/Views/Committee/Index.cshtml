@@ -65,6 +65,12 @@
                     commands.Delete().ButtonType(GridButtonType.Image);
                 }).Width(180).Title("Commands");
             })
+                      .Groupable(settings => settings.Groups(groups =>
+                      {
+                          groups.Add(c => c.StartYear);
+                          groups.Add(c => c.EndYear);
+
+                      })) 
             .ClientEvents(events => events.OnEdit("onEdit"))
             .Sortable()
           )
