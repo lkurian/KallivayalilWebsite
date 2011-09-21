@@ -13,11 +13,11 @@ namespace Website.Models
         [UIHint("PositionTypes"), DisplayName("Position Type")]
         public virtual PositionType Type { get; set; }
 
-        [DisplayName("Start Date"), DataType(DataType.Date)]
-        public DateTime StartDate { get; set; }
+        [DisplayName("Start Year")]
+        public string StartYear { get; set; }
 
-        [DisplayName("End Date"),DataType(DataType.Date)]
-        public  DateTime EndDate { get; set; }
+        [DisplayName("End Year")]
+        public  string EndYear { get; set; }
 
         [UIHint("Editor"),DisplayName("Constituent")]
         public virtual Constituent Constituent { get; set; }

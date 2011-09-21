@@ -62,8 +62,6 @@ namespace Website.Controllers
 
             committee.Constituent = new Constituent { Id = constiuent };
             committee.Type = new PositionType() { Id = positionType };
-            committee.StartDate = DateTime.Today;
-            committee.EndDate = DateTime.Today.AddDays(20);
 
             mapper = new AutoDataContractMapper();
             var committeeData = new CommitteeData();
@@ -109,9 +107,6 @@ namespace Website.Controllers
             TryUpdateModel(committee);
             committee.Type = new PositionType() { Id = positionType };
             committee.Constituent = new Constituent { Id = constiuent };
-            committee.StartDate = DateTime.Today;
-            committee.EndDate = DateTime.Today.AddDays(20);
-
 
             mapper = new AutoDataContractMapper();
             var committeeData = new CommitteeData();

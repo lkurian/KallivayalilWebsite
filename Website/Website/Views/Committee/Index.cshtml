@@ -52,8 +52,8 @@
             .Columns(columns =>
             {
                 columns.Bound(p => p.Type).ClientTemplate("<#= Type.Description#>");
-                columns.Bound(p => p.StartDate);
-                columns.Bound(p => p.EndDate);
+                columns.Bound(p => p.StartYear);
+                columns.Bound(p => p.EndYear);
                 columns.Bound(p => p.Constituent).ClientTemplate("<#=Constituent.Name.NameString #>").Title("Member Name") ;
                 columns.Bound(p => p.CreatedBy).Hidden(true);
                 columns.Bound(p => p.CreatedDateTime).Hidden(true);
