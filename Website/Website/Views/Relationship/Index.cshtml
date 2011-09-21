@@ -5,7 +5,7 @@
         .ToolBar(commands => commands.Insert().ButtonType(GridButtonType.Image).ImageHtmlAttributes(new { style = "margin-left:0" }))
                    
         .DataBinding(dataBinding => dataBinding.Ajax()
-                                        .Select("AllAssociations", "Relationship")
+                                            .Select("AllAssociations", "Relationship")
                                             .Update("Edit", "Relationship")
                                             .Insert("Create", "Relationship")
                                             .Delete("Delete", "Relationship"))
@@ -23,6 +23,11 @@
                 commands.Delete().ButtonType(GridButtonType.Image);
             }).Width(180).Title("Commands");
         })
+
+        .Groupable(settings => settings.Groups(groups =>
+        {
+            groups.Add(c => c.Type.Description);
+           }))        
         .ClientEvents(events => events.OnEdit("onEdit"))
         .Sortable()
 )
